@@ -1,0 +1,37 @@
+<!--
+  Generated template for the AdminClassStudentList2 page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+   <ion-navbar>
+    <ion-title>
+      CLASS {{classs.Id}}
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="goToAdminClassStudentAdd()">
+        <ion-icon name="subject-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+   <ion-list>
+    <ion-list-header>Class Subjects</ion-list-header>
+    <ion-item-sliding *ngFor="let classStudent of classStudentList | async">
+      <ion-item>
+        <ion-icon name="person" item-left></ion-icon>
+        <h3>Student Username: {{classStudent.Student}}</h3>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="danger" icon-left (click)="deleteClassStudent(classStudent)">
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>	
+</ion-content>

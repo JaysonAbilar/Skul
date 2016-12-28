@@ -19,28 +19,28 @@ export class AdminStudentUpdatePage {
   guardianList: FirebaseListObservable<any>;
   guardian = {
     Username: '',
-	Password: '',
-	Firstname: '',
-	Middlename:'',
-	Lastname: '',
-	Age: '',
-	Gender: '',
-	Email: '',
-	Contactnumber: ''
+  	Password: '',
+  	Firstname: '',
+  	Middlename:'',
+  	Lastname: '',
+  	Age: '',
+  	Gender: '',
+  	Email: '',
+  	Contactnumber: ''
   };
 
   studentList: FirebaseListObservable<any>;
   student = {
     Username: '',
-	Password: '',
-	Firstname: '',
-	Middlename:'',
-	Lastname: '',
-	Age: '',
-	Gender: '',
-	Email: '',
-	Contactnumber: '',
-	Guardian: ''
+  	Password: '',
+  	Firstname: '',
+  	Middlename:'',
+  	Lastname: '',
+  	Age: '',
+  	Gender: '',
+  	Email: '',
+  	Contactnumber: '',
+  	Guardian: ''
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {

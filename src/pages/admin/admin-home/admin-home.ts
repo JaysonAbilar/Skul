@@ -6,6 +6,7 @@ import { AdminSubjectListPage } from '../admin-subject-list/admin-subject-list';
 import { AdminStudentListPage } from '../admin-student-list/admin-student-list';
 import { AdminClassListPage } from '../admin-class-list/admin-class-list';
 import { AdminClassSubjectListPage } from '../admin-class-subject-list/admin-class-subject-list';
+import { AdminClassStudentListPage } from '../admin-class-student-list/admin-class-student-list';
 /*
   Generated class for the AdminHome page.
 
@@ -55,6 +56,12 @@ export class AdminHomePage {
   {
     this.navCtrl.push(AdminClassSubjectListPage);
   }
+
+  goToAdminClassStudentList()
+  {
+    this.navCtrl.push(AdminClassStudentListPage);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminHomePage');
   }

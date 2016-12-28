@@ -23,8 +23,12 @@ import { AdminClassListPage } from '../pages/admin/admin-class-list/admin-class-
 import { AdminClassAddPage } from '../pages/admin/admin-class-add/admin-class-add';
 import { AdminClassUpdatePage } from '../pages/admin/admin-class-update/admin-class-update';
 import { AdminClassSubjectListPage } from '../pages/admin/admin-class-subject-list/admin-class-subject-list';
+import { AdminClassSubjectList2Page } from '../pages/admin/admin-class-subject-list-2/admin-class-subject-list-2';
 import { AdminClassSubjectAddPage } from '../pages/admin/admin-class-subject-add/admin-class-subject-add';
 import { AdminClassSubjectUpdatePage } from '../pages/admin/admin-class-subject-update/admin-class-subject-update';
+import { AdminClassStudentListPage } from '../pages/admin/admin-class-student-list/admin-class-student-list';
+import { AdminClassStudentList2Page } from '../pages/admin/admin-class-student-list-2/admin-class-student-list-2';
+import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add/admin-class-student-add';
 
 @NgModule({
   declarations: [
@@ -50,8 +54,12 @@ import { AdminClassSubjectUpdatePage } from '../pages/admin/admin-class-subject-
     AdminClassAddPage,
     AdminClassUpdatePage,
     AdminClassSubjectListPage,
+    AdminClassSubjectList2Page,
     AdminClassSubjectAddPage,
-    AdminClassSubjectUpdatePage
+    AdminClassSubjectUpdatePage,
+    AdminClassStudentListPage,
+    AdminClassStudentList2Page,
+    AdminClassStudentAddPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -80,8 +88,12 @@ import { AdminClassSubjectUpdatePage } from '../pages/admin/admin-class-subject-
     AdminClassAddPage,
     AdminClassUpdatePage,
     AdminClassSubjectListPage,
+    AdminClassSubjectList2Page,
     AdminClassSubjectAddPage,
-    AdminClassSubjectUpdatePage
+    AdminClassSubjectUpdatePage,
+    AdminClassStudentListPage,
+    AdminClassStudentList2Page,
+    AdminClassStudentAddPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,
