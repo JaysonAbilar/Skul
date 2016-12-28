@@ -1,0 +1,32 @@
+<!--
+  Generated template for the AdminSubjectAdd page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ADD SUBJECT</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="add-subject">
+  <ion-item>
+    <ion-label stacked>Subject Code</ion-label>
+    <ion-input [(ngModel)]="subject.SubjectCode" type="text" placeholder="Fill Subject Code"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Name</ion-label>
+    <ion-input [(ngModel)]="subject.Name" type="text" placeholder="Fill Subject Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Description</ion-label>
+    <ion-input [(ngModel)]="subject.Description" type="text" placeholder="Fill Subject Description"></ion-input>
+  </ion-item>
+
+  <button ion-button color="primary" (click)="addSubject(subject.SubjectCode, subject.Name, subject.Description)"></button>
+</ion-content>
+

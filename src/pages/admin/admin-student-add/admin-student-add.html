@@ -1,0 +1,64 @@
+<!--
+  Generated template for the AdminStudentAdd page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ADD STUDENT</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="add-student">
+  <ion-item>
+    <ion-label stacked>Username</ion-label>
+    <ion-input [(ngModel)]="student.Username" type="text" placeholder="Fill your Username"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Password</ion-label>
+    <ion-input [(ngModel)]="student.Password" type="password" placeholder="Fill your Password"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>First name</ion-label>
+    <ion-input [(ngModel)]="student.Firstname" type="text" placeholder="Fill yoru Firstname"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Middle name</ion-label>
+    <ion-input [(ngModel)]="student.Middlename" type="text" placeholder="Fill your Middlename"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Last name</ion-label>
+    <ion-input [(ngModel)]="student.Lastname" type="text" placeholder="Fill your Lastname"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Age</ion-label>
+    <ion-input [(ngModel)]="student.Age" type="number" placeholder="Fill your Age"></ion-input>
+  </ion-item>
+  <ion-item>
+  <ion-label stacked>Gender</ion-label>
+  <ion-select [(ngModel)]="student.Gender" multiple="false" cancelText="Nah" okText="Okay!">
+    <ion-option value="Male" checked="true">Male</ion-option>
+    <ion-option value="Female">Female</ion-option>
+  </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Email</ion-label>
+    <ion-input [(ngModel)]="student.Email" type="email" placeholder="Fill your Email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Contact Number</ion-label>
+    <ion-input [(ngModel)]="student.Contactnumber" type="number" placeholder="Fill your ContactNumber"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Parent</ion-label>
+    <ion-select [(ngModel)]="student.Guardian" multiple="false" cancelText="Nah" okText="Okay!">
+      <ion-option *ngFor="let guardian of guardianList | async" value={{guardian.$key}} checked="true">{{guardian.$key}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <button ion-button color="primary" (click)="addStudent(student.Username, student.Password, student.Firstname, student.Middlename, student.Lastname, student.Age, student.Gender, student.Email, student.Contactnumber, student.Guardian)"></button>
+</ion-content>
