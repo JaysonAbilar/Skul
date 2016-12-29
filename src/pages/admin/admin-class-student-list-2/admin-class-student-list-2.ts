@@ -43,7 +43,7 @@ export class AdminClassStudentList2Page {
     this.classs.Year = this.navParams.get('Year');
     this.classs.Section = this.navParams.get('Section');
 
-    this.classStudentList = this.af.database.list('/class-student/' + this.classs.Id);
+    this.classStudentList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id);
 
   }
 

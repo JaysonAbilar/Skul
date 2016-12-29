@@ -58,11 +58,11 @@ export class AdminClassStudentAddPage {
     this.classs.Year = this.navParams.get('Year');
     this.classs.Section = this.navParams.get('Section');
 
-    this.classStudentList = this.af.database.list('/class-sutudent/' + this.classs.Id);
+    this.classStudentList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id);
   }
 
   addClassStudent(Student) {      
-      firebase.database().ref('/class-student/' + this.classs.Id + "/" + Student).set({ 
+      firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student).set({ 
       Student: Student,
      }).then( newClassSubject=> {
         this.navCtrl.pop();

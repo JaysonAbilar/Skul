@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { AdminTeacherListPage } from '../admin-teacher-list/admin-teacher-list';
 import { AdminGuardianListPage } from '../admin-guardian-list/admin-guardian-list';
 import { AdminSubjectListPage } from '../admin-subject-list/admin-subject-list';
@@ -18,8 +19,18 @@ import { AdminClassStudentListPage } from '../admin-class-student-list/admin-cla
   templateUrl: 'admin-home.html'
 })
 export class AdminHomePage {
+  currentAcademicYearObject: FirebaseObjectObservable<any>;
+  currentAcademicYear = {
+    Startyear: '',
+    Endyear: ''
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+
+    this.currentAcademicYearObject = this.af.database.object('/current-academic-year');
+    this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Startyear = snapshot.Startyear); 
+    this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Endyear = snapshot.Endyear); 
+  }
 
 
   goToAdminTeacherList(){
@@ -46,9 +57,12 @@ export class AdminHomePage {
 
   }
 
-  goToAdminClassList(){
+  goToAdminClassList(Startyear, Endyear){
 
-    this.navCtrl.push(AdminClassListPage);
+    this.navCtrl.push(AdminClassListPage,{
+      Startyear:Startyear,
+      Endyear:Endyear
+    });
 
   }
   

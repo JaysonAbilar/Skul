@@ -66,12 +66,12 @@ export class AdminClassSubjectAddPage {
     this.classs.Year = this.navParams.get('Year');
     this.classs.Section = this.navParams.get('Section');
 
-    this.classSubjectList = this.af.database.list('/class-subject/' + this.classs.Id);
+    this.classSubjectList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id);
 
   }
 
   addClassSubject(SubjectCode, Teacher) {      
-      firebase.database().ref('/class-subject/' + this.classs.Id + "/" + SubjectCode).set({ 
+      firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id + "/" + SubjectCode).set({ 
       SubjectCode: SubjectCode,
       Teacher: Teacher,
 

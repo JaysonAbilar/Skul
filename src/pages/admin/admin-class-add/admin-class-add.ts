@@ -34,6 +34,7 @@ export class AdminClassAddPage {
     this.currentAcademicYearObject.subscribe(snapshot => this.classs.EndYear = snapshot.Endyear); 
 
   	this.classsList = this.af.database.list('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/class');
+    console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/class');
   }
 
   addClass(StartYear, EndYear, Year, Section) {	   	

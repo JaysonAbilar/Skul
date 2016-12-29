@@ -14,6 +14,9 @@
 
 
 <ion-content padding>
+
+    <input type="hidden" [(ngModel)]="currentAcademicYear.Startyear" />
+    <input type="hidden" [(ngModel)]="currentAcademicYear.Endyear" />
 	<ion-list>
 	  <ion-item>
 	    <ion-thumbnail item-left>
@@ -48,7 +51,7 @@
 	      <img src="assets/images/classicon.png">
 	    </ion-thumbnail>
 	    <h2>CLASS</h2>
-	    <button (click)="goToAdminClassList()" ion-button clear item-right>View</button>
+	    <button (click)="goToAdminClassList(currentAcademicYear.Startyear,currentAcademicYear.Endyear)" ion-button clear item-right>View</button>
 	  </ion-item>
 	  
 	</ion-list>

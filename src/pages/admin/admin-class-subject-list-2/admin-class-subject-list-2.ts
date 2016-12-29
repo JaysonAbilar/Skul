@@ -42,7 +42,8 @@ export class AdminClassSubjectList2Page {
     this.classs.Year = this.navParams.get('Year');
     this.classs.Section = this.navParams.get('Section');
 
-    this.classSubjectList = this.af.database.list('/class-subject/' + this.classs.Id);
+    this.classSubjectList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id);
+
 
   }
   

@@ -16,8 +16,14 @@
 <ion-content padding class="add-class">
   <input type="hidden" [(ngModel)]="classs.Id" />
   <ion-item>
-    <ion-label stacked>School Year</ion-label>
-    <ion-input [(ngModel)]="classs.StartYear" type="number" placeholder="Start Year"></ion-input>-<ion-input [(ngModel)]="classs.EndYear" type="number" placeholder="End Year"></ion-input>
+    <ion-label stacked>Start Year</ion-label>
+    <ion-input [(ngModel)]="classs.StartYear" type="text" readonly="readonly" value={{classs.StartYear}}>
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>End Year</ion-label>
+    <ion-input [(ngModel)]="classs.EndYear" type="text" readonly="readonly" value={{classs.EndYear}}>
+    </ion-input>
   </ion-item>
   <ion-item>
     <ion-label stacked>Year</ion-label>

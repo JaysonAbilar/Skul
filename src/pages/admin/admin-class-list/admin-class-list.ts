@@ -6,6 +6,7 @@ import { AdminClassAddPage } from '../admin-class-add/admin-class-add';
 import { AdminClassUpdatePage } from '../admin-class-update/admin-class-update';
 import { AdminClassSubjectList2Page } from '../admin-class-subject-list-2/admin-class-subject-list-2';
 import { AdminClassStudentList2Page } from '../admin-class-student-list-2/admin-class-student-list-2';
+import * as firebase from 'firebase';
 /*
   Generated class for the AdminClassList page.
 
@@ -25,15 +26,13 @@ export class AdminClassListPage {
     Endyear: ''
   };
 
-  currentAcademicYearObject: FirebaseObjectObservable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
-    this.currentAcademicYearObject = this.af.database.object('/current-academic-year');
-    this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Startyear = snapshot.Startyear); 
-    this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Endyear = snapshot.Endyear); 
+    this.currentAcademicYear.Startyear = this.navParams.get('Startyear');
+    this.currentAcademicYear.Endyear = this.navParams.get('Endyear');
 
-    this.classsList = this.af.database.list('/class');
+    this.classsList = this.af.database.list('/academic-year/'+ this.currentAcademicYear.Startyear  + '-' + this.currentAcademicYear.Endyear  + '/class');
 
   }
   

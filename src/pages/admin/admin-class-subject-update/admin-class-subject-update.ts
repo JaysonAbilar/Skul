@@ -66,7 +66,7 @@ export class AdminClassSubjectUpdatePage {
     this.classs.Year = this.navParams.get('Year');
     this.classs.Section = this.navParams.get('Section');
 
-    this.classSubjectList = this.af.database.list('/class-subject/' + this.classs.Id);
+    this.classSubjectList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id);
     this.classSubject.ClassSubjectCode = this.navParams.get('ClassSubjectCode');
     this.classSubject.SubjectCode = this.navParams.get('SubjectCode');
     this.classSubject.Teacher = this.navParams.get('Teacher');
@@ -74,7 +74,7 @@ export class AdminClassSubjectUpdatePage {
   
   editClassSubject(ClassSubjectCode, SubjectCode, Teacher) {   
     this.classSubjectList.remove(ClassSubjectCode);       
-    firebase.database().ref('/class-subject/' + this.classs.Id + "/" + SubjectCode).set({ 
+    firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id + "/" + SubjectCode).set({ 
       SubjectCode: SubjectCode,
       Teacher: Teacher,
 
