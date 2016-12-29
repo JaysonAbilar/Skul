@@ -6,7 +6,11 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
 import { AdminHomePage } from '../pages/admin/admin-home/admin-home';
+import { TeacherHomePage } from '../pages/teacher/teacher-home/teacher-home';
+import { GuardianHomePage } from '../pages/guardian/guardian-home/guardian-home';
+import { StudentHomePage } from '../pages/student/student-home/student-home';
 import { AdminTeacherListPage } from '../pages/admin/admin-teacher-list/admin-teacher-list';
 import { AdminTeacherAddPage } from '../pages/admin/admin-teacher-add/admin-teacher-add';
 import { AdminTeacherUpdatePage } from '../pages/admin/admin-teacher-update/admin-teacher-update';
@@ -35,9 +39,13 @@ import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add
     MyApp,
     AboutPage,
     ContactPage,
+    LoginPage,
     HomePage,
     TabsPage,
     AdminHomePage,
+    TeacherHomePage,
+    GuardianHomePage,
+    StudentHomePage,
     AdminTeacherListPage,
     AdminTeacherAddPage,
     AdminTeacherUpdatePage,
@@ -69,9 +77,13 @@ import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add
     MyApp,
     AboutPage,
     ContactPage,
+    LoginPage,
     HomePage,
     TabsPage,
     AdminHomePage,
+    TeacherHomePage,
+    GuardianHomePage,
+    StudentHomePage,
     AdminTeacherListPage,
     AdminTeacherAddPage,
     AdminTeacherUpdatePage,
