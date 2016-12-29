@@ -8,7 +8,6 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AdminHomePage } from '../pages/admin/admin-home/admin-home';
-import { TeacherHomePage } from '../pages/teacher/teacher-home/teacher-home';
 import { GuardianHomePage } from '../pages/guardian/guardian-home/guardian-home';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
 import { AdminTeacherListPage } from '../pages/admin/admin-teacher-list/admin-teacher-list';
@@ -34,6 +33,11 @@ import { AdminClassStudentListPage } from '../pages/admin/admin-class-student-li
 import { AdminClassStudentList2Page } from '../pages/admin/admin-class-student-list-2/admin-class-student-list-2';
 import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add/admin-class-student-add';
 
+import { TeacherHomePage } from '../pages/teacher/teacher-home/teacher-home';
+import { TeacherDashboardPage } from '../pages/teacher/teacher-dashboard/teacher-dashboard';
+import { TeacherProfilePage } from '../pages/teacher/teacher-profile/teacher-profile';
+import { TeacherInboxPage } from '../pages/teacher/teacher-inbox/teacher-inbox';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -43,7 +47,6 @@ import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add
     HomePage,
     TabsPage,
     AdminHomePage,
-    TeacherHomePage,
     GuardianHomePage,
     StudentHomePage,
     AdminTeacherListPage,
@@ -67,7 +70,12 @@ import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add
     AdminClassSubjectUpdatePage,
     AdminClassStudentListPage,
     AdminClassStudentList2Page,
-    AdminClassStudentAddPage
+    AdminClassStudentAddPage,
+    TeacherHomePage,
+    TeacherDashboardPage,
+    TeacherProfilePage,
+    TeacherInboxPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -81,7 +89,6 @@ import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add
     HomePage,
     TabsPage,
     AdminHomePage,
-    TeacherHomePage,
     GuardianHomePage,
     StudentHomePage,
     AdminTeacherListPage,
@@ -105,7 +112,11 @@ import { AdminClassStudentAddPage } from '../pages/admin/admin-class-student-add
     AdminClassSubjectUpdatePage,
     AdminClassStudentListPage,
     AdminClassStudentList2Page,
-    AdminClassStudentAddPage
+    AdminClassStudentAddPage,
+    TeacherHomePage,
+    TeacherDashboardPage,
+    TeacherProfilePage,
+    TeacherInboxPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,

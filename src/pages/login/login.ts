@@ -27,7 +27,7 @@ export class LoginPage {
 
   login = {
   	Username: '',
-	Password: ''
+	  Password: ''
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController) {
@@ -56,7 +56,10 @@ export class LoginPage {
     }
     else if(teacherObjectPassword == Password)
     {
-    	this.navCtrl.push(TeacherHomePage);
+      this.navCtrl.push(TeacherHomePage, {
+       Username: Username
+     });
+
     }
     else if(guardianObjectPassword == Password)
     {
@@ -70,7 +73,7 @@ export class LoginPage {
     {
     	let toast = this.toastCtrl.create({
 	      message: 'Invalid Username or Password',
-	      duration: 3000
+	      duration: 500
 	    });
 	    toast.present();
     }
