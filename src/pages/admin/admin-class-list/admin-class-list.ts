@@ -4,6 +4,9 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AdminHomePage } from '../admin-home/admin-home';
 import { AdminClassAddPage } from '../admin-class-add/admin-class-add';
 import { AdminClassUpdatePage } from '../admin-class-update/admin-class-update';
+import { AdminClassSubjectList2Page } from '../admin-class-subject-list-2/admin-class-subject-list-2';
+import { AdminClassStudentList2Page } from '../admin-class-student-list-2/admin-class-student-list-2';
+
 /*
   Generated class for the AdminClassList page.
 
@@ -41,6 +44,26 @@ export class AdminClassListPage {
 
   deleteClass(classs) {
    this.classsList.remove(classs);
+  }
+
+  listSubject(classs){
+    this.navCtrl.push(AdminClassSubjectList2Page, {
+      key: classs.$key,
+      StartYear: classs.StartYear,
+      EndYear: classs.EndYear,
+      Year: classs.Year,
+      Section: classs.Section
+    });
+  }
+
+  listStudents(classs){
+    this.navCtrl.push(AdminClassStudentList2Page, {
+      key: classs.$key,
+      StartYear: classs.StartYear,
+      EndYear: classs.EndYear,
+      Year: classs.Year,
+      Section: classs.Section
+    });
   }
 
   ionViewDidLoad() {
