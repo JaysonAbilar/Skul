@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import { TeacherClassStudentsPage } from '../teacher-class-students/teacher-class-students';
 import { TeacherClassSubjectsPage } from '../teacher-class-subjects/teacher-class-subjects';
+import { TeacherClassAssignmentListPage } from '../teacher-class-assignment-list/teacher-class-assignment-list';
 /*
 /*
   Generated class for the TeacherClass page.
@@ -42,6 +43,15 @@ export class TeacherClassPage {
 
   viewSubjects(Username,classId,startYear,endYear){
    this.navCtrl.push(TeacherClassSubjectsPage, {
+     Username:Username,
+     ClassId:classId,
+     Startyear:startYear,
+     Endyear:endYear
+   });
+  }
+
+  viewHomeworks(Username,classId,startYear,endYear){
+   this.navCtrl.push(TeacherClassAssignmentListPage, {
      Username:Username,
      ClassId:classId,
      Startyear:startYear,
