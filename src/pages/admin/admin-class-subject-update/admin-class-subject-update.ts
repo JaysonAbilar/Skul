@@ -99,7 +99,9 @@ export class AdminClassSubjectUpdatePage {
      }).then( newClassSubject=> {
         firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' +Teacher + "/" + this.classs.Id + "/" + SubjectCode).set({ 
           SubjectCode: SubjectCode,
-          Teacher: Teacher,
+          Name: this.subject.Name,
+          Description: this.subject.Description,
+          Teacher: Teacher
           }).then( newClassSubject=> {
             this.navCtrl.pop();
         }, error => {

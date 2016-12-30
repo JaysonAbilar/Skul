@@ -40,8 +40,9 @@ export class TeacherClassPage {
   }
 
 
-  viewSubjects(classId,startYear,endYear){
+  viewSubjects(Username,classId,startYear,endYear){
    this.navCtrl.push(TeacherClassSubjectsPage, {
+     Username:Username,
      ClassId:classId,
      Startyear:startYear,
      Endyear:endYear

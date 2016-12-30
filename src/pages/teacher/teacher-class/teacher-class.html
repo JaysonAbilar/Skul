@@ -13,6 +13,7 @@
 
 <ion-content padding>
   {{ClassId}}
+  <input type="hidden" [(ngModel)]="Username" />
   <input type="hidden" [(ngModel)]="ClassId" />
   <input type="hidden" [(ngModel)]="Startyear" />
   <input type="hidden" [(ngModel)]="Endyear" />
@@ -21,7 +22,7 @@
        <img src="assets/images/classstudenticon.png"height=50px><h3>STUDENTS</h3>
     </ion-card-content>
   </ion-card>
-  <ion-card text-center (click)="viewSubjects(ClassId,Startyear,Endyear)">>
+  <ion-card text-center (click)="viewSubjects(Username,ClassId,Startyear,Endyear)">>
     <ion-card-content>
        <img src="assets/images/classsubjecticon.gif"height=50px><h3>SUBJECTS</h3>
     </ion-card-content>

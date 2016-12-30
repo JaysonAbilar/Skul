@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 /*
   Generated class for the TeacherClassSubjects page.
 
@@ -12,8 +12,28 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'teacher-class-subjects.html'
 })
 export class TeacherClassSubjectsPage {
+  
+  subjecttList: FirebaseListObservable<any>;
+  subject = {
+    Subjectcode: '',
+	Name: '',
+	Description: '',
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public Username:any;
+  public ClassId:any;
+  public Startyear:any;
+  public Endyear:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+  	 this.Username = this.navParams.get('Username');
+  	 this.ClassId = this.navParams.get('ClassId');
+  	 this.Startyear = this.navParams.get('Startyear');
+  	 this.Endyear = this.navParams.get('Endyear');
+
+  	 this.subjecttList= this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/teacher-class/' + this.Username + "/" + this.ClassId);
+  	 console.log('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/teacher-class/' + this.Username + "/" + this.ClassId)
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassSubjectsPage');
