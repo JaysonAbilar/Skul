@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable,FirebaseObjectObservable  } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import * as firebase from 'firebase';
 
@@ -17,6 +17,7 @@ import * as firebase from 'firebase';
 export class AdminClassSubjectUpdatePage {
 
   subjectList: FirebaseListObservable<any>;
+  public subjectObject: FirebaseObjectObservable<any>;
   subject = {
   	SubjectCode:'',
     Name: '',
@@ -80,6 +81,10 @@ export class AdminClassSubjectUpdatePage {
   }
   
   editClassSubject(ClassSubjectCode, SubjectCode, Teacher) { 
+    this.subjectObject = this.af.database.object('/subject/' + SubjectCode);  
+    this.subjectObject.subscribe(snapshot => this.subject.Name = snapshot.Name); 
+    this.subjectObject.subscribe(snapshot => this.subject.Description = snapshot.Description); 
+
     this.teacherClassList = this.taf.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' + this.oldTeacher + "/" + this.classs.Id); 
     console.log('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' + this.oldTeacher + "/" + this.classs.Id);
     console.log(ClassSubjectCode);
@@ -87,7 +92,9 @@ export class AdminClassSubjectUpdatePage {
     this.teacherClassList.remove(ClassSubjectCode);       
     firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id + "/" + SubjectCode).set({ 
       SubjectCode: SubjectCode,
-      Teacher: Teacher,
+      Name: this.subject.Name,
+      Description: this.subject.Description,
+      Teacher: Teacher
 
      }).then( newClassSubject=> {
         firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' +Teacher + "/" + this.classs.Id + "/" + SubjectCode).set({ 

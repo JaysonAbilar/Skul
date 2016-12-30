@@ -37,6 +37,9 @@ import { TeacherHomePage } from '../pages/teacher/teacher-home/teacher-home';
 import { TeacherDashboardPage } from '../pages/teacher/teacher-dashboard/teacher-dashboard';
 import { TeacherProfilePage } from '../pages/teacher/teacher-profile/teacher-profile';
 import { TeacherInboxPage } from '../pages/teacher/teacher-inbox/teacher-inbox';
+import { TeacherClassPage } from '../pages/teacher/teacher-class/teacher-class';
+import { TeacherClassStudentsPage } from '../pages/teacher/teacher-class-students/teacher-class-students';
+import { TeacherClassSubjectsPage } from '../pages/teacher/teacher-class-subjects/teacher-class-subjects';
 
 @NgModule({
   declarations: [
@@ -74,7 +77,10 @@ import { TeacherInboxPage } from '../pages/teacher/teacher-inbox/teacher-inbox';
     TeacherHomePage,
     TeacherDashboardPage,
     TeacherProfilePage,
-    TeacherInboxPage
+    TeacherInboxPage,
+    TeacherClassPage,
+    TeacherClassStudentsPage,
+    TeacherClassSubjectsPage
 
   ],
   imports: [
@@ -116,7 +122,10 @@ import { TeacherInboxPage } from '../pages/teacher/teacher-inbox/teacher-inbox';
     TeacherHomePage,
     TeacherDashboardPage,
     TeacherProfilePage,
-    TeacherInboxPage
+    TeacherInboxPage,
+    TeacherClassPage,
+    TeacherClassStudentsPage,
+    TeacherClassSubjectsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,

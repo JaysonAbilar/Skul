@@ -19,12 +19,23 @@
 
 
 <ion-content padding>
-<ion-card text-center>
-  <ion-card-header>
-    List of your current classes
-  </ion-card-header>
-  <ion-card-content>
-     <h1>S.Y. {{classs.StartYear}}-{{classs.EndYear}}</h1>
-  </ion-card-content>
-</ion-card>
+  <input type="hidden" [(ngModel)]="Username" />
+  <ion-card text-center (click)="initializeTeacherClassList(classs.StartYear,classs.EndYear)">
+    <ion-card-header>
+      List of your current classes
+    </ion-card-header>
+    <ion-card-content>
+       <h1>S.Y. {{classs.StartYear}}-{{classs.EndYear}}</h1>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>Class</ion-list-header>
+    <ion-item-sliding *ngFor="let teacherClass of teacherClassList | async">
+      <ion-item>
+        <h3>{{teacherClass.$key}}</h3>
+        <button ion-button item-right><ion-icon name="arrow-dropright-circle" (click)="goToSelectedClass(Username,teacherClass.$key)"></ion-icon></button>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

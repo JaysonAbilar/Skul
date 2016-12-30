@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import * as firebase from 'firebase';
 
@@ -18,6 +18,7 @@ import * as firebase from 'firebase';
 export class AdminClassStudentAddPage {
   
   studentList: FirebaseListObservable<any>;
+  studentOjbect: FirebaseObjectObservable<any>;
   student = {
     Username: '',
 	Password: '',
@@ -62,9 +63,28 @@ export class AdminClassStudentAddPage {
   }
 
   addClassStudent(Student) {      
+      this.studentOjbect  = this.af.database.object('/student/' + Student);
+
+      this.studentOjbect.subscribe(snapshot => this.student.Firstname = snapshot.Firstname); 
+      this.studentOjbect.subscribe(snapshot => this.student.Middlename = snapshot.Middlename); 
+      this.studentOjbect.subscribe(snapshot => this.student.Lastname = snapshot.Lastname); 
+      this.studentOjbect.subscribe(snapshot => this.student.Age = snapshot.Age); 
+      this.studentOjbect.subscribe(snapshot => this.student.Gender = snapshot.Gender); 
+      this.studentOjbect.subscribe(snapshot => this.student.Email = snapshot.Email); 
+      this.studentOjbect.subscribe(snapshot => this.student.Contactnumber = snapshot.Contactnumber); 
+
+
       firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student).set({ 
       Student: Student,
-     }).then( newClassSubject=> {
+      Firstname:this.student.Firstname,
+      Middlename:this.student.Middlename,
+      Lastname:this.student.Lastname,
+      Age:this.student.Age,
+      Gender:this.student.Gender,
+      Email:this.student.Email,
+      Contactnumber:this.student.Contactnumber
+
+      }).then( newClassSubject=> {
         firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + Student + "/" + this.classs.Id).set({ 
           Student: Student,
          }).then( newClassSubject=> {

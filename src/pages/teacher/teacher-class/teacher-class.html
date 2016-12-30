@@ -1,0 +1,39 @@
+<!--
+  Generated template for the TeacherClass page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CLASS {{ClassId}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  {{ClassId}}
+  <input type="hidden" [(ngModel)]="ClassId" />
+  <input type="hidden" [(ngModel)]="Startyear" />
+  <input type="hidden" [(ngModel)]="Endyear" />
+  <ion-card text-center (click)="viewStudents(ClassId,Startyear,Endyear)">
+    <ion-card-content>
+       <img src="assets/images/classstudenticon.png"height=50px><h3>STUDENTS</h3>
+    </ion-card-content>
+  </ion-card>
+  <ion-card text-center (click)="viewSubjects(ClassId,Startyear,Endyear)">>
+    <ion-card-content>
+       <img src="assets/images/classsubjecticon.gif"height=50px><h3>SUBJECTS</h3>
+    </ion-card-content>
+  </ion-card>
+  <ion-card text-center>
+    <ion-card-content>
+       <img src="assets/images/subjecticon.png"height=50px><h3>HOMEWORKS</h3>
+    </ion-card-content>
+  </ion-card>
+  <ion-card text-center>
+    <ion-card-content>
+       <img src="assets/images/attendanceicon.png"height=50px><h3>ATTENDANCE</h3>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

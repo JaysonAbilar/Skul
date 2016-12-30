@@ -35,7 +35,7 @@ export class LoginPage {
 
   }
 
-  presentLoading() {
+ presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
       duration: 1000
@@ -72,7 +72,7 @@ export class LoginPage {
     });
   }
 
-  loginUser(Username, Password, Role) {	
+  loginUser(Username, Password, Role) { 
 
     if(Role == "admin"){
       var root = firebase.database().ref('admin/'+Username);
