@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { TeacherHomePage } from '../teacher-home/teacher-home';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
@@ -36,7 +36,7 @@ export class TeacherDashboardPage {
 
   currentAcademicYearObject: FirebaseObjectObservable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
   	this.Username =  this.navParams.data.Username;
 
@@ -67,7 +67,7 @@ export class TeacherDashboardPage {
       });
   }
   logOut(){
-    this.navCtrl.push(LoginPage)
+    this.app.getRootNav().push(LoginPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherDashboardPage');

@@ -78,7 +78,7 @@ export class AdminHomePage {
   }
 
   logOut(){
-    this.navCtrl.push(LoginPage)
+    this.navCtrl.push(LoginPage);
   }
 
   ionViewDidLoad() {
