@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import * as firebase from 'firebase';
@@ -30,53 +30,60 @@ export class LoginPage {
 	  Password: ''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
 
   }
 
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+  }
+
   loginUser(Username, Password) {	
-    this.adminObject = this.af.database.object('/admin/' + Username);
-    this.teacherObject = this.af.database.object('/teacher/' + Username);
-    this.guardianObject = this.af.database.object('/guardian/' + Username);
-    this.studentObject = this.af.database.object('/student/' + Username);
-    
+
     var adminObjectPassword;
-    var teacherObjectPassword;
-    var guardianObjectPassword;
-    var studentObjectPassword;
 
-    this.adminObject.subscribe(snapshot => adminObjectPassword = snapshot.Password); 
-    this.teacherObject.subscribe(snapshot => teacherObjectPassword = snapshot.Password); 
-    this.guardianObject.subscribe(snapshot => guardianObjectPassword = snapshot.Password); 
-    this.studentObject.subscribe(snapshot => studentObjectPassword = snapshot.Password); 
+    var root = firebase.database().ref('admin/'+Username);
+    var navigation = this.navCtrl;
+    root.on('value', function(snap){
+      adminObjectPassword = snap.val().Password;  
+      if(adminObjectPassword == Password) {  
+        navigation.push(AdminHomePage);
+      }
+    });
+    this.presentLoading();
 
-    if(adminObjectPassword == Password)
-    {	
-    	this.navCtrl.push(AdminHomePage);
-    }
-    else if(teacherObjectPassword == Password)
-    {
-      this.navCtrl.push(TeacherHomePage, {
-       Username: Username
-     });
+    // if(adminObjectPassword){
+    //   this.navCtrl.push(AdminHomePage);
+    // }   
+    // this.adminObject = this.af.database.object('admin/' + Username);
+    
+   
+    // var adminObjectPassword;
+    // this.adminObject.subscribe(snapshot => adminObjectPassword = snapshot.Password);
+    // this.adminObject.subscribe(console.log);
+    // console.log(adminObjectPassword);
+    // this.adminObject.loaded().then(function(){
+      
+    // });
 
-    }
-    else if(guardianObjectPassword == Password)
-    {
-    	this.navCtrl.push(GuardianHomePage);
-    }
-    else if(studentObjectPassword == Password)
-    {
-    	this.navCtrl.push(StudentHomePage);
-    }
-    else
-    {
-    	let toast = this.toastCtrl.create({
-	      message: 'Invalid Username or Password',
-	      duration: 500
-	    });
-	    toast.present();
-    }
+    
+
+    // if(adminObjectPassword == Password)
+    // {	
+    // 	this.navCtrl.push(AdminHomePage);
+    // }
+    // else
+    // {
+    // 	let toast = this.toastCtrl.create({
+	   //    message: 'Invalid Username or Password',
+	   //    duration: 500
+	   //  });
+	   //  toast.present();
+    // }
 
 	  
    }
