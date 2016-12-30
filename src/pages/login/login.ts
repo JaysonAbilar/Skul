@@ -44,7 +44,7 @@ export class LoginPage {
   }
 
 
-  authenticate(root, Password, LandingPage){
+  authenticate(root, Password, LandingPage,Username){
     var RolePassword;
     var navigation = this.navCtrl;
     var toaster = this.toastCtrl;
@@ -53,7 +53,9 @@ export class LoginPage {
       try{
         RolePassword = snap.val().Password;  
         if(RolePassword == Password) {  
-          navigation.push(LandingPage);
+          navigation.push(LandingPage,{
+            Username:Username
+          });
         } else {
           let toast = toaster.create({
             message: 'Invalid Username or Password',
@@ -76,16 +78,16 @@ export class LoginPage {
 
     if(Role == "admin"){
       var root = firebase.database().ref('admin/'+Username);
-      this.authenticate(root,Password,AdminHomePage);
+      this.authenticate(root,Password,AdminHomePage,Username);
     } else if(Role == "teacher"){
       var root = firebase.database().ref('teacher/'+Username);
-      this.authenticate(root,Password,TeacherHomePage);
+      this.authenticate(root,Password,TeacherHomePage,Username);
     } else if(Role == "student"){
       var root = firebase.database().ref('student/'+Username);
-      this.authenticate(root,Password,StudentHomePage);
+      this.authenticate(root,Password,StudentHomePage,Username);
     } else if(Role == "guardian"){
       var root = firebase.database().ref('guardian/'+Username);
-      this.authenticate(root,Password,GuardianHomePage);
+      this.authenticate(root,Password,GuardianHomePage,Username);
     }
     this.presentLoading();
    }
