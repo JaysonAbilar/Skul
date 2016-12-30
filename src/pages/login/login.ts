@@ -46,12 +46,14 @@ export class LoginPage {
 
     var adminObjectPassword;
 
-    var root = firebase.database().ref('admin/'+Username);
+    var root = firebase.database().ref('teacher/'+Username);
     var navigation = this.navCtrl;
     root.on('value', function(snap){
       adminObjectPassword = snap.val().Password;  
       if(adminObjectPassword == Password) {  
-        navigation.push(AdminHomePage);
+        navigation.push(TeacherHomePage, {
+          Username: Username
+        });
       }
     });
     this.presentLoading();

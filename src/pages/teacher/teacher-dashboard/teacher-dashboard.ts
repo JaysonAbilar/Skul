@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TeacherHomePage } from '../teacher-home/teacher-home';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
-
+import { TeacherClassPage } from '../teacher-class/teacher-class';
 /*
   Generated class for the TeacherDashboard page.
 
@@ -16,16 +16,22 @@ import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, fireba
 })
 export class TeacherDashboardPage {
   
-  Username:'';
+  public Username:'';
   
-  classsList: FirebaseListObservable<any>;
-  classs = {
+  public classsList: FirebaseListObservable<any>;
+  public classs = {
     Id: '',
     StartYear: '',
     EndYear: '',
     Year: '',
     Section: ''
   };
+
+  public teacherClassList: FirebaseListObservable<any>;
+  public teacherClass = {
+    classId: ''
+  };
+
 
   currentAcademicYearObject: FirebaseObjectObservable<any>;
 
@@ -39,6 +45,25 @@ export class TeacherDashboardPage {
 
     this.classsList = this.af.database.list('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/class-subject');
 
+    this.teacherClassList = this.af.database.list('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/teacher-class/' + this.Username);
+
+    console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/teacher-class/' + this.Username)
+  }
+  
+  initializeTeacherClassList(syr,eyr)
+  {
+    this.teacherClassList = this.af.database.list('/academic-year/'+ syr  + '-' + eyr + '/teacher-class/' + this.Username);
+
+    console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/teacher-class/' + this.Username)
+  }
+
+  goToSelectedClass(Username,ClassId)
+  {
+     this.navCtrl.push(TeacherClassPage,
+      {
+         Username: Username,
+         ClassId: ClassId
+      });
   }
 
   ionViewDidLoad() {
