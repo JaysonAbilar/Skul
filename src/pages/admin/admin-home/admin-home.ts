@@ -8,6 +8,7 @@ import { AdminStudentListPage } from '../admin-student-list/admin-student-list';
 import { AdminClassListPage } from '../admin-class-list/admin-class-list';
 import { AdminClassSubjectListPage } from '../admin-class-subject-list/admin-class-subject-list';
 import { AdminClassStudentListPage } from '../admin-class-student-list/admin-class-student-list';
+import { LoginPage } from '../../login/login';
 /*
   Generated class for the AdminHome page.
 
@@ -74,6 +75,10 @@ export class AdminHomePage {
   goToAdminClassStudentList()
   {
     this.navCtrl.push(AdminClassStudentListPage);
+  }
+
+  logOut(){
+    this.navCtrl.push(LoginPage)
   }
 
   ionViewDidLoad() {

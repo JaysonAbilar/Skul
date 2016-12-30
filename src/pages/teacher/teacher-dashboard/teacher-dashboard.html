@@ -1,4 +1,4 @@
-<!--
+  <!--
   Generated template for the TeacherDashboard page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>Dashboard</ion-title>
+    <ion-buttons end>
+      <button color="danger" ion-button (click)="logOut()">
+        <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

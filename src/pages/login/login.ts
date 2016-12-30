@@ -27,7 +27,8 @@ export class LoginPage {
 
   login = {
   	Username: '',
-	  Password: ''
+	  Password: '',
+    Role: ''
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
@@ -37,55 +38,56 @@ export class LoginPage {
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
-      duration: 3000
+      duration: 1000
     });
     loader.present();
   }
 
-  loginUser(Username, Password) {	
 
-    var adminObjectPassword;
-
-    var root = firebase.database().ref('admin/'+Username);
+  authenticate(root, Password, LandingPage){
+    var RolePassword;
     var navigation = this.navCtrl;
+    var toaster = this.toastCtrl;
+
     root.on('value', function(snap){
-      adminObjectPassword = snap.val().Password;  
-      if(adminObjectPassword == Password) {  
-        navigation.push(AdminHomePage);
+      try{
+        RolePassword = snap.val().Password;  
+        if(RolePassword == Password) {  
+          navigation.push(LandingPage);
+        } else {
+          let toast = toaster.create({
+            message: 'Invalid Username or Password',
+            duration: 500
+          });
+          toast.present();
+        }
+      } catch(e){
+        let toast = toaster.create({
+            message: 'Invalid Username or Password',
+            duration: 500
+          });
+          toast.present();
+        console.log("auth username failed");
       }
     });
+  }
+
+  loginUser(Username, Password, Role) {	
+
+    if(Role == "admin"){
+      var root = firebase.database().ref('admin/'+Username);
+      this.authenticate(root,Password,AdminHomePage);
+    } else if(Role == "teacher"){
+      var root = firebase.database().ref('teacher/'+Username);
+      this.authenticate(root,Password,TeacherHomePage);
+    } else if(Role == "student"){
+      var root = firebase.database().ref('student/'+Username);
+      this.authenticate(root,Password,StudentHomePage);
+    } else if(Role == "guardian"){
+      var root = firebase.database().ref('guardian/'+Username);
+      this.authenticate(root,Password,GuardianHomePage);
+    }
     this.presentLoading();
-
-    // if(adminObjectPassword){
-    //   this.navCtrl.push(AdminHomePage);
-    // }   
-    // this.adminObject = this.af.database.object('admin/' + Username);
-    
-   
-    // var adminObjectPassword;
-    // this.adminObject.subscribe(snapshot => adminObjectPassword = snapshot.Password);
-    // this.adminObject.subscribe(console.log);
-    // console.log(adminObjectPassword);
-    // this.adminObject.loaded().then(function(){
-      
-    // });
-
-    
-
-    // if(adminObjectPassword == Password)
-    // {	
-    // 	this.navCtrl.push(AdminHomePage);
-    // }
-    // else
-    // {
-    // 	let toast = this.toastCtrl.create({
-	   //    message: 'Invalid Username or Password',
-	   //    duration: 500
-	   //  });
-	   //  toast.present();
-    // }
-
-	  
    }
 
   ionViewDidLoad() {

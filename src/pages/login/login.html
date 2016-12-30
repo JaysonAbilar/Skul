@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,6 +23,15 @@
 	    <ion-label floating>Password</ion-label>
 	    <ion-input [(ngModel)]="login.Password" type="text"></ion-input>
 	  </ion-item>
+	  <ion-item>
+	  	<ion-label>Login as:</ion-label>
+	  	<ion-select [(ngModel)] = "login.Role">
+	  		<ion-option value="teacher">Teacher</ion-option>
+	  		<ion-option value="guardian">Guardian</ion-option>
+	  		<ion-option value="student">Student</ion-option>
+	  		<ion-option value="admin">Admin</ion-option>
+	  	</ion-select>
+	  </ion-item>
 	</ion-list>
-	<button ion-button full (click)="loginUser(login.Username,login.Password)">Login</button>
+	<button ion-button full (click)="loginUser(login.Username,login.Password,login.Role)">Login</button>
 </ion-content>

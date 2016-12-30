@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TeacherHomePage } from '../teacher-home/teacher-home';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
+import { LoginPage } from '../../login/login';
 
 /*
   Generated class for the TeacherDashboard page.
@@ -40,7 +41,9 @@ export class TeacherDashboardPage {
     this.classsList = this.af.database.list('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/class-subject');
 
   }
-
+  logOut(){
+    this.navCtrl.push(LoginPage)
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherDashboardPage');
   }
