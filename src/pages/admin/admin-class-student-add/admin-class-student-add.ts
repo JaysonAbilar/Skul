@@ -65,7 +65,13 @@ export class AdminClassStudentAddPage {
       firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student).set({ 
       Student: Student,
      }).then( newClassSubject=> {
-        this.navCtrl.pop();
+        firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + Student + "/" + this.classs.Id).set({ 
+          Student: Student,
+         }).then( newClassSubject=> {
+            this.navCtrl.pop();
+          }, error => {
+            console.log(error);
+        });
       }, error => {
         console.log(error);
       });

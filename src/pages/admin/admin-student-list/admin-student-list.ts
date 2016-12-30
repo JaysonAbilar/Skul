@@ -17,8 +17,12 @@ import { AdminStudentUpdatePage } from '../admin-student-update/admin-student-up
 export class AdminStudentListPage {
   
   studentList: FirebaseListObservable<any>;
+  
+  guardianStudentList: FirebaseListObservable<any>;
+  public taf: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+    this.taf = af;
   	this.studentList = af.database.list('/student');
   }
 
@@ -45,6 +49,10 @@ export class AdminStudentListPage {
   }
 
   deleteStudent(student) {
+    console.log("/guardian-student/" + student.Guardian);
+    console.log("student.Username");
+    this.guardianStudentList = this.taf.database.list("/guardian-student/" + student.Guardian);   
+    this.guardianStudentList.remove(student.$key); 
     this.studentList.remove(student);
   }
 

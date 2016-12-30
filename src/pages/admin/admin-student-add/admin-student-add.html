@@ -56,7 +56,9 @@
   <ion-item>
     <ion-label stacked>Parent</ion-label>
     <ion-select [(ngModel)]="student.Guardian" multiple="false" cancelText="Nah" okText="Okay!">
-      <ion-option *ngFor="let guardian of guardianList | async" value={{guardian.$key}} checked="true">{{guardian.$key}}</ion-option>
+      <div *ngFor="let guardian of guardianList | async">
+      <ion-option ngSHow="guardian.Firstname === 'Lebron'" value={{guardian.$key}} checked="true">{{guardian.$key}}</ion-option>
+      </div>
     </ion-select>
   </ion-item>
 

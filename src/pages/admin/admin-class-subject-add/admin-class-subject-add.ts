@@ -76,7 +76,15 @@ export class AdminClassSubjectAddPage {
       Teacher: Teacher,
 
      }).then( newClassSubject=> {
-        this.navCtrl.pop();
+        firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' +Teacher + "/" + this.classs.Id + "/" + SubjectCode).set({ 
+        SubjectCode: SubjectCode,
+        Teacher: Teacher,
+
+       }).then( newClassSubject=> {
+          this.navCtrl.pop();
+        }, error => {
+          console.log(error);
+        });
       }, error => {
         console.log(error);
       });

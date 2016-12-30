@@ -55,7 +55,12 @@ export class AdminClassSubjectUpdatePage {
   	Teacher: '',
   };
 
+  teacherClassList: FirebaseListObservable<any>;
+
+  public taf: any;
+  public oldTeacher: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {
+    this.taf = af;    
   	this.subjectList = this.af.database.list('/subject');
     this.teacherList = this.af.database.list('/teacher');
     this.classsList = this.af.database.list('/class');
@@ -70,16 +75,29 @@ export class AdminClassSubjectUpdatePage {
     this.classSubject.ClassSubjectCode = this.navParams.get('ClassSubjectCode');
     this.classSubject.SubjectCode = this.navParams.get('SubjectCode');
     this.classSubject.Teacher = this.navParams.get('Teacher');
+    this.oldTeacher = this.navParams.get('Teacher');
+
   }
   
-  editClassSubject(ClassSubjectCode, SubjectCode, Teacher) {   
-    this.classSubjectList.remove(ClassSubjectCode);       
+  editClassSubject(ClassSubjectCode, SubjectCode, Teacher) { 
+    this.teacherClassList = this.taf.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' + this.oldTeacher + "/" + this.classs.Id); 
+    console.log('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' + this.oldTeacher + "/" + this.classs.Id);
+    console.log(ClassSubjectCode);
+    this.classSubjectList.remove(ClassSubjectCode); 
+    this.teacherClassList.remove(ClassSubjectCode);       
     firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id + "/" + SubjectCode).set({ 
       SubjectCode: SubjectCode,
       Teacher: Teacher,
 
      }).then( newClassSubject=> {
-        this.navCtrl.pop();
+        firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' +Teacher + "/" + this.classs.Id + "/" + SubjectCode).set({ 
+          SubjectCode: SubjectCode,
+          Teacher: Teacher,
+          }).then( newClassSubject=> {
+            this.navCtrl.pop();
+        }, error => {
+          console.log(error);
+        });
       }, error => {
         console.log(error);
     });

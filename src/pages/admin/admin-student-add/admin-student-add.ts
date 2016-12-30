@@ -61,7 +61,13 @@ export class AdminStudentAddPage {
       Guardian: Guardian
 
   	 }).then( newStudent => {
-	      this.navCtrl.pop();
+	       firebase.database().ref("/guardian-student/" + Guardian + "/" + Username).set({ 
+            Student:Username
+           }).then( newStudent => {
+              this.navCtrl.pop();
+            }, error => {
+              console.log(error);
+          });
 	    }, error => {
 	      console.log(error);
 	    });

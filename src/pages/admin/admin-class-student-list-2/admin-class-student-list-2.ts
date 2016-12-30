@@ -18,7 +18,7 @@ import { AdminClassStudentAddPage } from '../admin-class-student-add/admin-class
 export class AdminClassStudentList2Page {
   
   classsList: FirebaseListObservable<any>;
-  classs = {
+  public classs = {
     Id: '',
   	StartYear: '',
   	EndYear: '',
@@ -33,8 +33,11 @@ export class AdminClassStudentList2Page {
     Student: ''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {
+  studentClassList: FirebaseListObservable<any>;
+  public taf: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {
+    this.taf = af;
   	this.classsList = this.af.database.list('/class');
 
     this.classs.Id = this.navParams.get('key');
@@ -61,6 +64,10 @@ export class AdminClassStudentList2Page {
 
   deleteClassStudent(classStudent)
   {
+    this.studentClassList = this.taf.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + classStudent.Student);
+    console.log('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + classStudent.Student);
+    console.log(this.classs.Id);
+    this.studentClassList.remove(this.classs.Id); 
     this.classStudentList.remove(classStudent); 
   }
 

@@ -17,7 +17,7 @@ import { AdminClassSubjectUpdatePage } from '../admin-class-subject-update/admin
 export class AdminClassSubjectList2Page {
   
   classsList: FirebaseListObservable<any>;
-  classs = {
+  public classs = {
     Id: '',
   	StartYear: '',
   	EndYear: '',
@@ -33,7 +33,13 @@ export class AdminClassSubjectList2Page {
   	Teacher: '',
   };
 
+  teacherClassList: FirebaseListObservable<any>;
+
+  public taf: any;
+  public oldTeacher: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {
+    this.taf = af;
     this.classsList = this.af.database.list('/class');
 
     this.classs.Id = this.navParams.get('key');
@@ -43,7 +49,7 @@ export class AdminClassSubjectList2Page {
     this.classs.Section = this.navParams.get('Section');
 
     this.classSubjectList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-subject/' + this.classs.Id);
-
+    
 
   }
   
@@ -75,6 +81,8 @@ export class AdminClassSubjectList2Page {
   
   deleteClassSubject(classSubject)
   {
+    this.teacherClassList = this.taf.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/teacher-class/' + classSubject.Teacher + "/" + this.classs.Id);
+    this.teacherClassList.remove(classSubject.ClassSubjectCode);      
     this.classSubjectList.remove(classSubject); 
   }
 

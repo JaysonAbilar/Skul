@@ -43,8 +43,11 @@ export class AdminStudentUpdatePage {
   	Guardian: ''
   };
 
+  guardianStudentList: FirebaseListObservable<any>;
+  public taf: any;
+  public oldGuardian: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {
-
+    this.taf = af;
   	this.guardianList = this.af.database.list('/guardian');
   	this.guardian.Username = this.navParams.get('key');
     this.guardian.Password = this.navParams.get('Password');
@@ -67,10 +70,12 @@ export class AdminStudentUpdatePage {
     this.student.Email = this.navParams.get('Email');
     this.student.Contactnumber = this.navParams.get('Contactnumber');
     this.student.Guardian= this.navParams.get('Guardian');
-
+    this.oldGuardian = this.navParams.get('Guardian');
   }
 
-  editStudent(Username, Password, Firstname, Middlename,Lastname, Age, Gender, Email, Contactnumber,Guardian) {	   	
+  editStudent(Username, Password, Firstname, Middlename,Lastname, Age, Gender, Email, Contactnumber,Guardian) {	
+     this.guardianStudentList = this.taf.database.list("/guardian-student/" + this.oldGuardian);   	
+     this.guardianStudentList.remove(Username); 
   	 this.studentList.update(Username, {
       Password: Password,
       Firstname: Firstname,
@@ -82,7 +87,13 @@ export class AdminStudentUpdatePage {
       Contactnumber: Contactnumber,
       Guardian: Guardian
     }).then( newStudent => {
-      this.navCtrl.pop();
+        firebase.database().ref("/guardian-student/" + Guardian + "/" + Username).set({ 
+              Student:Username
+             }).then( newStudent => {
+                this.navCtrl.pop();
+              }, error => {
+                console.log(error);
+        });
     }, error => {
       console.log(error);
     });
