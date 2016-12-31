@@ -20,7 +20,7 @@ export class AdminClassStudentAddPage {
   studentList: FirebaseListObservable<any>;
   studentOjbect: FirebaseObjectObservable<any>;
   student = {
-    Username: '',
+  Username: '',
 	Password: '',
 	Firstname: '',
 	Middlename:'',

@@ -23,12 +23,7 @@
     <ion-item-sliding *ngFor="let teacher of teacherList | async">
       <ion-item>
         <ion-icon name="person" item-left></ion-icon>
-        <h3>Username: {{teacher.$key}}</h3>
-        <h3>Name: {{teacher.Lastname}}, {{teacher.Firstname}} {{teacher.Lastname}}</h3>
-        <h3>Age: {{teacher.Age}}</h3>
-        <h3>Gender: {{teacher.Gender}}</h3>
-        <h3>Contact Number: {{teacher.Contactnumber}}</h3>
-        <h3>Email: {{teacher.Email}}</h3>      
+        <h2>{{teacher.Lastname}}, {{teacher.Firstname}} {{teacher.Middlename}}</h2> 
       </ion-item>
       <ion-item-options>
         <button ion-button color="primary" icon-left (click)="editTeacher(teacher)">

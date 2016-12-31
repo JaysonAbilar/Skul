@@ -19,7 +19,7 @@ export class AdminClassStudentList2Page {
   
   classsList: FirebaseListObservable<any>;
   public classs = {
-    Id: '',
+    Id: '', 
   	StartYear: '',
   	EndYear: '',
   	Year:'',
@@ -39,13 +39,11 @@ export class AdminClassStudentList2Page {
   constructor(public navCtrl: NavController, public navParams: NavParams,public af: AngularFire) {
     this.taf = af;
   	this.classsList = this.af.database.list('/class');
-
     this.classs.Id = this.navParams.get('key');
     this.classs.StartYear = this.navParams.get('StartYear');
     this.classs.EndYear = this.navParams.get('EndYear');
     this.classs.Year = this.navParams.get('Year');
     this.classs.Section = this.navParams.get('Section');
-
     this.classStudentList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id);
 
   }

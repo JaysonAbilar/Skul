@@ -35,16 +35,12 @@ export class LoginPage {
 
   }
 
- presentLoading() {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 1000
-    });
-    loader.present();
+ presentLoading(status) {
+    
   }
 
 
-  authenticate(root, Password, LandingPage,Username){
+  authenticate(root, Password, LandingPage,Username,loader){
     var RolePassword;
     var navigation = this.navCtrl;
     var toaster = this.toastCtrl;
@@ -71,25 +67,31 @@ export class LoginPage {
           toast.present();
         console.log("auth username failed");
       }
+      
+    loader.dismiss();
     });
   }
 
   loginUser(Username, Password, Role) { 
 
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+
     if(Role == "admin"){
       var root = firebase.database().ref('admin/'+Username);
-      this.authenticate(root,Password,AdminHomePage,Username);
+      this.authenticate(root,Password,AdminHomePage,Username,loader);
     } else if(Role == "teacher"){
       var root = firebase.database().ref('teacher/'+Username);
-      this.authenticate(root,Password,TeacherHomePage,Username);
+      this.authenticate(root,Password,TeacherHomePage,Username,loader);
     } else if(Role == "student"){
       var root = firebase.database().ref('student/'+Username);
-      this.authenticate(root,Password,StudentHomePage,Username);
+      this.authenticate(root,Password,StudentHomePage,Username,loader);
     } else if(Role == "guardian"){
       var root = firebase.database().ref('guardian/'+Username);
-      this.authenticate(root,Password,GuardianHomePage,Username);
+      this.authenticate(root,Password,GuardianHomePage,Username,loader);
     }
-    this.presentLoading();
    }
 
   ionViewDidLoad() {

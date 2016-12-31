@@ -17,9 +17,10 @@ import { AdminStudentUpdatePage } from '../admin-student-update/admin-student-up
 export class AdminStudentListPage {
   
   studentList: FirebaseListObservable<any>;
-  
+  searchStudentList: FirebaseListObservable<any>;
   guardianStudentList: FirebaseListObservable<any>;
   public taf: any;
+  searchQuery: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
     this.taf = af;
@@ -27,9 +28,7 @@ export class AdminStudentListPage {
   }
 
   goToAdminStudentAdd(){
-
     this.navCtrl.push(AdminStudentAddPage);
-
   }
 
   editStudent(student){
@@ -55,6 +54,8 @@ export class AdminStudentListPage {
     this.guardianStudentList.remove(student.$key); 
     this.studentList.remove(student);
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminStudentListPage');

@@ -16,13 +16,13 @@
 <ion-content padding class="add-teacher">
   <input type="hidden" [(ngModel)]="subject.SubjectCode" />
   <ion-item>
-    <ion-label stacked>Password</ion-label>
+    <ion-label stacked>Subject Name</ion-label>
     <ion-input [(ngModel)]="subject.Name" type="text" placeholder="Fill Subject Name"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label stacked>First name</ion-label>
+    <ion-label stacked>Subject Description</ion-label>
     <ion-input [(ngModel)]="subject.Description" type="text" placeholder="Fill Subject Description"></ion-input>
   </ion-item>
 
-  <button ion-button color="primary" (click)="editSubject(subject.SubjectCode, subject.Name, subject.Description)"></button>
+  <button ion-button color="primary" (click)="editSubject(subject.SubjectCode, subject.Name, subject.Description)">Submit</button>
 </ion-content>
