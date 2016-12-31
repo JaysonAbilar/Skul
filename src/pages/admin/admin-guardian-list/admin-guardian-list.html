@@ -23,13 +23,8 @@
     <ion-list-header>Guardians</ion-list-header>
     <ion-item-sliding *ngFor="let guardian of guardianList | async">
       <ion-item>
-        <ion-icon name="person" item-left></ion-icon>
-        <h3>Username: {{guardian.$key}}</h3>
-        <h3>Name: {{guardian.Lastname}}, {{guardian.Firstname}} {{guardian.Lastname}}</h3>
-        <h3>Age: {{guardian.Age}}</h3>
-        <h3>Gender: {{guardian.Gender}}</h3>
-        <h3>Contact Number: {{guardian.Contactnumber}}</h3>
-        <h3>Email: {{guardian.Email}}</h3>      
+        <ion-icon ios="ios-people" md="md-people" item-left></ion-icon>
+        <h2>{{guardian.Lastname}}, {{guardian.Firstname}} {{guardian.Middlename}}</h2>
       </ion-item>
       <ion-item-options>
         <button ion-button color="primary" icon-left (click)="editGuardian(guardian)">

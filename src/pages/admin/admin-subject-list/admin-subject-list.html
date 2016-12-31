@@ -7,11 +7,11 @@
 <ion-header>
    <ion-navbar>
     <ion-title>
-      SUBJECT
+      Subject
     </ion-title>
     <ion-buttons end>
       <button (click)="goToAdminSubjectAdd()">
-        <ion-icon name="subject-add"></ion-icon>
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -23,10 +23,8 @@
     <ion-list-header>Subjects</ion-list-header>
     <ion-item-sliding *ngFor="let subject of subjectList | async">
       <ion-item>
-        <ion-icon name="person" item-left></ion-icon>
-        <h3>Subject Code: {{subject.$key}}</h3>
-        <h3>Name: {{subject.Name}}</h3>
-        <h3>Description: {{subject.Description}}</h3>
+        <ion-icon ios="ios-book" md="md-book" item-left></ion-icon>
+        <h2>{{subject.Name}}</h2>
       </ion-item>
       <ion-item-options>
         <button ion-button color="primary" icon-left (click)="editSubject(subject)">

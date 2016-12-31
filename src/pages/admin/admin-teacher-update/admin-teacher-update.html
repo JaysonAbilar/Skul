@@ -15,10 +15,7 @@
 
 <ion-content padding class="add-teacher">
   <input type="hidden" [(ngModel)]="teacher.Username" />
-  <ion-item>
-    <ion-label stacked>Password</ion-label>
-    <ion-input [(ngModel)]="teacher.Password" type="password" placeholder="Fill your Password"></ion-input>
-  </ion-item>
+  <input type="hidden" [(ngModel)]="teacher.Password"/>
   <ion-item>
     <ion-label stacked>First name</ion-label>
     <ion-input [(ngModel)]="teacher.Firstname" type="text" placeholder="Fill yoru Firstname"></ion-input>
@@ -51,5 +48,5 @@
     <ion-input [(ngModel)]="teacher.Contactnumber" type="number" placeholder="Fill your ContactNumber"></ion-input>
   </ion-item>
 
-  <button ion-button color="primary" (click)="editTeacher(teacher.Username, teacher.Password, teacher.Firstname, teacher.Middlename, teacher.Lastname, teacher.Age, teacher.Gender, teacher.Email, teacher.Contactnumber)"></button>
+  <button ion-button color="primary" (click)="editTeacher(teacher.Username, teacher.Password, teacher.Firstname, teacher.Middlename, teacher.Lastname, teacher.Age, teacher.Gender, teacher.Email, teacher.Contactnumber)">Submit</button>
 </ion-content>

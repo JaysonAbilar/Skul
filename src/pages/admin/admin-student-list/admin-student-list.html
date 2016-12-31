@@ -19,17 +19,17 @@
 
 
 <ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    [showCancelButton]="shouldShowCancel"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
   <ion-list>
     <ion-list-header>Students</ion-list-header>
     <ion-item-sliding *ngFor="let student of studentList | async">
       <ion-item>
         <ion-icon name="person" item-left></ion-icon>
-        <h3>Username: {{student.$key}}</h3>
-        <h3>Name: {{student.Lastname}}, {{student.Firstname}} {{student.Lastname}}</h3>
-        <h3>Age: {{student.Age}}</h3>
-        <h3>Gender: {{student.Gender}}</h3>
-        <h3>Contact Number: {{student.Contactnumber}}</h3>
-        <h3>Email: {{student.Email}}</h3>      
+        <h2>{{student.Lastname}}, {{student.Firstname}} {{student.Middlename}}</h2>
       </ion-item>
       <ion-item-options>
         <button ion-button color="primary" icon-left (click)="editStudent(student)">
