@@ -45,6 +45,11 @@ import { TeacherClassAssignmentListPage } from '../pages/teacher/teacher-class-a
 import { TeacherClassAssignmentAddPage } from '../pages/teacher/teacher-class-assignment-add/teacher-class-assignment-add';
 import { TeacherClassAssignmentUpdatePage } from '../pages/teacher/teacher-class-assignment-update/teacher-class-assignment-update';
 
+import { TeacherClassAttendanceListPage } from '../pages/teacher/teacher-class-attendance-list/teacher-class-attendance-list';
+import { TeacherClassAttendanceList2Page } from '../pages/teacher/teacher-class-attendance-list-2/teacher-class-attendance-list-2';
+import { TeacherClassAttendanceAddPage } from '../pages/teacher/teacher-class-attendance-add/teacher-class-attendance-add';
+import { TeacherClassAttendanceUpdatePage } from '../pages/teacher/teacher-class-attendance-update/teacher-class-attendance-update';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -87,7 +92,11 @@ import { TeacherClassAssignmentUpdatePage } from '../pages/teacher/teacher-class
     TeacherClassSubjectsPage,
     TeacherClassAssignmentListPage,
     TeacherClassAssignmentAddPage,
-    TeacherClassAssignmentUpdatePage
+    TeacherClassAssignmentUpdatePage,
+    TeacherClassAttendanceListPage,
+    TeacherClassAttendanceList2Page,
+    TeacherClassAttendanceAddPage,
+    TeacherClassAttendanceUpdatePage
 
   ],
   imports: [
@@ -135,7 +144,11 @@ import { TeacherClassAssignmentUpdatePage } from '../pages/teacher/teacher-class
     TeacherClassSubjectsPage,
     TeacherClassAssignmentListPage,
     TeacherClassAssignmentAddPage,
-    TeacherClassAssignmentUpdatePage
+    TeacherClassAssignmentUpdatePage,
+    TeacherClassAttendanceListPage,
+    TeacherClassAttendanceList2Page,
+    TeacherClassAttendanceAddPage,
+    TeacherClassAttendanceUpdatePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,

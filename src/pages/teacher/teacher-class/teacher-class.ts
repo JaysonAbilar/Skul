@@ -5,6 +5,7 @@ import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, fireba
 import { TeacherClassStudentsPage } from '../teacher-class-students/teacher-class-students';
 import { TeacherClassSubjectsPage } from '../teacher-class-subjects/teacher-class-subjects';
 import { TeacherClassAssignmentListPage } from '../teacher-class-assignment-list/teacher-class-assignment-list';
+import { TeacherClassAttendanceListPage } from '../teacher-class-attendance-list/teacher-class-attendance-list';
 /*
 /*
   Generated class for the TeacherClass page.
@@ -52,6 +53,15 @@ export class TeacherClassPage {
 
   viewHomeworks(Username,classId,startYear,endYear){
    this.navCtrl.push(TeacherClassAssignmentListPage, {
+     Username:Username,
+     ClassId:classId,
+     Startyear:startYear,
+     Endyear:endYear
+   });
+  }
+
+  viewAttendance(Username,classId,startYear,endYear){
+    this.navCtrl.push(TeacherClassAttendanceListPage, {
      Username:Username,
      ClassId:classId,
      Startyear:startYear,

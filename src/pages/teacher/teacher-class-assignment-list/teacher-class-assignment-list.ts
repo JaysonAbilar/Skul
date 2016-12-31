@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { TeacherClassAssignmentAddPage } from '../teacher-class-assignment-add/teacher-class-assignment-add';
 import { TeacherClassAssignmentUpdatePage } from '../teacher-class-assignment-update/teacher-class-assignment-update';
+
 /*
   Generated class for the TeacherClassAssignmentList page.
 
@@ -50,19 +51,19 @@ export class TeacherClassAssignmentListPage {
 
   	 this.subjectList = this.af.database.list('/academic-year/' + this.Startyear + "-" + this.Endyear +  '/teacher-class/' + this.Username + "/" + this.ClassId);
 
-  	 console.log('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/teacher-class/' + this.Username + "/" + this.ClassId)
+  	 console.log('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/teacher-class/' + this.Username + "/" + this.ClassId);
   }
 
   goToAddHomework(Username,ClassId,Startyear,Endyear,Subjectcode){
-
+  	console.log(Subjectcode);
     this.navCtrl.push(TeacherClassAssignmentAddPage,
-	{
-	   Username:Username,
-       ClassId:ClassId,
-       Startyear:Startyear,
-       Endyear:Endyear,
-       Subjectcode:Subjectcode
-	});
+  	{
+  	   Username:Username,
+         ClassId:ClassId,
+         Startyear:Startyear,
+         Endyear:Endyear,
+         Subjectcode:Subjectcode
+  	});
 
   }
 
