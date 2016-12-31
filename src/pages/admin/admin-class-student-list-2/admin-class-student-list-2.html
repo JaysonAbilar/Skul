@@ -11,7 +11,7 @@
     </ion-title>
     <ion-buttons end>
       <button (click)="goToAdminClassStudentAdd()">
-        <ion-icon name="subject-add"></ion-icon>
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -20,11 +20,11 @@
 
 <ion-content padding>
    <ion-list>
-    <ion-list-header>Class Subjects</ion-list-header>
+    <ion-list-header>Class Students</ion-list-header>
     <ion-item-sliding *ngFor="let classStudent of classStudentList | async">
       <ion-item>
         <ion-icon name="person" item-left></ion-icon>
-        <h3>Student Username: {{classStudent.Student}}</h3>
+        <h2>{{classStudent.Lastname}}, {{classStudent.Firstname}} {{classStudent.Middlename}}</h2>
       </ion-item>
       <ion-item-options>
         <button ion-button color="danger" icon-left (click)="deleteClassStudent(classStudent)">
