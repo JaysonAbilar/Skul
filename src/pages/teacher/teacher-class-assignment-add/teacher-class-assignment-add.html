@@ -38,33 +38,33 @@
   <div *ngIf="reminder.Type == 'Homework' || reminder.Type == 'Project'">
     <ion-label stacked>Due Date</ion-label>
     <ion-item>
-      <ion-label stacked>Date</ion-label>
-      <ion-input [(ngModel)]="reminder.DueDate" type="date" placeholder="Fill the Description"></ion-input>
-    </ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="reminder.DueDate" min="2016"></ion-datetime>
+  </ion-item>
      <ion-item>
-      <ion-label stacked>Time</ion-label>
-      <ion-input [(ngModel)]="reminder.DueTime" type="time" placeholder="Fill the Description"></ion-input>
+      <ion-label>Time</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.DueTime"></ion-datetime>
     </ion-item>
   </div>
   <div *ngIf="reminder.Type == 'Meeting'">
     <ion-label stacked>Start Date</ion-label>
     <ion-item>
-      <ion-label stacked>Date</ion-label>
-      <ion-input [(ngModel)]="reminder.StartDate" type="date" placeholder="Fill the Description"></ion-input>
-    </ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="reminder.StartDate" min="2016"></ion-datetime>
+  </ion-item>
      <ion-item>
-      <ion-label stacked>Time</ion-label>
-      <ion-input [(ngModel)]="reminder.StartTime" type="time" placeholder="Fill the Description"></ion-input>
+      <ion-label>Time</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.StartTime"></ion-datetime>
     </ion-item>
     <ion-label stacked>End Date</ion-label>
     <ion-item>
-      <ion-label stacked>Date</ion-label>
-      <ion-input [(ngModel)]="reminder.EndDate" type="date" placeholder="Fill the Description"></ion-input>
-    </ion-item>
-     <ion-item>
-      <ion-label stacked>Time</ion-label>
-      <ion-input [(ngModel)]="reminder.EndTime" type="time" placeholder="Fill the Description"></ion-input>
-    </ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="reminder.EndDate" min="2016"></ion-datetime>
+  </ion-item>
+      <ion-item>
+        <ion-label>Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.EndTime"></ion-datetime>
+      </ion-item>
   </div>
   <button ion-button (click)="addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, reminder.Type, reminder.Title, reminder.Description,
        reminder.DueDate, reminder.DueTime, reminder.StartDate, reminder.StartTime, reminder.EndDate, reminder.EndTime)">ADD</button>
