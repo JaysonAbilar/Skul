@@ -24,7 +24,7 @@ export class TeacherClassAttendanceAddPage {
   public attendanceStudentList: FirebaseListObservable<any>;
  
   public attendanceStudent = {
-  	Username: '',
+  Username: '',
 	Firstname: '',
 	Middlename:'',
 	Lastname: '',
@@ -37,7 +37,7 @@ export class TeacherClassAttendanceAddPage {
 
   public attendancePresentStudentObject: FirebaseObjectObservable<any>;
   public attendancePresentStudent = {
-  	Username: '',
+  Username: '',
 	Firstname: '',
 	Middlename:'',
 	Lastname: '',

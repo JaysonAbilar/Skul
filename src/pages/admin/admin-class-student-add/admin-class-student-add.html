@@ -15,11 +15,13 @@
 
 <ion-content padding>
   <ion-label stacked>List of Students</ion-label>
-  <ion-item-sliding *ngFor = "let student of studentList | async">
-    <ion-item>
-      <ion-label>{{student.Firstname}}, {{student.Firstname}} {{student.Middlename}}</ion-label>
-      <ion-checkbox color="primary"></ion-checkbox>
-    </ion-item>
-  </ion-item-sliding>
+  <ion-item>
+    <ion-label stacked>Students</ion-label>
+    <ion-select [(ngModel)]="classStudent.Student" multiple="true" cancelText="Nah" okText="Okay!">
+      <div *ngFor="let student of studentList | async">
+      <ion-option value={{student.$key}} checked="true">{{student.Lastname}}, {{student.Firstname}} {{student.Middlename}}</ion-option>
+      </div>
+    </ion-select>
+  </ion-item>
   <button ion-button color="primary" (click)="addClassStudent(classStudent.Student)">Submit</button>
 </ion-content>

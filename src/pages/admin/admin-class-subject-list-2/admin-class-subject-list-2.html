@@ -11,7 +11,7 @@
     </ion-title>
     <ion-buttons end>
       <button (click)="goToAdminClassSubjectAdd()">
-        <ion-icon name="subject-add"></ion-icon>
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -24,7 +24,7 @@
     <ion-item-sliding *ngFor="let classSubject of classSubjectList | async">
       <ion-item>
         <ion-icon name="person" item-left></ion-icon>
-        <h3>Subject Code: {{classSubject.SubjectCode}}</h3>
+        <h3>Subject: {{classSubject.Name}}</h3>
         <h3>Teacher: {{classSubject.Teacher}}</h3>
       </ion-item>
       <ion-item-options>

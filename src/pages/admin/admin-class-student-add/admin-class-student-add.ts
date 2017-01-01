@@ -36,12 +36,13 @@ export class AdminClassStudentAddPage {
   classs = {
     Id: '',
   	StartYear: '',
-  	EndYear: '',
+  	EndYear: '', 
   	Year:'',
   	Section:''
 
   };
 
+  
 
   classStudentList: FirebaseListObservable<any>;
   classStudent= {
@@ -61,10 +62,14 @@ export class AdminClassStudentAddPage {
 
     this.classStudentList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id);
   }
-
-  addClassStudent(Student) {      
-      this.studentOjbect  = this.af.database.object('/student/' + Student);
-
+  tae(ebak){
+    console.log(ebak);
+  }
+  addClassStudent(Student) {   
+    
+    for (var i = 0; i < Student.length; i++) { 
+      console.log('/student/' + Student[i]);
+      this.studentOjbect  = this.af.database.object('/student/' + Student[i]);
       this.studentOjbect.subscribe(snapshot => this.student.Firstname = snapshot.Firstname); 
       this.studentOjbect.subscribe(snapshot => this.student.Middlename = snapshot.Middlename); 
       this.studentOjbect.subscribe(snapshot => this.student.Lastname = snapshot.Lastname); 
@@ -73,8 +78,7 @@ export class AdminClassStudentAddPage {
       this.studentOjbect.subscribe(snapshot => this.student.Email = snapshot.Email); 
       this.studentOjbect.subscribe(snapshot => this.student.Contactnumber = snapshot.Contactnumber); 
 
-
-      firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student).set({ 
+      firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student[i]).set({ 
       Student: Student,
       Firstname:this.student.Firstname,
       Middlename:this.student.Middlename,
@@ -88,13 +92,16 @@ export class AdminClassStudentAddPage {
         firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + Student + "/" + this.classs.Id).set({ 
           Student: Student,
          }).then( newClassSubject=> {
-            this.navCtrl.pop();
+            
           }, error => {
             console.log(error);
         });
       }, error => {
         console.log(error);
       });
+    }
+    this.navCtrl.pop();
+      
     
    }
 
