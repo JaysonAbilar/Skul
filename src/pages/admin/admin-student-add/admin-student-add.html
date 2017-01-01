@@ -40,8 +40,8 @@
   </ion-item>
   <ion-item>
   <ion-label stacked>Gender</ion-label>
-  <ion-select [(ngModel)]="student.Gender" multiple="false" cancelText="Nah" okText="Okay!">
-    <ion-option value="Male" checked="true">Male</ion-option>
+  <ion-select [(ngModel)]="student.Gender" multiple="false" cancelText="No" okText="Okay!">
+    <ion-option value="Male">Male</ion-option>
     <ion-option value="Female">Female</ion-option>
   </ion-select>
   </ion-item>
@@ -55,7 +55,7 @@
   </ion-item>
   <ion-item>
     <ion-label stacked>Parent</ion-label>
-    <ion-select [(ngModel)]="student.Guardian" multiple="false" cancelText="Nah" okText="Okay!">
+    <ion-select [(ngModel)]="student.Guardian" multiple="false" cancelText="No" okText="Okay!">
       <div *ngFor="let guardian of guardianList | async">
       <ion-option value={{guardian.$key}} checked="true">{{guardian.$key}}</ion-option>
       </div>

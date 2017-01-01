@@ -49,7 +49,7 @@
   </ion-item>
   <ion-item>
     <ion-label stacked>Parent</ion-label>
-    <ion-select [(ngModel)]="student.Guardian" multiple="false" cancelText="Nah" okText="Okay!">
+    <ion-select [(ngModel)]="student.Guardian" multiple="false" cancelText="No" okText="Okay!">
       <ion-option *ngFor="let guardian of guardianList | async" value={{guardian.$key}} checked="true">{{guardian.$key}}</ion-option>
     </ion-select>
   </ion-item>

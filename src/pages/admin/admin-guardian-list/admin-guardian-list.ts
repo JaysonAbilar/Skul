@@ -17,6 +17,7 @@ import { AdminGuardianUpdatePage } from '../admin-guardian-update/admin-guardian
 export class AdminGuardianListPage {
   
   guardianList: FirebaseListObservable<any>;
+  searchQuery: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
   	this.guardianList = af.database.list('/guardian');

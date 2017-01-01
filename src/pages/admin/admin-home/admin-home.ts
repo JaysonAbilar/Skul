@@ -25,13 +25,55 @@ export class AdminHomePage {
     Startyear: '',
     Endyear: ''
   };
+  Count = {
+    teacherCount: 0,
+    studentCount: 0,
+    guardianCount: 0,
+    subjectCount: 0,
+    classCount: 0
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
     this.currentAcademicYearObject = this.af.database.object('/current-academic-year');
     this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Startyear = snapshot.Startyear); 
     this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Endyear = snapshot.Endyear); 
+    this.countEachObject();
   }
+
+  countEachObject(){
+    this.af.database.list('/teacher', { preserveSnapshot: true})
+    .subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          this.Count.teacherCount++;
+        });
+    })
+    this.af.database.list('/subject', { preserveSnapshot: true})
+    .subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          this.Count.subjectCount++;
+        });
+    })
+    this.af.database.list('/student', { preserveSnapshot: true})
+    .subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          this.Count.studentCount++;
+        });
+    })
+    this.af.database.list('/guardian', { preserveSnapshot: true})
+    .subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          this.Count.guardianCount++;
+        });
+    })
+    this.af.database.list('/academic-year/2016-2017/class', { preserveSnapshot: true})
+    .subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          this.Count.classCount++;
+        });
+    })
+  }
+
 
 
   goToAdminTeacherList(){

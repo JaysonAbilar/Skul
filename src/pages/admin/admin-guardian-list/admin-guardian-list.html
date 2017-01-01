@@ -19,6 +19,11 @@
 
 
 <ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    [showCancelButton]="shouldShowCancel"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
   <ion-list>
     <ion-list-header>Guardians</ion-list-header>
     <ion-item-sliding *ngFor="let guardian of guardianList | async">

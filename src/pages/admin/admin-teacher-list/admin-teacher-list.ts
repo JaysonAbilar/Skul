@@ -17,6 +17,7 @@ import { AdminTeacherUpdatePage } from '../admin-teacher-update/admin-teacher-up
 export class AdminTeacherListPage {
   
   teacherList: FirebaseListObservable<any>;
+  searchQuery: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
   	this.teacherList = af.database.list('/teacher');
@@ -43,8 +44,8 @@ export class AdminTeacherListPage {
 	  });
 	}
 
-   deleteTeacher(teacher) {
-	  this.teacherList.remove(teacher);
+  deleteTeacher(teacher) {
+	   this.teacherList.remove(teacher);
 	}
 
   ionViewDidLoad() {

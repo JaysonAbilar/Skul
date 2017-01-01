@@ -14,24 +14,31 @@
 
 
 <ion-content padding>
+	<br><br><br>
+	<ion-row>
+        <ion-col width-100>
+            <img src="assets/images/logo.png" width="200">  
+        </ion-col>
+    </ion-row>
+    <br><br><br>
 	<ion-list>
-	  <ion-item>
-	    <ion-label floating>Username</ion-label>
-	    <ion-input [(ngModel)]="login.Username" type="text"></ion-input>
-	  </ion-item>
-	  <ion-item>
-	    <ion-label floating>Password</ion-label>
-	    <ion-input [(ngModel)]="login.Password" type="text"></ion-input>
-	  </ion-item>
-	  <ion-item>
-	  	<ion-label>Login as:</ion-label>
-	  	<ion-select [(ngModel)] = "login.Role">
-	  		<ion-option value="teacher">Teacher</ion-option>
-	  		<ion-option value="guardian">Guardian</ion-option>
-	  		<ion-option value="student">Student</ion-option>
-	  		<ion-option value="admin">Admin</ion-option>
-	  	</ion-select>
-	  </ion-item>
+		<ion-item>
+			<ion-label>Login as:</ion-label>
+			<ion-select [(ngModel)] = "login.Role">
+				<ion-option value="teacher">Teacher</ion-option>
+				<ion-option value="guardian">Guardian</ion-option>
+				<ion-option value="student">Student</ion-option>
+				<ion-option value="admin">Admin</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label floating>Username</ion-label>
+			<ion-input [(ngModel)]="login.Username" type="text"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label floating>Password</ion-label>
+			<ion-input [(ngModel)]="login.Password" type="text"></ion-input>
+		</ion-item>
 	</ion-list>
 	<button ion-button full (click)="loginUser(login.Username,login.Password,login.Role)">Login</button>
 </ion-content>

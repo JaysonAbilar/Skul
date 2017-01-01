@@ -18,6 +18,7 @@ import { AdminSubjectUpdatePage } from '../admin-subject-update/admin-subject-up
 export class AdminSubjectListPage {
 
   subjectList: FirebaseListObservable<any>;
+  searchQuery: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
   	this.subjectList = af.database.list('/subject');

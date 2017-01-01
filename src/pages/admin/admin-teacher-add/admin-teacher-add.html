@@ -40,8 +40,8 @@
   </ion-item>
   <ion-item>
   <ion-label stacked>Gender</ion-label>
-  <ion-select [(ngModel)]="teacher.Gender" multiple="true" cancelText="Nah" okText="Okay!">
-    <ion-option value="Male" checked="true">Male</ion-option>
+  <ion-select [(ngModel)]="teacher.Gender" cancelText="Nah" okText="Okay!">
+    <ion-option value="Male">Male</ion-option>
     <ion-option value="Female">Female</ion-option>
   </ion-select>
   </ion-item>
@@ -54,5 +54,5 @@
     <ion-input [(ngModel)]="teacher.Contactnumber" type="number" placeholder="Fill your ContactNumber"></ion-input>
   </ion-item>
 
-  <button ion-button color="primary" (click)="addTeacher(teacher.Username, teacher.Password, teacher.Firstname, teacher.Middlename, teacher.Lastname, teacher.Age, teacher.Gender, teacher.Email, teacher.Contactnumber)"></button>
+  <button ion-button color="primary" (click)="addTeacher(teacher.Username, teacher.Password, teacher.Firstname, teacher.Middlename, teacher.Lastname, teacher.Age, teacher.Gender, teacher.Email, teacher.Contactnumber)">Submit</button>
 </ion-content>
