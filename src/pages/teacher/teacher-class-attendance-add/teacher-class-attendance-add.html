@@ -19,10 +19,9 @@
   <input type="hidden" [(ngModel)]="Startyear" />
   <input type="hidden" [(ngModel)]="Endyear" />
   <input type="hidden" [(ngModel)]="SubjectCode" />
-
   <ion-item>
-    <ion-label stacked>Date</ion-label>
-    <ion-input [(ngModel)]="attendance.Date" type="date" placeholder="Fill the Date"></ion-input>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="attendance.Date" ></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label stacked>Students</ion-label>
