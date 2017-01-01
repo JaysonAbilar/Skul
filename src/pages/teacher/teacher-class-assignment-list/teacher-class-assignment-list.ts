@@ -32,13 +32,39 @@ export class TeacherClassAssignmentListPage {
   };
 
   homeworkList: FirebaseListObservable<any>;
+  projectList: FirebaseListObservable<any>;
+  meetingList: FirebaseListObservable<any>;
+
   homework = {
-  	HomeworkCode: '',
-  	Title: '',
-  	Description: '',
-  	DeadlineDate: '',
-  	DeadlineTime: '',
-  	DateAdded: ''
+    homeworkCode: '',
+    Type:'',
+    Title: '',
+    Description: '',
+    DueDate: '',
+    DueTime: '',
+    DateAdded: ''
+  }
+
+  project = {
+    projectCode: '',
+    Type:'',
+    Title: '',
+    Description: '',
+    DueDate: '',
+    DueTime: '',
+    DateAdded: ''
+  }
+
+  meeting = {
+    meetingCode: '',
+    Type:'',
+    Title: '',
+    Description: '',
+    StartDate:'',
+    StartTime:'',
+    EndDate:'',
+    EndTime:'',
+    DateAdded: ''
   }
 
 
@@ -69,8 +95,10 @@ export class TeacherClassAssignmentListPage {
 
   selectedValueChanged(SubjectCode)
   {
-  	 this.SubjectCode = SubjectCode;
+  	 this.SubjectCode = SubjectCode
   	 this.homeworkList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-homeworks/');
+     this.projectList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-projects/');
+     this.meetingList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-meetings/');
   }
 
   ionViewDidLoad() {

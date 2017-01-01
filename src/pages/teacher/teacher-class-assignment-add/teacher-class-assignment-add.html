@@ -19,23 +19,53 @@
   <input type="hidden" [(ngModel)]="Startyear" />
   <input type="hidden" [(ngModel)]="Endyear" />
   <input type="hidden" [(ngModel)]="SubjectCode" />
+  <ion-item>
+      <ion-label stacked>Type</ion-label>
+     <ion-select [(ngModel)]="reminder.Type" multiple="false" cancelText="Nah" okText="Okay!">
+        <ion-option value="Homework" checked="true">Homework</ion-option>
+        <ion-option value="Project">Project</ion-option>
+        <ion-option value="Meeting">Meeting</ion-option>
+     </ion-select>
+  </ion-item>
    <ion-item>
     <ion-label stacked>Title</ion-label>
-    <ion-input [(ngModel)]="homework.Title" type="text" placeholder="Fill the title"></ion-input>
+    <ion-input [(ngModel)]="reminder.Title" type="text" placeholder="Fill the title"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label stacked>Description</ion-label>
-    <ion-input [(ngModel)]="homework.Description" type="text" placeholder="Fill the Description"></ion-input>
+    <ion-input [(ngModel)]="reminder.Description" type="text" placeholder="Fill the Description"></ion-input>
   </ion-item>
-  <ion-label stacked>Deadline</ion-label>
-  <ion-item>
-    <ion-label stacked>Date</ion-label>
-    <ion-input [(ngModel)]="homework.DeadlineDate" type="date" placeholder="Fill the Description"></ion-input>
-  </ion-item>
-   <ion-item>
-    <ion-label stacked>Time</ion-label>
-    <ion-input [(ngModel)]="homework.DeadlineTime" type="time" placeholder="Fill the Description"></ion-input>
-  </ion-item>
-  <button ion-button (click)="addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, homework.Title, homework.Description, homework.DeadlineDate,
-       homework.DeadlineTime)">ADD</button>
+  <div *ngIf="reminder.Type == 'Homework' || reminder.Type == 'Project'">
+    <ion-label stacked>Due Date</ion-label>
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-input [(ngModel)]="reminder.DueDate" type="date" placeholder="Fill the Description"></ion-input>
+    </ion-item>
+     <ion-item>
+      <ion-label stacked>Time</ion-label>
+      <ion-input [(ngModel)]="reminder.DueTime" type="time" placeholder="Fill the Description"></ion-input>
+    </ion-item>
+  </div>
+  <div *ngIf="reminder.Type == 'Meeting'">
+    <ion-label stacked>Start Date</ion-label>
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-input [(ngModel)]="reminder.StartDate" type="date" placeholder="Fill the Description"></ion-input>
+    </ion-item>
+     <ion-item>
+      <ion-label stacked>Time</ion-label>
+      <ion-input [(ngModel)]="reminder.StartTime" type="time" placeholder="Fill the Description"></ion-input>
+    </ion-item>
+    <ion-label stacked>End Date</ion-label>
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-input [(ngModel)]="reminder.EndDate" type="date" placeholder="Fill the Description"></ion-input>
+    </ion-item>
+     <ion-item>
+      <ion-label stacked>Time</ion-label>
+      <ion-input [(ngModel)]="reminder.EndTime" type="time" placeholder="Fill the Description"></ion-input>
+    </ion-item>
+  </div>
+  <button ion-button (click)="addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, reminder.Type, reminder.Title, reminder.Description,
+       reminder.DueDate, reminder.DueTime, reminder.StartDate, reminder.StartTime, reminder.EndDate, reminder.EndTime)">ADD</button>
 </ion-content>

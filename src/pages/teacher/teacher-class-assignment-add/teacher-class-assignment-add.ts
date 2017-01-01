@@ -24,12 +24,19 @@ export class TeacherClassAssignmentAddPage {
   public currentDate: Date;
 
   homeworkList: FirebaseListObservable<any>;
-  homework = {
-  	HomeworkCode: '',
+  projectList: FirebaseListObservable<any>;
+  meetingList: FirebaseListObservable<any>;
+  reminder= {
+  	reminderCode: '',
+    Type:'',
   	Title: '',
   	Description: '',
-  	DeadlineDate: '',
-  	DeadlineTime: '',
+    StartDate:'',
+    StartTime:'',
+    EndDate:'',
+    EndTime:'',
+  	DueDate: '',
+  	DueTime: '',
   	DateAdded: ''
   }
 
@@ -43,28 +50,59 @@ export class TeacherClassAssignmentAddPage {
 
   	 this.currentDate = new Date();
 
-  	 this.homeworkList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode);
-
   }
 
-  addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, Title, Description, DeadlineDate, DeadlineTime)
+  addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, Type, Title, Description, DueDate, DueTime, 
+                StartDate, StartTime, EndDate, EndTime)
   {
   	 var day = this.currentDate.getDate();
   	 var month = this.currentDate.getMonth() + 1;
   	 var year = this.currentDate.getFullYear();
 
-  	 firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-homeworks/' + Title).set({ 
-  	  Title: Title,
-      Description: Description,
-      DeadlineDate: DeadlineDate,
-      DeadlineTime: DeadlineTime,
-      DateAdded: year+'-'+month+'-'+day
-
-  	 }).then( newTeacher => {
-	      this.navCtrl.pop();
-	    }, error => {
-	      console.log(error);
-	    });
+     if(Type=='Homework')
+     {
+    	 firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-homeworks/hw_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
+    	  Title: Title,
+        Description: Description,
+        DueDate: DueDate,
+        DueTime: DueTime,
+        DateAdded: year+'-'+month+'-'+day
+    	 }).then( newClassAssignment => {
+  	      this.navCtrl.pop();
+  	    }, error => {
+  	      console.log(error);
+  	    });
+    }
+    else if(Type=='Project')
+    {
+       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-projects/proj_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
+        Title: Title,
+        Description: Description,
+        DueDate: DueDate,
+        DueTime: DueTime,
+        DateAdded: year+'-'+month+'-'+day
+       }).then( newClassAssignment => {
+          this.navCtrl.pop();
+        }, error => {
+          console.log(error);
+        });
+    }
+    else if(Type=='Meeting')
+    {
+       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-meetings/meet_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
+        Title: Title,
+        Description: Description,
+        StartDate: StartDate,
+        StartTime: StartTime,
+        EndDate: EndDate,
+        EndTime: EndTime,
+        DateAdded: year+'-'+month+'-'+day
+       }).then( newClassAssignment => {
+          this.navCtrl.pop();
+        }, error => {
+          console.log(error);
+        });
+    }
   }
 
   ionViewDidLoad() {

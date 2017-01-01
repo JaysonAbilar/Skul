@@ -31,15 +31,29 @@
     </ion-select>
   </ion-item>
 
- <ion-list>
-    <ion-list-header>Homeworks History</ion-list-header>
+<div padding>
+  <ion-segment [(ngModel)]="types">
+    <ion-segment-button value="Homeworks">
+      Homeworks
+    </ion-segment-button>
+    <ion-segment-button value="Projects">
+      Projects
+    </ion-segment-button>
+    <ion-segment-button value="Meetings">
+      Meetings
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="types">
+  <ion-list *ngSwitchCase="'Homeworks'">
     <ion-item-sliding *ngFor="let homework of homeworkList | async">
       <ion-item>
         <h2>{{homework.HomeworkCode}}</h2>
         <h3>Title: {{homework.Title}}</h3>
         <h3>Desc: {{homework.Description}}</h3>
         <h3>Added: {{homework.DateAdded}}</h3>
-        <h3>Deadline: {{homework.DeadlineDate}} {{homework.DeadlineTime}}</h3>
+        <h3>Deadline: {{homework.DueDate}} {{homework.DueTime}}</h3>
       </ion-item>
         
       <ion-item-options>
@@ -54,6 +68,56 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+ <ion-list *ngSwitchCase="'Projects'">
+    <ion-item-sliding *ngFor="let project of projectList | async">
+      <ion-item>
+        <h2>{{project.projectCode}}</h2>
+        <h3>Title: {{project.Title}}</h3>
+        <h3>Desc: {{project.Description}}</h3>
+        <h3>Added: {{project.DateAdded}}</h3>
+        <h3>Deadline: {{project.DueDate}} {{project.DueTime}}</h3>
+      </ion-item>
+        
+      <ion-item-options>
+        <button ion-button color="primary" icon-left >
+          <ion-icon name="ios-create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" icon-left>
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Meetings'">
+    <ion-item-sliding *ngFor="let meeting of meetingList | async">
+      <ion-item>
+        <h2>{{meeting.meetingkCode}}</h2>
+        <h3>Title: {{meeting.Title}}</h3>
+        <h3>Desc: {{meeting.Description}}</h3>
+        <h3>Added: {{meeting.DateAdded}}</h3>
+        <h3>Meeting Date</h3>
+        <h3>Start : {{meeting.StartDate}} {{meeting.StartTime}}</h3>
+        <h3>End: {{meeting.EndDate}} {{meeting.EndTime}}</h3>
+      </ion-item>
+        
+      <ion-item-options>
+        <button ion-button color="primary" icon-left >
+          <ion-icon name="ios-create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" icon-left>
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</div>
+
 </ion-content>
 
 

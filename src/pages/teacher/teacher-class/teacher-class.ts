@@ -51,7 +51,7 @@ export class TeacherClassPage {
    });
   }
 
-  viewHomeworks(Username,classId,startYear,endYear){
+  viewReminders(Username,classId,startYear,endYear){
    this.navCtrl.push(TeacherClassAssignmentListPage, {
      Username:Username,
      ClassId:classId,
