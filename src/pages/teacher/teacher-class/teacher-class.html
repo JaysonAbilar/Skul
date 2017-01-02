@@ -7,49 +7,51 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>CLASS {{ClassId}}</ion-title>
+    <ion-title>Year & Section : {{classYear}} - {{classSection}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  {{ClassId}}
   <input type="hidden" [(ngModel)]="Username" />
   <input type="hidden" [(ngModel)]="ClassId" />
   <input type="hidden" [(ngModel)]="Startyear" />
   <input type="hidden" [(ngModel)]="Endyear" />
+    
+    <ion-card text-center>
+      <ion-card-content>
+         <h1>CLASS RECORDS</h1>
+      </ion-card-content>
+    </ion-card>
 
-    <ion-grid>
-        <ion-row>
-            <ion-col width-50>
-                <ion-card text-center (click)="viewStudents(ClassId,Startyear,Endyear)">
-                    <ion-card-content>
-                       <img src="assets/images/classstudenticon.png"width=50px><h3>STUDENTS</h3>
-                    </ion-card-content>
-              </ion-card>
-            </ion-col>
-            <ion-col width-50>
-                <ion-card text-center (click)="viewSubjects(Username,ClassId,Startyear,Endyear)">
-                    <ion-card-content>
-                       <img src="assets/images/subjecticon.png"width=50px><h3>SUBJECTS</h3>
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col width-50>
-                <ion-card text-center (click)="viewReminders(Username,ClassId,Startyear,Endyear)">
-                    <ion-card-content>
-                       <img src="assets/images/reminder.png"width=50px><h3>REMINDERS</h3>
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-            <ion-col width-50>
-                <ion-card text-center (click)="viewAttendance(Username,ClassId,Startyear,Endyear)">
-                    <ion-card-content>
-                       <img src="assets/images/attendanceicon.png"width=50px><h3>ATTENDANCE</h3>
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-list>
+    <ion-item (click)="viewStudents(ClassId,Startyear,Endyear)">
+      <ion-thumbnail item-left>
+        <img src="assets/images/classstudenticon.png">
+      </ion-thumbnail>
+      <h2>STUDENTS</h2>
+      <button ion-button clear item-right><h1>{{Count.Students}}</h1></button>
+     </ion-item>
+
+    <ion-item (click)="viewSubjects(Username,ClassId,Startyear,Endyear)">
+      <ion-thumbnail item-left>
+          <img src="assets/images/subjecticon.png">
+      </ion-thumbnail>
+      <h2>SUBJECTS</h2>
+      <button ion-button clear item-right><h1>{{Count.Subjects}}</h1></button>
+    </ion-item>
+
+    <ion-item (click)="viewReminders(Username,ClassId,Startyear,Endyear)">
+      <ion-thumbnail item-left>
+        <img src="assets/images/reminder.png">
+      </ion-thumbnail>
+      <h2>REMINDERS</h2>
+     </ion-item>
+
+    <ion-item (click)="viewAttendance(Username,ClassId,Startyear,Endyear)">
+      <ion-thumbnail item-left>
+        <img src="assets/images/attendanceicon.png">
+      </ion-thumbnail>
+      <h2>ATTENDANCE</h2>
+     </ion-item>
+   </ion-list>
 </ion-content>

@@ -78,6 +78,11 @@ export class TeacherClassAttendanceListPage {
          Subjectcode:SubjectCode
   	});
   }
+
+  deleteAttendanceDate(attendanceDate)
+  {
+    this.attendanceDateList.remove(attendanceDate);
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassAttendanceListPage');
   }

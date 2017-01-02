@@ -38,7 +38,14 @@
         <h1>{{attendanceDate.$key}}</h1>
         <button (click)="goToAttendanceStudentList(Username,ClassId,Startyear,Endyear,SubjectCode,attendanceDate.$key)" ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school" ></ion-icon></button>
       </ion-item>
-        
+      
+      <ion-item-options>
+        <button ion-button color="danger" icon-left (click)="deleteAttendanceDate(attendanceDate)">
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+
     </ion-item-sliding>
   </ion-list>
 </ion-content>

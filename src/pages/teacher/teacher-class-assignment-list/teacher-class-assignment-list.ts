@@ -101,6 +101,19 @@ export class TeacherClassAssignmentListPage {
      this.meetingList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-meetings/');
   }
 
+  deleteHomework(homework) {
+
+   this.homeworkList.remove(homework);
+  }
+
+  deleteProject(project) {
+   this.projectList.remove(project);
+  }
+
+  deleteMeeting(meeting) {
+  this.meetingList.remove(meeting);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassAssignmentListPage');
   }

@@ -63,7 +63,9 @@ export class TeacherDashboardPage {
      this.navCtrl.push(TeacherClassPage,
       {
          Username: Username,
-         ClassId: ClassId
+         ClassId: ClassId,
+         Startyear: this.classs.StartYear,
+         Endyear: this.classs.EndYear
       });
   }
   logOut(){

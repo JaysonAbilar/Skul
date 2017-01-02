@@ -29,7 +29,13 @@
         <h3>Contact #: {{presentStudents.Contactnumber}}</h3>
         <button ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school"></ion-icon></button>
       </ion-item>
-        
+      
+      <ion-item-options>
+        <button ion-button color="danger" icon-left (click)="deletePresentStudents(presentStudents)">
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 </ion-content>

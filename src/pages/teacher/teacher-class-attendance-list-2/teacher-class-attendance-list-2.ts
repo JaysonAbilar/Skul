@@ -49,7 +49,12 @@ export class TeacherClassAttendanceList2Page {
   	 					'/subject-attendance/' + this.AttendanceDate);
 
   }
-
+  
+  deletePresentStudents(presentStudents)
+  {
+     this.presentStudentsList.remove(presentStudents);
+  }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassAttendanceList2Page');
   }

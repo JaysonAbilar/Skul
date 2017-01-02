@@ -23,16 +23,54 @@ export class TeacherClassPage {
   public Startyear:any;
   public Endyear:any;
 
-  public currentAcademicYearObject : FirebaseObjectObservable<any>;
+  public classYear;
+  public classSection;
 
+  public currentAcademicYearObject : FirebaseObjectObservable<any>;
+  public classObject: FirebaseObjectObservable<any>;
+  
+  public Count = {
+    Students: 0,
+    Subjects: 0
+
+  };
+
+  public classStudentList : FirebaseListObservable<any>;
+  public classSubjectList : FirebaseListObservable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
   	this.Username = this.navParams.get('Username');
   	this.ClassId = this.navParams.get('ClassId');
 
-    this.currentAcademicYearObject = this.af.database.object('/current-academic-year');
-    this.currentAcademicYearObject.subscribe(snapshot => this.Startyear = snapshot.Startyear); 
-    this.currentAcademicYearObject.subscribe(snapshot => this.Endyear = snapshot.Endyear); 
+    this.Startyear = this.navParams.get('Startyear');
+    this.Endyear = this.navParams.get('Endyear');
+
+
+    this.classObject= this.af.database.object('/academic-year/' + this.Startyear + '-' + this.Endyear + '/class/'+ this.ClassId);
+    this.classObject.subscribe(snapshot => this.classYear = snapshot.Year); 
+    this.classObject.subscribe(snapshot => this.classSection = snapshot.Section); 
+    
+    this.classStudentList = this.af.database.list('/academic-year/' + this.Startyear + '-' + this.Endyear + '/class-student/'+ this.ClassId);
+    this.classSubjectList = this.af.database.list('/academic-year/' + this.Startyear + '-' + this.Endyear + '/class-subject/'+ this.ClassId);
+
+    this.countObjects();
   }
+
+  countObjects()
+  {
+    this.classStudentList.subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          console.log('students - ' + snapshot.$key + '- ' +this.Count.Students);
+          this.Count.Students++;
+        });
+    })
+    this.classSubjectList.subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+          console.log('subjects - ' + snapshot.$key + '- ' + this.Count.Subjects);
+          this.Count.Subjects++;
+        });
+    })
+  }
+
   viewStudents(classId,startYear,endYear){
    this.navCtrl.push(TeacherClassStudentsPage, {
      ClassId:classId,
@@ -68,6 +106,9 @@ export class TeacherClassPage {
      Endyear:endYear
    });
   }
+
+  
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassPage');
