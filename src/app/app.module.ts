@@ -8,7 +8,6 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AdminHomePage } from '../pages/admin/admin-home/admin-home';
-import { GuardianHomePage } from '../pages/guardian/guardian-home/guardian-home';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
 import { AdminTeacherListPage } from '../pages/admin/admin-teacher-list/admin-teacher-list';
 import { AdminTeacherAddPage } from '../pages/admin/admin-teacher-add/admin-teacher-add';
@@ -52,6 +51,11 @@ import { TeacherClassAttendanceUpdatePage } from '../pages/teacher/teacher-class
 
 import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-profile/teacher-student-profile';
 
+import { GuardianHomePage } from '../pages/guardian/guardian-home/guardian-home';
+import { GuardianDashboardPage } from '../pages/guardian/guardian-dashboard/guardian-dashboard';
+import { GuardianProfilePage } from '../pages/guardian/guardian-profile/guardian-profile';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -61,7 +65,6 @@ import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-prof
     HomePage,
     TabsPage,
     AdminHomePage,
-    GuardianHomePage,
     StudentHomePage,
     AdminTeacherListPage,
     AdminTeacherAddPage,
@@ -99,7 +102,10 @@ import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-prof
     TeacherClassAttendanceList2Page,
     TeacherClassAttendanceAddPage,
     TeacherClassAttendanceUpdatePage,
-    TeacherStudentProfilePage
+    TeacherStudentProfilePage,
+    GuardianHomePage,
+    GuardianDashboardPage,
+    GuardianProfilePage
 
   ],
   imports: [
@@ -114,7 +120,6 @@ import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-prof
     HomePage,
     TabsPage,
     AdminHomePage,
-    GuardianHomePage,
     StudentHomePage,
     AdminTeacherListPage,
     AdminTeacherAddPage,
@@ -152,7 +157,10 @@ import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-prof
     TeacherClassAttendanceList2Page,
     TeacherClassAttendanceAddPage,
     TeacherClassAttendanceUpdatePage,
-    TeacherStudentProfilePage
+    TeacherStudentProfilePage,
+    GuardianHomePage,
+    GuardianDashboardPage,
+    GuardianProfilePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,
