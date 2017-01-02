@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { TeacherStudentProfilePage } from '../teacher-student-profile/teacher-student-profile';
 /*
   Generated class for the TeacherClassStudents page.
 
@@ -38,6 +39,14 @@ export class TeacherClassStudentsPage {
 
   	 this.studentList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId);
   	 console.log('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId)
+  }
+
+  viewStudentProfile(Student)
+  {
+    this.navCtrl.push(TeacherStudentProfilePage,
+    {
+       Student:Student
+    });
   }
 
   ionViewDidLoad() {

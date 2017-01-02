@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { TeacherStudentProfilePage } from '../teacher-student-profile/teacher-student-profile';
 /*
   Generated class for the TeacherClassAttendanceList2 page.
 
@@ -55,6 +56,13 @@ export class TeacherClassAttendanceList2Page {
      this.presentStudentsList.remove(presentStudents);
   }
   
+  viewStudentProfile(Student)
+  {
+    this.navCtrl.push(TeacherStudentProfilePage,
+    {
+       Student:Student
+    });
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassAttendanceList2Page');
   }

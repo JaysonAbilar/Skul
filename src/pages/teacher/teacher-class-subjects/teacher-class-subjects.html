@@ -15,14 +15,12 @@
 
 <ion-content padding>
    <ion-list>
-    <ion-item-sliding *ngFor="let subject of subjecttList | async">
-      <ion-item>
-        <h1>{{subject.SubjectCode}}</h1>
-        <h3>Name: {{subject.Name}}</h3>
-        <h3>Description: {{subject.Description}}</h3>
-        <button ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school"></ion-icon></button>
-      </ion-item>
-        
-    </ion-item-sliding>
+      <div *ngFor="let subject of subjecttList | async">
+        <ion-item>
+          <h1>{{subject.SubjectCode}}</h1>
+          <h3>Name: {{subject.Name}}</h3>
+          <h3>Description: {{subject.Description}}</h3>
+        </ion-item>
+      </div>
   </ion-list>
 </ion-content>

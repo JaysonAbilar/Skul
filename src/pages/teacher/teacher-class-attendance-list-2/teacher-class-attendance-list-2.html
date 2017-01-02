@@ -27,7 +27,7 @@
         <h1>{{presentStudents.Lastname}}, {{presentStudents.Firstname}} {{presentStudents.Middlename}}</h1>
         <h3>Gender: {{presentStudents.Gender}}</h3>
         <h3>Contact #: {{presentStudents.Contactnumber}}</h3>
-        <button ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school"></ion-icon></button>
+        <button ion-button item-right (click)="viewStudentProfile(presentStudents.$key)"><ion-icon name="arrow-dropright-circle"></ion-icon></button>
       </ion-item>
       
       <ion-item-options>

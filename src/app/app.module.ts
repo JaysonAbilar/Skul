@@ -50,6 +50,8 @@ import { TeacherClassAttendanceList2Page } from '../pages/teacher/teacher-class-
 import { TeacherClassAttendanceAddPage } from '../pages/teacher/teacher-class-attendance-add/teacher-class-attendance-add';
 import { TeacherClassAttendanceUpdatePage } from '../pages/teacher/teacher-class-attendance-update/teacher-class-attendance-update';
 
+import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-profile/teacher-student-profile';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -96,7 +98,8 @@ import { TeacherClassAttendanceUpdatePage } from '../pages/teacher/teacher-class
     TeacherClassAttendanceListPage,
     TeacherClassAttendanceList2Page,
     TeacherClassAttendanceAddPage,
-    TeacherClassAttendanceUpdatePage
+    TeacherClassAttendanceUpdatePage,
+    TeacherStudentProfilePage
 
   ],
   imports: [
@@ -148,7 +151,8 @@ import { TeacherClassAttendanceUpdatePage } from '../pages/teacher/teacher-class
     TeacherClassAttendanceListPage,
     TeacherClassAttendanceList2Page,
     TeacherClassAttendanceAddPage,
-    TeacherClassAttendanceUpdatePage
+    TeacherClassAttendanceUpdatePage,
+    TeacherStudentProfilePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,
