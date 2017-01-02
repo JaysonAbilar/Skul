@@ -25,11 +25,11 @@
   </ion-item>
   <ion-item>
     <ion-label stacked>Students</ion-label>
-    <ion-select [(ngModel)]="attendance.Student" multiple="true" cancelText="Nah" okText="Okay!">
+    <ion-select [(ngModel)]="attendance.Student" (ngModelChange)="selectedValueChanged(attendance.Student)" multiple="true" cancelText="Nah" okText="Okay!">
       <div *ngFor="let attendanceStudent of attendanceStudentList | async">
       <ion-option value={{attendanceStudent.$key}} checked="true">{{attendanceStudent.$key}}</ion-option>
       </div>
     </ion-select>
   </ion-item>
-  <button ion-button (click)="addAttendance(Username, ClassId, Startyear, Endyear, SubjectCode, attendance.Date, attendance.Student,0)">ADD</button>
+  <button ion-button (click)="addAttendance(Username, ClassId, Startyear, Endyear, SubjectCode, attendance.Date, attendance.Student)">ADD</button>
 </ion-content>

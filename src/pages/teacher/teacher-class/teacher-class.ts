@@ -52,9 +52,9 @@ export class TeacherClassPage {
     this.classStudentList = this.af.database.list('/academic-year/' + this.Startyear + '-' + this.Endyear + '/class-student/'+ this.ClassId);
     this.classSubjectList = this.af.database.list('/academic-year/' + this.Startyear + '-' + this.Endyear + '/class-subject/'+ this.ClassId);
 
-    this.countObjects();
   }
 
+/*
   countObjects()
   {
     this.classStudentList.subscribe(snapshots=>{
@@ -70,7 +70,7 @@ export class TeacherClassPage {
         });
     })
   }
-
+*/
   viewStudents(classId,startYear,endYear){
    this.navCtrl.push(TeacherClassStudentsPage, {
      ClassId:classId,
