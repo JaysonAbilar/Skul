@@ -39,8 +39,8 @@
     <ion-label stacked>Due Date</ion-label>
     <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="reminder.DueDate" min="2016"></ion-datetime>
-  </ion-item>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="reminder.DueDate" min="2016"></ion-datetime>
+    </ion-item>
      <ion-item>
       <ion-label>Time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="reminder.DueTime"></ion-datetime>
@@ -50,7 +50,7 @@
     <ion-label stacked>Start Date</ion-label>
     <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="reminder.StartDate" min="2016"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="reminder.StartDate" min="2016"></ion-datetime>
   </ion-item>
      <ion-item>
       <ion-label>Time</ion-label>
@@ -59,7 +59,7 @@
     <ion-label stacked>End Date</ion-label>
     <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="reminder.EndDate" min="2016"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="reminder.EndDate" min="2016"></ion-datetime>
   </ion-item>
       <ion-item>
         <ion-label>Time</ion-label>
