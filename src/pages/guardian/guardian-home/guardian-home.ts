@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import * as firebase from 'firebase';
+import { GuardianDashboardPage } from '../guardian-dashboard/guardian-dashboard';
+import { GuardianProfilePage } from '../guardian-profile/guardian-profile';
 
 /*
   Generated class for the GuardianHome page.
@@ -8,15 +11,22 @@ import { NavController, NavParams } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-guardian-home',
   templateUrl: 'guardian-home.html'
 })
 export class GuardianHomePage {
+	tab1Root: any;
+  	tab2Root: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  	Username:'';
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GuardianHomePage');
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	    this.Username =  this.navParams.data;
+	    this.tab1Root = GuardianDashboardPage;
+	    this.tab2Root = GuardianProfilePage;
+	}
+
+  	ionViewDidLoad() {
+    	console.log('ionViewDidLoad GuardianHomePage');
+  	}
 
 }

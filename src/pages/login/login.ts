@@ -67,7 +67,6 @@ export class LoginPage {
           toast.present();
         console.log("auth username failed");
       }
-      
     loader.dismiss();
     });
   }
