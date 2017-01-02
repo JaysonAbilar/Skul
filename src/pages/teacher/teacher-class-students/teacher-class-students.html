@@ -7,22 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>List of Students</ion-title>
+    <ion-title>Students</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-   <ion-list>
-    <ion-item-sliding *ngFor="let student of studentList | async">
+  <input type="hidden" [(ngModel)]="ClassId" />
+  <input type="hidden" [(ngModel)]="Startyear" />
+  <input type="hidden" [(ngModel)]="Endyear" />
+
+  <ion-list>
+  <ion-list-header>List of present Students</ion-list-header>
+    <div *ngFor="let student of studentList | async">
       <ion-item>
         <h1>{{student.Lastname}}, {{student.Firstname}} {{student.Middlename}}</h1>
         <h3>Gender: {{student.Gender}}</h3>
         <h3>Contact #: {{student.Contactnumber}}</h3>
-        <button ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school"></ion-icon></button>
+        <button ion-button item-right (click)="viewStudentProfile(student.$key)"><ion-icon name="arrow-dropright-circle"></ion-icon></button>
       </ion-item>
-        
-    </ion-item-sliding>
+    </div>
   </ion-list>
 </ion-content>
