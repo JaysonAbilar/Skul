@@ -73,9 +73,9 @@ export class TeacherClassAssignmentAddPage {
   	 var month = this.currentDate.getMonth() + 1;
   	 var year = this.currentDate.getFullYear();
 
-     var message = "Class Reminder: Homework\n" +
-                   "Subject: " + SubjectCode +
-                   "Title: " + Title +
+     var message = "Class Reminder: Homework" +
+                   "\nSubject: " + SubjectCode +
+                   "\nTitle: " + Title +
                    "\nDescription: " + Description +
                    "\nDueDate: " + DueDate +
                    "\nDueTime: " + DueTime;
@@ -95,6 +95,8 @@ export class TeacherClassAssignmentAddPage {
                          intent: ''
                       }
                 }
+              console.log(this.guardian.Contactnumber);
+              console.log(message);
               SMS.send(this.guardian.Contactnumber, message ,options)
                 .then(()=>{
                   alert("success");
