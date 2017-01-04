@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
 import { AdminHomePage } from '../admin-home/admin-home';
 import { AdminStudentAddPage } from '../admin-student-add/admin-student-add';
 import { AdminStudentUpdatePage } from '../admin-student-update/admin-student-update';
@@ -21,7 +21,9 @@ export class AdminStudentListPage {
   guardianStudentList: FirebaseListObservable<any>;
   public taf: any;
   searchQuery: string = '';
-
+  
+  guardianObject: FirebaseObjectObservable<any>;
+  public guardianUsername: '';
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
     this.taf = af;
   	this.studentList = af.database.list('/student');
@@ -50,7 +52,12 @@ export class AdminStudentListPage {
   deleteStudent(student) {
     console.log("/guardian-student/" + student.Guardian);
     console.log("student.Username");
-    this.guardianStudentList = this.taf.database.list("/guardian-student/" + student.Guardian);   
+
+    this.guardianObject = this.af.database.object("/student/" + student.Username + "/Guardian");      
+    this.guardianObject.subscribe(snapshot => this.guardianUsername = snapshot.Username); 
+
+
+    this.guardianStudentList = this.taf.database.list("/guardian-student/" + this.guardianUsername);   
     this.guardianStudentList.remove(student.$key); 
     this.studentList.remove(student);
   }

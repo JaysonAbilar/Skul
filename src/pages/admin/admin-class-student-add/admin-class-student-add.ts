@@ -32,6 +32,20 @@ export class AdminClassStudentAddPage {
 	Guardian: ''
   };
 
+  guardianObject: FirebaseObjectObservable<any>;
+  guardian = {
+    Username: '',
+  Password: '',
+  Firstname: '',
+  Middlename:'',
+  Lastname: '',
+  Age: '',
+  Gender: '',
+  Email: '',
+  Contactnumber: ''
+  };
+
+
   classsList: FirebaseListObservable<any>;
   classs = {
     Id: '',
@@ -74,9 +88,19 @@ export class AdminClassStudentAddPage {
       this.studentOjbect.subscribe(snapshot => this.student.Gender = snapshot.Gender); 
       this.studentOjbect.subscribe(snapshot => this.student.Email = snapshot.Email); 
       this.studentOjbect.subscribe(snapshot => this.student.Contactnumber = snapshot.Contactnumber); 
+
+      this.guardianObject = this.af.database.object('/student/' + Student[i] + '/Guardian');    
+      this.guardianObject.subscribe(snapshot => this.guardian.Username = snapshot.Username); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Firstname = snapshot.Firstname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Middlename = snapshot.Middlename); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Lastname = snapshot.Lastname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Age= snapshot.Age); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Gender = snapshot.Gender); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Email = snapshot.Email); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Contactnumber = snapshot.Contactnumber); 
+
       console.log('/student/' + Student[i]);  
       firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student[i]).set({ 
-      Student: Student,
       Firstname:this.student.Firstname,
       Middlename:this.student.Middlename,
       Lastname:this.student.Lastname,
@@ -89,6 +113,18 @@ export class AdminClassStudentAddPage {
       firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + Student[i]).set({ 
         ClassId: this.classs.Id
        });
+
+      firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + '/' + Student[i] + '/Guardian').set({ 
+        Username: this.guardian.Username,
+        Firstname : this.guardian.Firstname,
+        Middlename: this.guardian.Middlename,
+        Lastname: this.guardian.Lastname,
+        Age: this.guardian.Age,
+        Gender: this.guardian.Gender,
+        Email: this.guardian.Email,
+        Contactnumber: this.guardian.Contactnumber
+      });
+
     }
     this.navCtrl.pop();
       

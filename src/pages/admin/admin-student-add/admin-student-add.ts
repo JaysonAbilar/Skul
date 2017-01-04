@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import * as firebase from 'firebase';
 
@@ -16,6 +16,7 @@ import * as firebase from 'firebase';
 })
 export class AdminStudentAddPage {
   guardianList: FirebaseListObservable<any>;
+  guardianObject: FirebaseObjectObservable<any>;
   guardian = {
     Username: '',
 	Password: '',
@@ -48,7 +49,18 @@ export class AdminStudentAddPage {
 
   }
 
-   addStudent(Username, Password, Firstname, Middlename,Lastname, Age, Gender, Email, Contactnumber,Guardian) {	   	
+   addStudent(Username, Password, Firstname, Middlename,Lastname, Age, Gender, Email, Contactnumber,Guardian) {
+
+      this.guardianObject = this.af.database.object('/guardian/' + Guardian);	   	
+      this.guardianObject.subscribe(snapshot => this.guardian.Firstname = snapshot.Firstname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Middlename = snapshot.Middlename); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Lastname = snapshot.Lastname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Age= snapshot.Age); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Gender = snapshot.Gender); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Email = snapshot.Email); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Contactnumber = snapshot.Contactnumber); 
+
+
   	  firebase.database().ref("/student/" + Username).set({ 
   	  Password: Password,
       Firstname: Firstname,
@@ -58,21 +70,33 @@ export class AdminStudentAddPage {
       Gender: Gender,
       Email: Email,
       Contactnumber: Contactnumber,
-      Guardian: Guardian
-
+      Username: Username
   	 }).then( newStudent => {
 	       firebase.database().ref("/guardian-student/" + Guardian + "/" + Username).set({ 
-            Password: Password,
+            Username:Username,
             Firstname: Firstname,
             Middlename: Middlename,
             Lastname: Lastname,
             Age: Age,
             Gender: Gender,
             Email: Email,
-            Contactnumber: Contactnumber,
-            Guardian: Guardian
+            Contactnumber: Contactnumber
            }).then( newStudent => {
-              this.navCtrl.pop();
+                
+                firebase.database().ref("/student/" + Username + "/Guardian/").set({ 
+                Username: Guardian,
+                Firstname : this.guardian.Firstname,
+                Middlename: this.guardian.Middlename,
+                Lastname: this.guardian.Lastname,
+                Age: this.guardian.Age,
+                Gender: this.guardian.Gender,
+                Email: this.guardian.Email,
+                Contactnumber: this.guardian.Contactnumber
+               }).then( newStudent => {
+                  this.navCtrl.pop();
+                }, error => {
+                  console.log(error);
+              });
             }, error => {
               console.log(error);
           });

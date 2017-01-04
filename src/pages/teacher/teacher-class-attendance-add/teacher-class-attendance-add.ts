@@ -101,7 +101,13 @@ export class TeacherClassAttendanceAddPage {
         Email: this.attendancePresentStudent.Email[i],
         Contactnumber: this.attendancePresentStudent.Contactnumber[i],
         Guardian: this.attendancePresentStudent.Guardian[i]
+       }).then( newTeacher => {  
+         firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/student-attendance/' + Student[i] + '/' + AttendanceDate).set({ 
+         Date:AttendanceDate
        }).then( newTeacher => {         
+        }, error => {
+          console.log(error);
+     });       
         }, error => {
           console.log(error);
      });
