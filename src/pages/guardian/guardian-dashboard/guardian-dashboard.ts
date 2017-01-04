@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GuardianHomePage } from '../guardian-home/guardian-home';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 /*
   Generated class for the GuardianDashboard page.
@@ -13,14 +14,23 @@ import { GuardianHomePage } from '../guardian-home/guardian-home';
   templateUrl: 'guardian-dashboard.html'
 })
 export class GuardianDashboardPage {
-	
+
+	studentList: FirebaseListObservable<any>;
 	public Username: '';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  searchQuery: string = '';
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
   	this.Username =  this.navParams.data.Username;
+    this.studentList = af.database.list('/guardian-student/'+this.Username);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuardianDashboardPage');
+  }
+
+  childProfile(childKey){
+    console.log(childKey);
   }
 
 }

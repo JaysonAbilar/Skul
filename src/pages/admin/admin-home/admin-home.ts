@@ -34,7 +34,11 @@ export class AdminHomePage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
-
+    this.Count.teacherCount = 0;
+    this.Count.studentCount = 0;
+    this.Count.guardianCount = 0;
+    this.Count.subjectCount = 0;
+    
     this.currentAcademicYearObject = this.af.database.object('/current-academic-year');
     this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Startyear = snapshot.Startyear); 
     this.currentAcademicYearObject.subscribe(snapshot => this.currentAcademicYear.Endyear = snapshot.Endyear); 
@@ -50,6 +54,7 @@ export class AdminHomePage {
     })
     this.af.database.list('/subject', { preserveSnapshot: true})
     .subscribe(snapshots=>{
+        this.Count.subjectCount = 0;
         snapshots.forEach(snapshot => {
           this.Count.subjectCount++;
         });
@@ -68,6 +73,7 @@ export class AdminHomePage {
     })
     this.af.database.list('/academic-year/2016-2017/class', { preserveSnapshot: true})
     .subscribe(snapshots=>{
+        this.Count.classCount = 0;
         snapshots.forEach(snapshot => {
           this.Count.classCount++;
         });

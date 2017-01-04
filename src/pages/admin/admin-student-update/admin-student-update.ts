@@ -88,7 +88,15 @@ export class AdminStudentUpdatePage {
       Guardian: Guardian
     }).then( newStudent => {
         firebase.database().ref("/guardian-student/" + Guardian + "/" + Username).set({ 
-              Student:Username
+              Password: Password,
+            Firstname: Firstname,
+            Middlename: Middlename,
+            Lastname: Lastname,
+            Age: Age,
+            Gender: Gender,
+            Email: Email,
+            Contactnumber: Contactnumber,
+            Guardian: Guardian
              }).then( newStudent => {
                 this.navCtrl.pop();
               }, error => {

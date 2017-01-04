@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabIcon="contact"></ion-tab>
+  <ion-tab [root]="tab1Root" [rootParams]="Username" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" [rootParams]="Username" tabTitle="Profile" tabIcon="contact"></ion-tab>
 </ion-tabs>
 

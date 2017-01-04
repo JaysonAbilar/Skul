@@ -62,13 +62,10 @@ export class AdminClassStudentAddPage {
 
     this.classStudentList = this.af.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id);
   }
-  tae(ebak){
-    console.log(ebak);
-  }
   addClassStudent(Student) {   
     
     for (var i = 0; i < Student.length; i++) { 
-      console.log('/student/' + Student[i]);
+      
       this.studentOjbect  = this.af.database.object('/student/' + Student[i]);
       this.studentOjbect.subscribe(snapshot => this.student.Firstname = snapshot.Firstname); 
       this.studentOjbect.subscribe(snapshot => this.student.Middlename = snapshot.Middlename); 
@@ -77,7 +74,7 @@ export class AdminClassStudentAddPage {
       this.studentOjbect.subscribe(snapshot => this.student.Gender = snapshot.Gender); 
       this.studentOjbect.subscribe(snapshot => this.student.Email = snapshot.Email); 
       this.studentOjbect.subscribe(snapshot => this.student.Contactnumber = snapshot.Contactnumber); 
-
+      console.log('/student/' + Student[i]);  
       firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/class-student/' + this.classs.Id + "/" + Student[i]).set({ 
       Student: Student,
       Firstname:this.student.Firstname,
@@ -87,18 +84,11 @@ export class AdminClassStudentAddPage {
       Gender:this.student.Gender,
       Email:this.student.Email,
       Contactnumber:this.student.Contactnumber
-
-      }).then( newClassSubject=> {
-        firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + Student + "/" + this.classs.Id).set({ 
-          Student: Student,
-         }).then( newClassSubject=> {
-            
-          }, error => {
-            console.log(error);
-        });
-      }, error => {
-        console.log(error);
       });
+
+      firebase.database().ref('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + Student[i]).set({ 
+        ClassId: this.classs.Id
+       });
     }
     this.navCtrl.pop();
       
