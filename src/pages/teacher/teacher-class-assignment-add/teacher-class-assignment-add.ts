@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import * as firebase from 'firebase';
-
+import { SMS } from 'ionic-native'
 /*
   Generated class for the TeacherClassAssignmentAdd page.
 
@@ -26,6 +26,20 @@ export class TeacherClassAssignmentAddPage {
   homeworkList: FirebaseListObservable<any>;
   projectList: FirebaseListObservable<any>;
   meetingList: FirebaseListObservable<any>;
+  studentList: FirebaseListObservable<any>;
+  guardianObject: FirebaseObjectObservable<any>;
+  guardian = {
+    Username: '',
+    Password: '',
+    Firstname: '',
+    Middlename:'',
+    Lastname: '',
+    Age: '',
+    Gender: '',
+    Email: '',
+    Contactnumber: ''
+  };
+
   reminder= {
   	reminderCode: '',
     Type:'',
@@ -59,8 +73,39 @@ export class TeacherClassAssignmentAddPage {
   	 var month = this.currentDate.getMonth() + 1;
   	 var year = this.currentDate.getFullYear();
 
+     var message = "Class Reminder: Homework\n" +
+                   "Subject: " + SubjectCode +
+                   "Title: " + Title +
+                   "\nDescription: " + Description +
+                   "\nDueDate: " + DueDate +
+                   "\nDueTime: " + DueTime;
+
      if(Type=='Homework')
      {
+        this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId, { preserveSnapshot: true})
+        .subscribe(snapshots=>{
+            snapshots.forEach(snapshot => {
+              this.guardianObject = this.af.database.object('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + 
+                                '/class-student/' + this.ClassId  + '/' + snapshot.key); 
+              this.guardianObject.subscribe(snapshot => this.guardian.Contactnumber = snapshot.Contactnumber);   
+
+              var options={
+                    replaceLineBreaks: false, 
+                    android: {
+                         intent: ''
+                      }
+                }
+              SMS.send(this.guardian.Contactnumber, message ,options)
+                .then(()=>{
+                  alert("success");
+                },()=>{
+                alert("failed");
+                });
+
+            //  console.log(snapshot.key, snapshot.val());
+            });
+        })
+
     	 firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-homeworks/hw_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
     	  Title: Title,
         Description: Description,
@@ -108,5 +153,8 @@ export class TeacherClassAssignmentAddPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassAssignmentAddPage');
   }
+
+
+
 
 }
