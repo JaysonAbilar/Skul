@@ -28,7 +28,8 @@ export class TeacherClassAssignmentAddPage {
   meetingList: FirebaseListObservable<any>;
   studentList: FirebaseListObservable<any>;
   guardianObject: FirebaseObjectObservable<any>;
-  guardian = {
+
+  public guardian = {
     Username: '',
     Password: '',
     Firstname: '',
@@ -65,6 +66,21 @@ export class TeacherClassAssignmentAddPage {
   	 this.currentDate = new Date();
 
   }
+  
+  selectedValueChanged(Username, ClassId, Startyear, Endyear, SubjectCode, Type, Title, Description, DueDate, DueTime, 
+                StartDate, StartTime, EndDate, EndTime)
+  {
+    this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId, { preserveSnapshot: true})
+        .subscribe(snapshots=>{
+            snapshots.forEach(snapshot => {
+              this.guardianObject = this.af.database.object('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + 
+                                '/class-student/' + this.ClassId  + '/' + snapshot.key + '/Guardian'); 
+              this.guardianObject.subscribe(snapshot2 => this.guardian.Contactnumber = snapshot2.Contactnumber);   
+
+            //  console.log(snapshot.key, snapshot.val());
+            });
+        })
+  }
 
   addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, Type, Title, Description, DueDate, DueTime, 
                 StartDate, StartTime, EndDate, EndTime)
@@ -72,8 +88,8 @@ export class TeacherClassAssignmentAddPage {
   	 var day = this.currentDate.getDate();
   	 var month = this.currentDate.getMonth() + 1;
   	 var year = this.currentDate.getFullYear();
-
-     var message = "Class Reminder: Homework" +
+     var tempNumber = 'temp';
+     var message = "Class Reminder: " + Type +
                    "\nSubject: " + SubjectCode +
                    "\nTitle: " + Title +
                    "\nDescription: " + Description +
@@ -86,23 +102,28 @@ export class TeacherClassAssignmentAddPage {
         .subscribe(snapshots=>{
             snapshots.forEach(snapshot => {
               this.guardianObject = this.af.database.object('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + 
-                                '/class-student/' + this.ClassId  + '/' + snapshot.key); 
-              this.guardianObject.subscribe(snapshot => this.guardian.Contactnumber = snapshot.Contactnumber);   
+                                '/class-student/' + this.ClassId  + '/' + snapshot.key + '/Guardian'); 
+              this.guardianObject.subscribe(snapshot2 => this.guardian.Contactnumber = snapshot2.Contactnumber);   
 
-              var options={
-                    replaceLineBreaks: false, 
-                    android: {
-                         intent: ''
-                      }
-                }
-              console.log(this.guardian.Contactnumber);
-              console.log(message);
-              SMS.send(this.guardian.Contactnumber, message ,options)
-                .then(()=>{
-                  alert("success");
-                },()=>{
-                alert("failed");
-                });
+              if(tempNumber != this.guardian.Contactnumber)
+              {
+                tempNumber = this.guardian.Contactnumber;
+                 console.log(this.guardian.Contactnumber);
+                 console.log(message);
+                 var options={
+                      replaceLineBreaks: true, 
+                      android: {
+                           intent: ''
+                        }
+                  }
+
+                SMS.send(this.guardian.Contactnumber, message ,options)
+                  .then(()=>{
+                    alert("success");
+                  },()=>{
+                  alert("failed");
+                  });
+              }
 
             //  console.log(snapshot.key, snapshot.val());
             });
@@ -122,6 +143,38 @@ export class TeacherClassAssignmentAddPage {
     }
     else if(Type=='Project')
     {
+       this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId, { preserveSnapshot: true})
+        .subscribe(snapshots=>{
+            snapshots.forEach(snapshot => {
+              this.guardianObject = this.af.database.object('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + 
+                                '/class-student/' + this.ClassId  + '/' + snapshot.key + '/Guardian'); 
+              this.guardianObject.subscribe(snapshot2 => this.guardian.Contactnumber = snapshot2.Contactnumber);   
+
+              if(tempNumber != this.guardian.Contactnumber)
+              {
+                tempNumber = this.guardian.Contactnumber;
+                console.log(this.guardian.Contactnumber);
+                console.log(message);
+
+                 var options={
+                      replaceLineBreaks: true, 
+                      android: {
+                           intent: ''
+                        }
+                  }
+
+                SMS.send(this.guardian.Contactnumber, message ,options)
+                  .then(()=>{
+                    alert("success");
+                  },()=>{
+                  alert("failed");
+                  });
+              }
+
+            //  console.log(snapshot.key, snapshot.val());
+            });
+        })
+
        firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-projects/proj_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
         Title: Title,
         Description: Description,
@@ -136,6 +189,47 @@ export class TeacherClassAssignmentAddPage {
     }
     else if(Type=='Meeting')
     {
+       
+       message = "Class Reminder: " + Type +
+                   "\nSubject: " + SubjectCode +
+                   "\nTitle: " + Title +
+                   "\nDescription: " + Description +
+                   "\nStartDate: " + StartDate +
+                   "\nStartTime: " + StartTime + 
+                   "\nEndDate: " + EndDate +
+                   "\nEndTime: " + EndTime;
+
+       this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId, { preserveSnapshot: true})
+        .subscribe(snapshots=>{
+            snapshots.forEach(snapshot => {
+              this.guardianObject = this.af.database.object('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + 
+                                '/class-student/' + this.ClassId  + '/' + snapshot.key + '/Guardian'); 
+              this.guardianObject.subscribe(snapshot2 => this.guardian.Contactnumber = snapshot2.Contactnumber);   
+
+              if(tempNumber != this.guardian.Contactnumber)
+              {
+                tempNumber = this.guardian.Contactnumber;
+                console.log(this.guardian.Contactnumber);
+                console.log(message);
+
+                 var options={
+                      replaceLineBreaks: true, 
+                      android: {
+                           intent: ''
+                        }
+                  }
+
+                SMS.send(this.guardian.Contactnumber, message ,options)
+                  .then(()=>{
+                    alert("success");
+                  },()=>{
+                  alert("failed");
+                  });
+              }
+            //  console.log(snapshot.key, snapshot.val());
+            });
+        })
+
        firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-meetings/meet_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
         Title: Title,
         Description: Description,

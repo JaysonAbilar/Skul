@@ -21,7 +21,7 @@
   <input type="hidden" [(ngModel)]="SubjectCode" />
   <ion-item>
       <ion-label stacked>Type</ion-label>
-     <ion-select [(ngModel)]="reminder.Type" multiple="false" cancelText="Nah" okText="Okay!">
+     <ion-select [(ngModel)]="reminder.Type" (ngModelChange)="selectedValueChanged()" multiple="false" cancelText="Nah" okText="Okay!">
         <ion-option value="Homework" checked="true">Homework</ion-option>
         <ion-option value="Project">Project</ion-option>
         <ion-option value="Meeting">Meeting</ion-option>
