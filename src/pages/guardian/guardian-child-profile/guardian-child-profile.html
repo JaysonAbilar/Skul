@@ -14,5 +14,19 @@
 
 
 <ion-content padding>
-<h1>{{ChildKey}}</h1>
+	<div class="list card">
+		<ion-item class="profile-item">
+			<div class="profile-picture big-profile-picture">
+			<img src="assets/images/avatarStudent.png">
+			</div>
+			<h2 class="profile-name dark">{{child.Firstname}} {{child.Lastname}}</h2>
+			<div class="profile-info">{{child.Email}}</div>
+		</ion-item>
+		<h5>Subjects</h5>
+		<div *ngFor="let subject of subjectList | async">
+			<ion-item class="profile-item" (click)="goToSubjectInfoPage(subject.SubjectCode,SchoolYearAndSection)">
+				{{subject.Name}}
+			</ion-item>
+		</div>
+	</div>
 </ion-content>

@@ -26,9 +26,9 @@ export class LoginPage {
   studentObject: FirebaseObjectObservable<any>;
 
   login = {
-  	Username: '',
-	  Password: '',
-    Role: ''
+  	Username: 'guardian_Carlo',
+	  Password: '123456',
+    Role: 'Guardian'
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController, public loadingCtrl: LoadingController) {

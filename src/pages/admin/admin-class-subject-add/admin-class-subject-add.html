@@ -17,13 +17,13 @@
   <ion-item>
     <ion-label stacked>Subject</ion-label>
     <ion-select [(ngModel)]="classSubject.SubjectCode" multiple="false" cancelText="Nah" okText="Okay!">
-      <ion-option *ngFor="let subject of subjectList | async" value={{subject.$key}} checked="true">{{subject.$key}}</ion-option>
+      <ion-option *ngFor="let subject of subjectList | async" value={{subject.$key}} checked="true">{{subject.Description}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label stacked>Teacher</ion-label>
     <ion-select [(ngModel)]="classSubject.Teacher" multiple="false" cancelText="Nah" okText="Okay!">
-      <ion-option *ngFor="let teacher of teacherList | async" value={{teacher.$key}} checked="true">{{teacher.$key}}</ion-option>
+      <ion-option *ngFor="let teacher of teacherList | async" value="{{teacher.Firstname}} {{teacher.Lastname}}" checked="true">{{teacher.Firstname}} {{teacher.Lastname}}</ion-option>
     </ion-select>
   </ion-item>
 
