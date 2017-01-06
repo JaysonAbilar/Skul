@@ -54,7 +54,7 @@ import { TeacherStudentProfilePage } from '../pages/teacher/teacher-student-prof
 import { GuardianHomePage } from '../pages/guardian/guardian-home/guardian-home';
 import { GuardianDashboardPage } from '../pages/guardian/guardian-dashboard/guardian-dashboard';
 import { GuardianProfilePage } from '../pages/guardian/guardian-profile/guardian-profile';
-
+import { GuardianChildProfilePage } from '../pages/guardian/guardian-child-profile/guardian-child-profile';
 
 @NgModule({
   declarations: [
@@ -105,7 +105,8 @@ import { GuardianProfilePage } from '../pages/guardian/guardian-profile/guardian
     TeacherStudentProfilePage,
     GuardianHomePage,
     GuardianDashboardPage,
-    GuardianProfilePage
+    GuardianProfilePage,
+    GuardianChildProfilePage
 
   ],
   imports: [
@@ -160,7 +161,8 @@ import { GuardianProfilePage } from '../pages/guardian/guardian-profile/guardian
     TeacherStudentProfilePage,
     GuardianHomePage,
     GuardianDashboardPage,
-    GuardianProfilePage
+    GuardianProfilePage,
+    GuardianChildProfilePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,

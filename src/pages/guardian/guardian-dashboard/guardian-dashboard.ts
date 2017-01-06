@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GuardianHomePage } from '../guardian-home/guardian-home';
+import { GuardianChildProfilePage } from '../guardian-child-profile/guardian-child-profile';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 /*
@@ -29,8 +30,9 @@ export class GuardianDashboardPage {
     console.log('ionViewDidLoad GuardianDashboardPage');
   }
 
-  childProfile(childKey){
-    console.log(childKey);
+  childProfile(ChildKey){
+    this.navCtrl.push(GuardianChildProfilePage, {
+      ChildKey: ChildKey
+    });
   }
-
 }
