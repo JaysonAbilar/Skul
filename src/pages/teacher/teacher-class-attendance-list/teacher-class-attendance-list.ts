@@ -79,10 +79,7 @@ export class TeacherClassAttendanceListPage {
   	});
   }
 
-  deleteAttendanceDate(attendanceDate)
-  {
-    this.attendanceDateList.remove(attendanceDate);
-  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherClassAttendanceListPage');
   }

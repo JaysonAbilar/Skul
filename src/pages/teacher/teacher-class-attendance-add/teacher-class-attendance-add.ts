@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable,FirebaseObjectObservable } from 'an
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import { TeacherClassAttendanceListPage } from '../teacher-class-attendance-list/teacher-class-attendance-list';
 import * as firebase from 'firebase';
+import { SMS } from 'ionic-native'
 /*
   Generated class for the TeacherClassAttendanceAdd page.
 
@@ -16,6 +17,10 @@ import * as firebase from 'firebase';
 })
 export class TeacherClassAttendanceAddPage {
   
+
+  public hours:any;
+
+
   public Username:any;
   public ClassId:any;
   public Startyear:any;
@@ -62,6 +67,20 @@ export class TeacherClassAttendanceAddPage {
   Guardian: []
   };
 
+  guardianObject: FirebaseObjectObservable<any>;
+
+  public guardian = {
+    Username: '',
+    Password: '',
+    Firstname: '',
+    Middlename:'',
+    Lastname: '',
+    Age: '',
+    Gender: '',
+    Email: '',
+    Contactnumber: ''
+  };
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
      this.Username = this.navParams.get('Username');
@@ -79,7 +98,18 @@ export class TeacherClassAttendanceAddPage {
 
   addAttendance(Username, ClassId, Startyear, Endyear, SubjectCode, AttendanceDate, Student)
   {  
-    for (var i = 0; i < Student.length; i++) { 
+
+
+    for (var i = 0; i < Student.length; i++) 
+    { 
+      var date = new Date();
+      this.hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+      var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+      this.hours = this.hours < 10 ? "0" + this.hours : this.hours;
+      var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      var time = this.hours + ":" + minutes + ":" + seconds + " " + am_pm;
+
 
       this.attendancePresentStudentObject = this.af.database.object('/student/' + Student[i]);
       console.log('/student/' + Student[i]);
@@ -92,6 +122,37 @@ export class TeacherClassAttendanceAddPage {
       this.attendancePresentStudentObject.subscribe(snapshot => this.attendancePresentStudent.Contactnumber[i] = snapshot.Contactnumber); 
       this.attendancePresentStudentObject.subscribe(snapshot => this.attendancePresentStudent.Guardian[i] = snapshot.Guardian); 
 
+      this.guardianObject = this.af.database.object('/student/' + Student[i] + '/Guardian');    
+      this.guardianObject.subscribe(snapshot => this.guardian.Username = snapshot.Username); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Firstname = snapshot.Firstname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Middlename = snapshot.Middlename); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Lastname = snapshot.Lastname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Age= snapshot.Age); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Gender = snapshot.Gender); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Email = snapshot.Email); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Contactnumber = snapshot.Contactnumber); 
+
+      var message = "Greetings mam/sir. " + 
+          this.attendancePresentStudent.Firstname[i] + " " + this.attendancePresentStudent.Lastname[i] + " is present in his/her current subject " +
+          SubjectCode + " at exactly " + time;
+
+
+      var options={
+            replaceLineBreaks: true, 
+            android: {
+                 intent: ''
+              }
+        }
+
+      console.log(this.guardian.Contactnumber);
+      console.log(message);
+      SMS.send(this.guardian.Contactnumber, message ,options)
+        .then(()=>{
+          alert("success");
+        },()=>{
+        alert("failed");
+        });
+
       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-attendance/' + AttendanceDate + '/' + Student[i]).set({ 
         Firstname: this.attendancePresentStudent.Firstname[i],
         Middlename: this.attendancePresentStudent.Middlename[i],
@@ -101,16 +162,11 @@ export class TeacherClassAttendanceAddPage {
         Email: this.attendancePresentStudent.Email[i],
         Contactnumber: this.attendancePresentStudent.Contactnumber[i],
         Guardian: this.attendancePresentStudent.Guardian[i]
-       }).then( newTeacher => {  
-         firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/student-attendance/' + Student[i] + '/' + AttendanceDate).set({ 
+       });
+
+       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/student-attendance/' + Student[i] + '/' + AttendanceDate).set({ 
          Date:AttendanceDate
-       }).then( newTeacher => {         
-        }, error => {
-          console.log(error);
-     });       
-        }, error => {
-          console.log(error);
-     });
+       })
   }
      
     this.navCtrl.pop();
@@ -139,6 +195,17 @@ export class TeacherClassAttendanceAddPage {
       this.attendancePresentStudentObject.subscribe(snapshot => this.attendancePresentStudent.Email[i] = snapshot.Email); 
       this.attendancePresentStudentObject.subscribe(snapshot => this.attendancePresentStudent.Contactnumber[i] = snapshot.Contactnumber); 
       this.attendancePresentStudentObject.subscribe(snapshot => this.attendancePresentStudent.Guardian[i] = snapshot.Guardian); 
+
+      this.guardianObject = this.af.database.object('/student/' + Student[i] + '/Guardian');    
+      this.guardianObject.subscribe(snapshot => this.guardian.Username = snapshot.Username); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Firstname = snapshot.Firstname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Middlename = snapshot.Middlename); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Lastname = snapshot.Lastname); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Age= snapshot.Age); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Gender = snapshot.Gender); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Email = snapshot.Email); 
+      this.guardianObject.subscribe(snapshot => this.guardian.Contactnumber = snapshot.Contactnumber); 
+
     }
   }
 

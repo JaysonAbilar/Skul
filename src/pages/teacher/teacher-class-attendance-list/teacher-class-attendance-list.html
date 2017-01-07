@@ -33,19 +33,12 @@
 
   <ion-list>
 	<ion-list-header>Dates</ion-list-header>
-    <ion-item-sliding *ngFor="let attendanceDate of attendanceDateList | async">
+    <div *ngFor="let attendanceDate of attendanceDateList | async">
       <ion-item>
         <h1>{{attendanceDate.$key | date: 'MMM dd, y'}}</h1>
         <button (click)="goToAttendanceStudentList(Username,ClassId,Startyear,Endyear,SubjectCode,attendanceDate.$key)" ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school" ></ion-icon></button>
       </ion-item>
-      
-      <ion-item-options>
-        <button ion-button color="danger" icon-left (click)="deleteAttendanceDate(attendanceDate)">
-          <ion-icon name="ios-trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-
-    </ion-item-sliding>
+    
+    </div>
   </ion-list>
 </ion-content>

@@ -22,6 +22,7 @@ export class TeacherClassAttendanceList2Page {
   public AttendanceDate:any;
 
   presentStudentsList: FirebaseListObservable<any>;
+  StudentsPresentList: FirebaseListObservable<any>;
   presentStudents = {
     Username: '',
 	Password: '',
@@ -46,14 +47,26 @@ export class TeacherClassAttendanceList2Page {
 
   	 this.presentStudentsList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode +
   	 					'/subject-attendance/' + this.AttendanceDate);
+
+   
+
+
   	 console.log('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode +
   	 					'/subject-attendance/' + this.AttendanceDate);
 
   }
   
-  deletePresentStudents(presentStudents)
-  {
+  deletePresentStudents(presentStudents,student)
+  { 
+     this.StudentsPresentList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode +
+              '/student-attendance/' + student);
+
+
+     console.log('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode +
+              '/student-attendance/' + student);
+     console.log(this.AttendanceDate);
      this.presentStudentsList.remove(presentStudents);
+     this.StudentsPresentList.remove(this.AttendanceDate);
   }
   
   viewStudentProfile(Student)
