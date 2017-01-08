@@ -26,13 +26,20 @@ export class LoginPage {
   studentObject: FirebaseObjectObservable<any>;
 
   login = {
-  	Username: 'guardian_Carlo',
+  	Username: 'student_liza',
 	  Password: '123456',
     Role: 'Guardian'
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+  public Startyear: '';
+  public Endyear:'';
 
+  currentAcademicYearObject: FirebaseObjectObservable<any>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire,public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+    this.currentAcademicYearObject = this.af.database.object('/current-academic-year');
+    this.currentAcademicYearObject.subscribe(snapshot => this.Startyear = snapshot.Startyear); 
+    this.currentAcademicYearObject.subscribe(snapshot => this.Endyear = snapshot.Endyear); 
   }
 
  presentLoading(status) {
@@ -40,7 +47,7 @@ export class LoginPage {
   }
 
 
-  authenticate(root, Password, LandingPage,Username,loader){
+  authenticate(root, Password, LandingPage,Username,loader,Startyear,Endyear){
     var RolePassword;
     var navigation = this.navCtrl;
     var toaster = this.toastCtrl;
@@ -50,7 +57,9 @@ export class LoginPage {
         RolePassword = snap.val().Password;  
         if(RolePassword == Password) {  
           navigation.push(LandingPage,{
-            Username:Username
+            Username:Username,
+            Startyear:Startyear,
+            Endyear:Endyear
           });
         } else {
           let toast = toaster.create({
@@ -71,7 +80,7 @@ export class LoginPage {
     });
   }
 
-  loginUser(Username, Password, Role) { 
+  loginUser(Username, Password, Role,Startyear,Endyear) { 
 
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -80,16 +89,16 @@ export class LoginPage {
 
     if(Role == "admin"){
       var root = firebase.database().ref('admin/'+Username);
-      this.authenticate(root,Password,AdminHomePage,Username,loader);
+      this.authenticate(root,Password,AdminHomePage,Username,loader,Startyear,Endyear);
     } else if(Role == "teacher"){
       var root = firebase.database().ref('teacher/'+Username);
-      this.authenticate(root,Password,TeacherHomePage,Username,loader);
+      this.authenticate(root,Password,TeacherHomePage,Username,loader,Startyear,Endyear);
     } else if(Role == "student"){
       var root = firebase.database().ref('student/'+Username);
-      this.authenticate(root,Password,StudentHomePage,Username,loader);
+      this.authenticate(root,Password,StudentHomePage,Username,loader,Startyear,Endyear);
     } else if(Role == "guardian"){
       var root = firebase.database().ref('guardian/'+Username);
-      this.authenticate(root,Password,GuardianHomePage,Username,loader);
+      this.authenticate(root,Password,GuardianHomePage,Username,loader,Startyear,Endyear);
     }
    }
 

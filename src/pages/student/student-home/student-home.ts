@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import * as firebase from 'firebase';
+import { StudentDashboardPage } from '../student-dashboard/student-dashboard';
+import { StudentProfilePage } from '../student-profile/student-profile';
 /*
   Generated class for the StudentHome page.
 
@@ -13,7 +15,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class StudentHomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  tab1Root: any;
+  tab2Root: any;
+
+  Username:'';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	this.Username =  this.navParams.data;
+	this.tab1Root = StudentDashboardPage;
+	this.tab2Root = StudentProfilePage;
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StudentHomePage');

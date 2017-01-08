@@ -1,0 +1,32 @@
+<!--
+  Generated template for the StudentClass page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>My Subjects</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <input type="hidden" [(ngModel)]="Username" />
+  <input type="hidden" [(ngModel)]="ClassId" />
+  <input type="hidden" [(ngModel)]="Startyear" />
+  <input type="hidden" [(ngModel)]="Endyear" />
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let subject of subjecttList | async">
+      <ion-item>
+        <h1>{{subject.SubjectCode}}</h1>
+        <h3>{{subject.Name}}</h3>
+        <h3>- {{subject.Description}}</h3>
+        <button ion-button color="secondary" item-right><ion-icon ios="ios-school" md="md-school"></ion-icon></button>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
