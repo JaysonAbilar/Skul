@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import * as firebase from 'firebase';
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import { GuardianSubjectInfoPage } from '../guardian-subject-info/guardian-subject-info';
+import { GuardianSendMessgePage } from '../guardian-send-messge/guardian-send-messge';
 /*
   Generated class for the GuardianChildProfile page.
 
@@ -18,6 +19,7 @@ export class GuardianChildProfilePage {
 
 	public ChildKey: '';
 	public ClassId: '';
+	public GuardianUsername: '';
 	public SchoolYearAndSection: '';
 	studentOjbect: FirebaseObjectObservable<any>;
 	subjectList: FirebaseListObservable<any>;
@@ -34,6 +36,8 @@ export class GuardianChildProfilePage {
 
   	constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
   		this.ChildKey = this.navParams.get('ChildKey');
+  		this.GuardianUsername = this.navParams.get('GuardianUserName');
+  		console.log(this.GuardianUsername);
 
      //  	var root = firebase.database().ref('academic-year/2016-2017/student-class/'+this.ChildKey);
      //  	root.on('value', function(snap){
@@ -64,6 +68,15 @@ export class GuardianChildProfilePage {
   		this.navCtrl.push(GuardianSubjectInfoPage, {
 	      SubjectCode: SubjectCode,
 	      SchoolYearAndSection: SchoolYearAndSection,
+	    });
+  	}
+
+  	goToMessagePage(teacherCode){
+  		this.navCtrl.push(GuardianSendMessgePage, {
+	      teacherCode: teacherCode,
+	      GuardianUsername: this.GuardianUsername,
+	      ChildFirstname: this.child.Firstname,
+	      ChildLastname: this.child.Lastname
 	    });
   	}
 

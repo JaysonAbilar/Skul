@@ -32,7 +32,8 @@ export class GuardianDashboardPage {
 
   childProfile(ChildKey){
     this.navCtrl.push(GuardianChildProfilePage, {
-      ChildKey: ChildKey
+      ChildKey: ChildKey,
+      GuardianUserName: this.Username 
     });
   }
 }

@@ -7,13 +7,33 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>guardian-subject-info</ion-title>
+    <ion-title>Child Assignments</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<h1>{{SchoolYearAndSection}}</h1>
-<h1>{{SubjectCode}}</h1>
+  <ion-searchbar>
+  </ion-searchbar>
+	<ion-card *ngFor="let assignment of homeWorkList | async" [ngClass]="{active: assignment.DueDate > todayString, inactive: assignment.DueDate < todayString}">
+		<ion-card-header >
+			{{assignment.Title}}
+		</ion-card-header>
+		<ion-card-content>
+			<p>Description: {{assignment.Description}}</p>
+			<p>Due Date: {{assignment.DueDate | date: 'MMM dd, y'}}</p>
+			<p>Due Time: {{assignment.DueTime}}</p>
+		</ion-card-content>
+	</ion-card>
+	<ion-card *ngFor="let project of projectList | async" [ngClass]="{activeProject: project.DueDate > todayString, inactive: project.DueDate < todayString}">
+		<ion-card-header >
+			{{project.Title}}
+		</ion-card-header>
+		<ion-card-content>
+			<p>Description: {{project.Description}}</p>
+			<p>Due Date: {{project.DueDate | date: 'MMM dd, y'}}</p>
+			<p>Due Time: {{project.DueTime}}</p>
+		</ion-card-content>
+	</ion-card>
 </ion-content>

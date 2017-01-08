@@ -19,10 +19,34 @@ export class GuardianSubjectInfoPage {
 
 	public SubjectCode: '';
 	public SchoolYearAndSection: '';
+	public DateToday: '';
+	public todayString: any;	
+	homeWorkList: FirebaseListObservable<any>;
+	projectList: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
-  	this.SubjectCode = this.navParams.get('SubjectCode');
+  	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var ddString = dd.toString();
+	var mmString = mm.toString();;
+	var yyyyString = yyyy.toString();;
+	
+
+	var yyyy = today.getFullYear();
+	if(dd<10){
+	    ddString='0'+dd;
+	} 
+	if(mm<10){
+	    mmString='0'+mm;
+	} 
+	this.todayString = yyyyString+'-'+mmString+'-'+ddString;
+	console.log(this.todayString);
+	this.SubjectCode = this.navParams.get('SubjectCode');
   	this.SchoolYearAndSection = this.navParams.get('SchoolYearAndSection');
+  	this.homeWorkList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + "/" + this.SubjectCode +'/subject-homeworks');
+  	this.projectList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + "/" + this.SubjectCode +'/subject-projects');
   }
 
   ionViewDidLoad() {

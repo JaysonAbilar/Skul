@@ -22,11 +22,20 @@
 			<h2 class="profile-name dark">{{child.Firstname}} {{child.Lastname}}</h2>
 			<div class="profile-info">{{child.Email}}</div>
 		</ion-item>
-		<h5>Subjects</h5>
-		<div *ngFor="let subject of subjectList | async">
-			<ion-item class="profile-item" (click)="goToSubjectInfoPage(subject.SubjectCode,SchoolYearAndSection)">
-				{{subject.Name}}
-			</ion-item>
-		</div>
 	</div>
+	<ion-list>
+    <ion-list-header>Class Subjects</ion-list-header>
+		<ion-item-sliding *ngFor="let subject of subjectList | async">
+			<ion-item (click)="goToSubjectInfoPage(subject.SubjectCode,SchoolYearAndSection)">
+			<ion-icon ios="ios-book" md="md-book" item-left></ion-icon>
+        	<h2>{{subject.Name}}</h2>
+			</ion-item>
+			<ion-item-options>
+				<button ion-button color="primary" (click)="goToMessagePage(subject.Teacher)" icon-left> 
+				<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+				Message Teacher
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
 </ion-content>
