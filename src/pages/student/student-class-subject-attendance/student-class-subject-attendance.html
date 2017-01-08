@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>student-class-subject-attendance</ion-title>
+    <ion-title>Dates that I am present</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <input type="hidden" [(ngModel)]="Username" />
+  <input type="hidden" [(ngModel)]="ClassId" />
+  <input type="hidden" [(ngModel)]="Startyear" />
+  <input type="hidden" [(ngModel)]="Endyear" />
+  <input type="hidden" [(ngModel)]="SubjectCode" />
+  <ion-list>
+	<ion-list-header>Dates</ion-list-header>
+    <div *ngFor="let attendanceDate of attendanceDateList | async">
+      <ion-item>
+        <h1>{{attendanceDate.$key | date: 'MMM dd, y'}}</h1>
+      </ion-item>
+    
+    </div>
+  </ion-list>
 
 </ion-content>
