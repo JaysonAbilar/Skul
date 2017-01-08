@@ -14,7 +14,7 @@ import { GuardianProfilePage } from '../guardian-profile/guardian-profile';
   templateUrl: 'guardian-home.html'
 })
 export class GuardianHomePage {
-	tab1Root: any;
+	  tab1Root: any;
   	tab2Root: any;
 
   	Username:'';

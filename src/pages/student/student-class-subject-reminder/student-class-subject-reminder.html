@@ -1,0 +1,98 @@
+<!--
+  Generated template for the StudentClassSubjectReminder page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Subject Reminders</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <input type="hidden" [(ngModel)]="Username" />
+  <input type="hidden" [(ngModel)]="ClassId" />
+  <input type="hidden" [(ngModel)]="Startyear" />
+  <input type="hidden" [(ngModel)]="Endyear" />
+  <input type="hidden" [(ngModel)]="SubjectCode" />
+
+  <div padding>
+  <ion-segment [(ngModel)]="types">
+    <ion-segment-button value="Homeworks">
+      Homeworks
+    </ion-segment-button>
+    <ion-segment-button value="Projects">
+      Projects
+    </ion-segment-button>
+    <ion-segment-button value="Meetings">
+      Meetings
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="types">
+  <ion-list *ngSwitchCase="'Homeworks'">
+    <ion-item-sliding *ngFor="let homework of homeworkList | async">
+      <ion-item>
+        <h2>{{homework.HomeworkCode}}</h2>
+        <h3>Title: {{homework.Title}}</h3>
+        <h3>Desc: {{homework.Description}}</h3>
+        <h3>Added: {{homework.DateAdded | date: 'MMM dd, y'}}</h3>
+        <h3>Deadline: {{homework.DueDate + ' ' + homework.DueTime | date: 'MMM dd, y h:mm a'}}</h3>
+      </ion-item>  
+      <ion-item-options>
+        <button ion-button color="danger" icon-left (click)="deleteHomework(homework)">
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+ <ion-list *ngSwitchCase="'Projects'">
+    <ion-item-sliding *ngFor="let project of projectList | async">
+      <ion-item>
+        <h2>{{project.projectCode}}</h2>
+        <h3>Title: {{project.Title}}</h3>
+        <h3>Desc: {{project.Description}}</h3>
+        <h3>Added: {{project.DateAdded | date: 'MMM dd, y'}}</h3>
+        <h3>Deadline: {{project.DueDate + ' ' + project.DueTime | date: 'MMM dd, y h:mm a'}}</h3>
+
+      </ion-item>
+        
+      <ion-item-options>
+        <button ion-button color="danger" icon-left (click)="deleteProject(project)">
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Meetings'">
+    <ion-item-sliding *ngFor="let meeting of meetingList | async">
+      <ion-item>
+        <h2>{{meeting.meetingkCode}}</h2>
+        <h3>Title: {{meeting.Title}}</h3>
+        <h3>Desc: {{meeting.Description}}</h3>
+        <h3>Added: {{meeting.DateAdded | date: 'MMM dd, y'}}</h3>
+        <h3>Meeting Date</h3>
+        <h3>Start : {{meeting.StartDate + ' ' + meeting.StartTime | date: 'MMM dd, y h:mm a'}}</h3>
+        <h3>End: {{meeting.EndDate + ' ' + meeting.EndTime | date: 'MMM dd, y h:mm a'}}</h3>
+
+      </ion-item>
+        
+      <ion-item-options>
+        <button ion-button color="danger" icon-left (click)="deleteMeeting(meeting)">
+          <ion-icon name="ios-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</div>
+</ion-content>

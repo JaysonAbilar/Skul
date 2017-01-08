@@ -8,7 +8,6 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AdminHomePage } from '../pages/admin/admin-home/admin-home';
-import { StudentHomePage } from '../pages/student/student-home/student-home';
 import { AdminTeacherListPage } from '../pages/admin/admin-teacher-list/admin-teacher-list';
 import { AdminTeacherAddPage } from '../pages/admin/admin-teacher-add/admin-teacher-add';
 import { AdminTeacherUpdatePage } from '../pages/admin/admin-teacher-update/admin-teacher-update';
@@ -58,6 +57,14 @@ import { GuardianChildProfilePage } from '../pages/guardian/guardian-child-profi
 import { GuardianSubjectInfoPage } from '../pages/guardian/guardian-subject-info/guardian-subject-info';
 import { GuardianSendMessgePage } from '../pages/guardian/guardian-send-messge/guardian-send-messge';
 
+import { StudentHomePage } from '../pages/student/student-home/student-home';
+import { StudentDashboardPage } from '../pages/student/student-dashboard/student-dashboard';
+import { StudentProfilePage } from '../pages/student/student-profile/student-profile';
+import { StudentClassPage } from '../pages/student/student-class/student-class';
+import { StudentClassSubjectPage } from '../pages/student/student-class-subject/student-class-subject';
+import { StudentClassSubjectAttendancePage } from '../pages/student/student-class-subject-attendance/student-class-subject-attendance';
+import { StudentClassSubjectReminderPage } from '../pages/student/student-class-subject-reminder/student-class-subject-reminder';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -67,7 +74,6 @@ import { GuardianSendMessgePage } from '../pages/guardian/guardian-send-messge/g
     HomePage,
     TabsPage,
     AdminHomePage,
-    StudentHomePage,
     AdminTeacherListPage,
     AdminTeacherAddPage,
     AdminTeacherUpdatePage,
@@ -110,7 +116,14 @@ import { GuardianSendMessgePage } from '../pages/guardian/guardian-send-messge/g
     GuardianProfilePage,
     GuardianChildProfilePage,
     GuardianSubjectInfoPage,
-    GuardianSendMessgePage
+    GuardianSendMessgePage,
+    StudentHomePage,
+    StudentDashboardPage,
+    StudentProfilePage,
+    StudentClassPage,
+    StudentClassSubjectPage,
+    StudentClassSubjectAttendancePage,
+    StudentClassSubjectReminderPage
 
   ],
   imports: [
@@ -125,7 +138,6 @@ import { GuardianSendMessgePage } from '../pages/guardian/guardian-send-messge/g
     HomePage,
     TabsPage,
     AdminHomePage,
-    StudentHomePage,
     AdminTeacherListPage,
     AdminTeacherAddPage,
     AdminTeacherUpdatePage,
@@ -169,6 +181,13 @@ import { GuardianSendMessgePage } from '../pages/guardian/guardian-send-messge/g
     GuardianChildProfilePage,
     GuardianSubjectInfoPage,
     GuardianSendMessgePage
+    StudentHomePage,
+    StudentDashboardPage,
+    StudentProfilePage,
+    StudentClassPage,
+    StudentClassSubjectPage,
+    StudentClassSubjectAttendancePage,
+    StudentClassSubjectReminderPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     FIREBASE_PROVIDERS,
