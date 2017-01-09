@@ -23,8 +23,12 @@ export class GuardianSubjectInfoPage {
 	public todayString: any;	
 	homeWorkList: FirebaseListObservable<any>;
 	projectList: FirebaseListObservable<any>;
+	attendanceDateList: FirebaseListObservable<any>;
+	public types: any;
+	public ChildKey: '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+  	this.types = 'Reminders';
   	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
@@ -42,11 +46,12 @@ export class GuardianSubjectInfoPage {
 	    mmString='0'+mm;
 	} 
 	this.todayString = yyyyString+'-'+mmString+'-'+ddString;
-	console.log(this.todayString);
 	this.SubjectCode = this.navParams.get('SubjectCode');
+	this.ChildKey = this.navParams.get('ChildKey');
   	this.SchoolYearAndSection = this.navParams.get('SchoolYearAndSection');
   	this.homeWorkList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + "/" + this.SubjectCode +'/subject-homeworks');
   	this.projectList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + "/" + this.SubjectCode +'/subject-projects');
+  	this.attendanceDateList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + '/' + this.SubjectCode + '/student-attendance/' + this.ChildKey);
   }
 
   ionViewDidLoad() {

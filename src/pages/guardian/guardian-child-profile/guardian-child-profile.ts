@@ -49,7 +49,6 @@ export class GuardianChildProfilePage {
             snapshots.forEach(snapshot => {
               this.subjectList = af.database.list('/academic-year/2016-2017/class-subject/'+ snapshot.val() + '/'); 
               this.SchoolYearAndSection = snapshot.val();
-              console.log(this.SchoolYearAndSection);
             });
         })
       	this.childObject = this.af.database.object('/student/' + this.ChildKey);
@@ -68,6 +67,7 @@ export class GuardianChildProfilePage {
   		this.navCtrl.push(GuardianSubjectInfoPage, {
 	      SubjectCode: SubjectCode,
 	      SchoolYearAndSection: SchoolYearAndSection,
+	      ChildKey: this.ChildKey
 	    });
   	}
 

@@ -14,26 +14,53 @@
 
 
 <ion-content padding>
-  <ion-searchbar>
-  </ion-searchbar>
-	<ion-card *ngFor="let assignment of homeWorkList | async" [ngClass]="{active: assignment.DueDate > todayString, inactive: assignment.DueDate < todayString}">
-		<ion-card-header >
-			{{assignment.Title}}
-		</ion-card-header>
-		<ion-card-content>
-			<p>Description: {{assignment.Description}}</p>
-			<p>Due Date: {{assignment.DueDate | date: 'MMM dd, y'}}</p>
-			<p>Due Time: {{assignment.DueTime}}</p>
-		</ion-card-content>
-	</ion-card>
-	<ion-card *ngFor="let project of projectList | async" [ngClass]="{activeProject: project.DueDate > todayString, inactive: project.DueDate < todayString}">
-		<ion-card-header >
-			{{project.Title}}
-		</ion-card-header>
-		<ion-card-content>
-			<p>Description: {{project.Description}}</p>
-			<p>Due Date: {{project.DueDate | date: 'MMM dd, y'}}</p>
-			<p>Due Time: {{project.DueTime}}</p>
-		</ion-card-content>
-	</ion-card>
+	<div padding>
+		<ion-segment [(ngModel)]="types">
+			<ion-segment-button value="Reminders">
+				Reminders
+			</ion-segment-button>
+			<ion-segment-button value="Attendance">
+				Attendance
+			</ion-segment-button>
+		</ion-segment>
+	</div>
+
+	<div [ngSwitch]="types">
+		<ion-list *ngSwitchCase="'Reminders'">
+			<ion-card *ngFor="let assignment of homeWorkList | async" [ngClass]="{active: assignment.DueDate > todayString, inactive: assignment.DueDate < todayString}">
+			<ion-card-header >
+				{{assignment.Title}}
+			</ion-card-header>
+			<ion-card-content>
+				<p>Description: {{assignment.Description}}</p>
+				<p>Due Date: {{assignment.DueDate | date: 'MMM dd, y'}}</p>
+				<p>Due Time: {{assignment.DueTime}}</p>
+			</ion-card-content>
+		</ion-card>
+			<ion-card *ngFor="let project of projectList | async" [ngClass]="{activeProject: project.DueDate > todayString, inactive: project.DueDate < todayString}">
+				<ion-card-header >
+					{{project.Title}}
+				</ion-card-header>
+				<ion-card-content>
+					<p>Description: {{project.Description}}</p>
+					<p>Due Date: {{project.DueDate | date: 'MMM dd, y'}}</p>
+					<p>Due Time: {{project.DueTime}}</p>
+				</ion-card-content>
+			</ion-card>
+		</ion-list>
+		<ion-list *ngSwitchCase='Attendance'>
+			<ion-card *ngFor="let attendance of attendanceDateList | async">
+				<ion-card-header>
+					{{attendance.$key | date: 'MMM dd, y'}}
+				</ion-card-header>
+				<ion-card-content>
+					Nothing here
+				</ion-card-content>
+			</ion-card>
+		</ion-list>
+	</div>
+
+
+
+	
 </ion-content>
