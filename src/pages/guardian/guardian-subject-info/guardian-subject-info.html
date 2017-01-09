@@ -48,19 +48,12 @@
 				</ion-card-content>
 			</ion-card>
 		</ion-list>
-		<ion-list *ngSwitchCase='Attendance'>
-			<ion-card *ngFor="let attendance of attendanceDateList | async">
-				<ion-card-header>
-					{{attendance.$key | date: 'MMM dd, y'}}
-				</ion-card-header>
-				<ion-card-content>
-					Nothing here
-				</ion-card-content>
-			</ion-card>
+		<ion-list *ngSwitchCase="'Attendance'">
+			<ion-card *ngFor="let attendanceDate of attendanceDateList | async">
+		      <ion-card-header >
+		        Present: {{attendanceDate.$key | date: 'MMM dd, y'}}
+		      </ion-card-header >
+		    </ion-card>
 		</ion-list>
-	</div>
-
-
-
-	
+	</div>	
 </ion-content>

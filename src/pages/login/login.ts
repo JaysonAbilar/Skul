@@ -26,7 +26,7 @@ export class LoginPage {
   studentObject: FirebaseObjectObservable<any>;
 
   login = {
-  	Username: 'guardian_Carlo',
+  	Username: 'teacher_kevin',
 	  Password: '123456',
     Role: 'Guardian'
   };

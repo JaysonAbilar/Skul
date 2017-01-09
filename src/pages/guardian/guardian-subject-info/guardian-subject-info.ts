@@ -52,6 +52,10 @@ export class GuardianSubjectInfoPage {
   	this.homeWorkList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + "/" + this.SubjectCode +'/subject-homeworks');
   	this.projectList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + "/" + this.SubjectCode +'/subject-projects');
   	this.attendanceDateList = this.af.database.list('/academic-year/2016-2017/class-subject/' + this.SchoolYearAndSection + '/' + this.SubjectCode + '/student-attendance/' + this.ChildKey);
+  	console.log(this.SchoolYearAndSection);
+  	console.log(this.SubjectCode);
+  	console.log(this.ChildKey);
+  	console.log(this.attendanceDateList);
   }
 
   ionViewDidLoad() {

@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>guardian-profile</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+	<div class="list card">
+		<ion-item class="profile-item">
+			<div class="profile-picture big-profile-picture">
+			<img src="assets/images/guardianicon.png">
+			</div>
+			<h2 class="profile-name dark">{{guardian.Firstname}} {{guardian.Lastname}}</h2>
+			<div class="profile-info">{{guardian.Email}}</div>
+		</ion-item>
+		<ion-item class="profile-item">
+			{{guardian.Contactnumber}}
+		</ion-item>
+		<ion-item class="profile-item">
+			{{guardian.Gender}}
+		</ion-item>
+		<ion-item class="profile-item">
+			{{guardian.Age}}
+		</ion-item>
+	</div>
 </ion-content>

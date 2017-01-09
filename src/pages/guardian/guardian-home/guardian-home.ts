@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { GuardianDashboardPage } from '../guardian-dashboard/guardian-dashboard';
 import { GuardianProfilePage } from '../guardian-profile/guardian-profile';
+import { GuardianInboxPage } from '../guardian-inbox/guardian-inbox';
 
 /*
   Generated class for the GuardianHome page.
@@ -16,6 +17,7 @@ import { GuardianProfilePage } from '../guardian-profile/guardian-profile';
 export class GuardianHomePage {
 	  tab1Root: any;
   	tab2Root: any;
+    tab3Root: any;
 
   	Username:'';
 
@@ -23,6 +25,7 @@ export class GuardianHomePage {
 	    this.Username =  this.navParams.data;
 	    this.tab1Root = GuardianDashboardPage;
 	    this.tab2Root = GuardianProfilePage;
+      this.tab3Root = GuardianInboxPage;
 	}
 
   	ionViewDidLoad() {

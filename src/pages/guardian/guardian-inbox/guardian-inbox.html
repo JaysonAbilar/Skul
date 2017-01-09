@@ -1,5 +1,5 @@
 <!--
-  Generated template for the TeacherInbox page.
+  Generated template for the GuardianInbox page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -17,7 +17,7 @@
 	<ion-list>
 		<ion-card *ngFor="let message of messageList | async">
 	      <ion-card-header >
-	       <p>From: <b>Guardian of {{message.childFirstname}} {{message.childLastname}}</b></p>
+	       <p>From: <b>Teacher of {{message.StudentFirstname}} {{message.StudentLastname}}</b></p>
 	       <p>Subject: {{message.subject}}</p>
 	       <p>{{message.timestamp}}</p>
 	      </ion-card-header >

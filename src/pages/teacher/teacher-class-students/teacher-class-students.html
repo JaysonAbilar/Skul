@@ -25,7 +25,7 @@
         <h1>{{student.Lastname}}, {{student.Firstname}} {{student.Middlename}}</h1>
         <h3>Gender: {{student.Gender}}</h3>
         <h3>Contact #: {{student.Contactnumber}}</h3>
-        <button ion-button item-right (click)="viewStudentProfile(student.$key)"><ion-icon name="arrow-dropright-circle"></ion-icon></button>
+        <button ion-button item-right (click)="createMessage(student.$key,student.Firstname,student.Lastname)"><ion-icon name="arrow-dropright-circle"></ion-icon></button>
       </ion-item>
     </div>
   </ion-list>
