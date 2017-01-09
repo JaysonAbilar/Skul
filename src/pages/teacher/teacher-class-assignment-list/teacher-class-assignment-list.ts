@@ -55,19 +55,6 @@ export class TeacherClassAssignmentListPage {
     DateAdded: ''
   }
 
-  meeting = {
-    meetingCode: '',
-    Type:'',
-    Title: '',
-    Description: '',
-    StartDate:'',
-    StartTime:'',
-    EndDate:'',
-    EndTime:'',
-    DateAdded: ''
-  }
-
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
   	 this.Username = this.navParams.get('Username');
@@ -98,7 +85,6 @@ export class TeacherClassAssignmentListPage {
   	 this.SubjectCode = SubjectCode
   	 this.homeworkList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-homeworks/');
      this.projectList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-projects/');
-     this.meetingList = this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + '/' + this.SubjectCode + '/subject-meetings/');
   }
 
   deleteHomework(homework) {

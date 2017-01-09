@@ -180,7 +180,7 @@ import { StudentClassSubjectReminderPage } from '../pages/student/student-class-
     GuardianProfilePage,
     GuardianChildProfilePage,
     GuardianSubjectInfoPage,
-    GuardianSendMessgePage
+    GuardianSendMessgePage,
     StudentHomePage,
     StudentDashboardPage,
     StudentProfilePage,

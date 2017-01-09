@@ -5,7 +5,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import { LoginPage } from '../../login/login';
 import { StudentClassSubjectPage } from '../student-class-subject/student-class-subject';
-
+import { LocalNotifications } from 'ionic-native';
 /*
   Generated class for the StudentDashboard page.
 
@@ -50,9 +50,13 @@ export class StudentDashboardPage {
   
   initializeStudentClassObject(syr,eyr)
   {
-    
-
-    console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/student-class/' + this.Username)
+     
+      LocalNotifications.schedule({
+            title: "Test Title",
+            text: "Delayed Notification",
+            at: new Date(new Date().getTime() + 5 * 1000),
+            sound: 'file://assets/sounds/notif.mp3'
+        });
   }
   
   goToSelectedClass(Username,ClassId)

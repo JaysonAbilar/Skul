@@ -25,7 +25,6 @@ export class TeacherClassAssignmentAddPage {
 
   homeworkList: FirebaseListObservable<any>;
   projectList: FirebaseListObservable<any>;
-  meetingList: FirebaseListObservable<any>;
   studentList: FirebaseListObservable<any>;
   guardianObject: FirebaseObjectObservable<any>;
 
@@ -40,19 +39,15 @@ export class TeacherClassAssignmentAddPage {
     Email: '',
     Contactnumber: ''
   };
-
+  
   reminder= {
-  	reminderCode: '',
+    reminderCode: '',
     Type:'',
-  	Title: '',
-  	Description: '',
-    StartDate:'',
-    StartTime:'',
-    EndDate:'',
-    EndTime:'',
-  	DueDate: '',
-  	DueTime: '',
-  	DateAdded: ''
+    Title: '',
+    Description: '',
+    DueDate: '',
+    DueTime: '',
+    DateAdded: ''
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
@@ -82,8 +77,7 @@ export class TeacherClassAssignmentAddPage {
         })
   }
 
-  addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, Type, Title, Description, DueDate, DueTime, 
-                StartDate, StartTime, EndDate, EndTime)
+  addHomework(Username, ClassId, Startyear, Endyear, SubjectCode, Type, Title, Description, DueDate, DueTime)
   {
   	 var day = this.currentDate.getDate();
   	 var month = this.currentDate.getMonth() + 1;
@@ -135,11 +129,19 @@ export class TeacherClassAssignmentAddPage {
         DueDate: DueDate,
         DueTime: DueTime,
         DateAdded: year+'-'+month+'-'+day
-    	 }).then( newClassAssignment => {
-  	      this.navCtrl.pop();
-  	    }, error => {
-  	      console.log(error);
-  	    });
+    	 });
+
+       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-reminder/' + this.ClassId + '/hw_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
+        Type: 'Homework',
+        Title: Title,
+        Description: Description,
+        DueDate: DueDate,
+        DueTime: DueTime,
+        DateAdded: year+'-'+month+'-'+day
+       });
+
+
+       this.navCtrl.pop();
     }
     else if(Type=='Project')
     {
@@ -181,69 +183,22 @@ export class TeacherClassAssignmentAddPage {
         DueDate: DueDate,
         DueTime: DueTime,
         DateAdded: year+'-'+month+'-'+day
-       }).then( newClassAssignment => {
-          this.navCtrl.pop();
-        }, error => {
-          console.log(error);
-        });
-    }
-    else if(Type=='Meeting')
-    {
-       
-       message = "Class Reminder: " + Type +
-                   "\nSubject: " + SubjectCode +
-                   "\nTitle: " + Title +
-                   "\nDescription: " + Description +
-                   "\nStartDate: " + StartDate +
-                   "\nStartTime: " + StartTime + 
-                   "\nEndDate: " + EndDate +
-                   "\nEndTime: " + EndTime;
+       });
 
-       this.af.database.list('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-student/' + this.ClassId, { preserveSnapshot: true})
-        .subscribe(snapshots=>{
-            snapshots.forEach(snapshot => {
-              this.guardianObject = this.af.database.object('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + 
-                                '/class-student/' + this.ClassId  + '/' + snapshot.key + '/Guardian'); 
-              this.guardianObject.subscribe(snapshot2 => this.guardian.Contactnumber = snapshot2.Contactnumber);   
 
-              if(tempNumber != this.guardian.Contactnumber)
-              {
-                tempNumber = this.guardian.Contactnumber;
-                console.log(this.guardian.Contactnumber);
-                console.log(message);
-
-                 var options={
-                      replaceLineBreaks: true, 
-                      android: {
-                           intent: ''
-                        }
-                  }
-
-                SMS.send(this.guardian.Contactnumber, message ,options)
-                  .then(()=>{
-                    alert("success");
-                  },()=>{
-                  alert("failed");
-                  });
-              }
-            //  console.log(snapshot.key, snapshot.val());
-            });
-        })
-
-       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-subject/' + this.ClassId + "/" + this.SubjectCode + '/subject-meetings/meet_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
+       firebase.database().ref('/academic-year/'+ this.Startyear  + '-' + this.Endyear  + '/class-reminder/' + this.ClassId + '/proj_' + Title + '_' +  year+'-'+month+'-'+day).set({ 
+        Type: 'Project',
         Title: Title,
         Description: Description,
-        StartDate: StartDate,
-        StartTime: StartTime,
-        EndDate: EndDate,
-        EndTime: EndTime,
+        DueDate: DueDate,
+        DueTime: DueTime,
         DateAdded: year+'-'+month+'-'+day
-       }).then( newClassAssignment => {
-          this.navCtrl.pop();
-        }, error => {
-          console.log(error);
-        });
+       });
+
+
+       this.navCtrl.pop();
     }
+    
   }
 
   ionViewDidLoad() {
