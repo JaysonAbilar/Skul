@@ -20,7 +20,6 @@
 
 
 <ion-content padding>
-{{studentClass.classId }}
   <input type="hidden" [(ngModel)]="Username" />
   <ion-card text-center (click)="initializeStudentClassObject(classs.StartYear,classs.EndYear)">
     <ion-card-header>
@@ -30,7 +29,7 @@
        <h1>S.Y. {{classs.StartYear}}-{{classs.EndYear}}</h1>
     </ion-card-content>
   </ion-card>
-
+  
   <ion-list>
     <ion-list-header>Class</ion-list-header>
       <ion-item>

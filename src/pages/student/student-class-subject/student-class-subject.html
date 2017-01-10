@@ -20,14 +20,15 @@
   <input type="hidden" [(ngModel)]="Endyear" />
 
   <ion-list>
-    <ion-item-sliding *ngFor="let subject of subjecttList | async">
-      <ion-item>
-        <h1>{{subject.SubjectCode}}</h1>
-        <h3>{{subject.Name}}</h3>
-        <h3>- {{subject.Description}}</h3>
-        <button ion-button color="secondary" item-right (click)="viewReminders(Username,ClassId,Startyear,Endyear,subject.SubjectCode)"><ion-icon ios="ios-school" md="md-school"></ion-icon></button>
-        <button ion-button item-right (click)="viewAttendance(Username,ClassId,Startyear,Endyear,subject.SubjectCode)"><ion-icon name="clock"></ion-icon></button>
-      </ion-item>
-    </ion-item-sliding>
+    <ion-list-header>List of your subjects</ion-list-header>
+    <ion-card *ngFor="let subject of subjecttList | async" (click)="viewReminders(Username,ClassId,Startyear,Endyear,subject.SubjectCode)">
+      <ion-card-header >
+          <ion-icon ios="ios-book" md="md-book" item-left></ion-icon>
+          {{subject.Name}}
+        </ion-card-header>
+        <ion-card-content>
+          {{subject.Description}}
+        </ion-card-content>
+    </ion-card>
   </ion-list>
 </ion-content>

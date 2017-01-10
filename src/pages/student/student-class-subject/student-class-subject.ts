@@ -62,9 +62,7 @@ export class StudentClassSubjectPage {
          Subjectcode:Subjectcode
   	});
   }
-
-
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad StudentClassSubjectPage');
   }

@@ -14,40 +14,22 @@
 
 
 <ion-content padding>
-  <ion-card>
-
-    <img src="assets/images/teachericon.png" widht=50px height=200px>
-
-    <ion-card-content>
-      <ion-card-title>
-        <ion-icon name="information-circle" style="color: #55acee">  {{student.Username}}</ion-icon>
-      </ion-card-title>
-    </ion-card-content>
-
-    <ion-item>
-      <ion-icon name="information-circle" style="color: #55acee"></ion-icon>
-      Name :
-      <ion-badge item-right>{{student.Lastname}}, {{student.Firstname}} {{student.Middlename}}</ion-badge>
+  <div class="list card">
+    <ion-item class="profile-item">
+      <div class="profile-picture big-profile-picture">
+      <img src="assets/images/avatarStudent.png">
+      </div>
+      <h2 class="profile-name dark">{{student.Firstname}} {{student.Lastname}}</h2>
+      <div class="profile-info">{{student.Email}}</div>
     </ion-item>
-    <ion-item>
-      <ion-icon name="information-circle" style="color: #55acee"></ion-icon>
-      Age :
-      <ion-badge item-right>{{student.Age}}</ion-badge>
+    <ion-item class="profile-item">
+      {{student.Contactnumber}}
     </ion-item>
-    <ion-item>
-      <ion-icon name="information-circle" style="color: #55acee"></ion-icon>
-      Gender :
-      <ion-badge item-right>{{student.Gender}}</ion-badge>
+    <ion-item class="profile-item">
+      {{student.Gender}}
     </ion-item>
-    <ion-item>
-      <ion-icon name="information-circle" style="color: #55acee"></ion-icon>
-      Email :
-      <ion-badge item-right>{{student.Email}}</ion-badge>
+    <ion-item class="profile-item">
+      {{student.Age}}
     </ion-item>
-    <ion-item>
-      <ion-icon name="information-circle" style="color: #55acee"></ion-icon>
-      Contact # :
-      <ion-badge item-right>{{student.Contactnumber}}</ion-badge>
-    </ion-item>
-  </ion-card>
+  </div>
 </ion-content>

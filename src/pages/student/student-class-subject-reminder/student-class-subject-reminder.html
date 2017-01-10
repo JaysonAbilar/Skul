@@ -23,76 +23,45 @@
   <div padding>
   <ion-segment [(ngModel)]="types">
     <ion-segment-button value="Homeworks">
-      Homeworks
+      Reminders
     </ion-segment-button>
-    <ion-segment-button value="Projects">
-      Projects
-    </ion-segment-button>
-    <ion-segment-button value="Meetings">
-      Meetings
+    <ion-segment-button value="Attendance">
+      Attendance
     </ion-segment-button>
   </ion-segment>
 </div>
 
 <div [ngSwitch]="types">
   <ion-list *ngSwitchCase="'Homeworks'">
-    <ion-item-sliding *ngFor="let homework of homeworkList | async">
-      <ion-item>
-        <h2>{{homework.HomeworkCode}}</h2>
-        <h3>Title: {{homework.Title}}</h3>
-        <h3>Desc: {{homework.Description}}</h3>
-        <h3>Added: {{homework.DateAdded | date: 'MMM dd, y'}}</h3>
-        <h3>Deadline: {{homework.DueDate + ' ' + homework.DueTime | date: 'MMM dd, y h:mm a'}}</h3>
-      </ion-item>  
-      <ion-item-options>
-        <button ion-button color="danger" icon-left (click)="deleteHomework(homework)">
-          <ion-icon name="ios-trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-card *ngFor="let assignment of homeworkList | async" [ngClass]="{active: assignment.DueDate > todayString, inactive: assignment.DueDate < todayString}">
+        <ion-card-header >
+          {{assignment.Title}}
+        </ion-card-header>
+        <ion-card-content>
+          <p>Description: {{assignment.Description}}</p>
+          <p>Due Date: {{assignment.DueDate | date: 'MMM dd, y'}}</p>
+          <p>Due Time: {{assignment.DueTime}}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngFor="let project of projectList | async" [ngClass]="{activeProject: project.DueDate > todayString, inactive: project.DueDate < todayString}">
+        <ion-card-header >
+          {{project.Title}}
+        </ion-card-header>
+        <ion-card-content>
+          <p>Description: {{project.Description}}</p>
+          <p>Due Date: {{project.DueDate | date: 'MMM dd, y'}}</p>
+          <p>Due Time: {{project.DueTime}}</p>
+        </ion-card-content>
+      </ion-card>
   </ion-list>
 
- <ion-list *ngSwitchCase="'Projects'">
-    <ion-item-sliding *ngFor="let project of projectList | async">
-      <ion-item>
-        <h2>{{project.projectCode}}</h2>
-        <h3>Title: {{project.Title}}</h3>
-        <h3>Desc: {{project.Description}}</h3>
-        <h3>Added: {{project.DateAdded | date: 'MMM dd, y'}}</h3>
-        <h3>Deadline: {{project.DueDate + ' ' + project.DueTime | date: 'MMM dd, y h:mm a'}}</h3>
-
-      </ion-item>
-        
-      <ion-item-options>
-        <button ion-button color="danger" icon-left (click)="deleteProject(project)">
-          <ion-icon name="ios-trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+ <ion-list *ngSwitchCase="'Attendance'">
+    <ion-card *ngFor="let attendanceDate of attendanceDateList | async">
+        <ion-card-header >
+          Present: {{attendanceDate.$key | date: 'MMM dd, y'}}
+        </ion-card-header >
+      </ion-card>
   </ion-list>
 
-  <ion-list *ngSwitchCase="'Meetings'">
-    <ion-item-sliding *ngFor="let meeting of meetingList | async">
-      <ion-item>
-        <h2>{{meeting.meetingkCode}}</h2>
-        <h3>Title: {{meeting.Title}}</h3>
-        <h3>Desc: {{meeting.Description}}</h3>
-        <h3>Added: {{meeting.DateAdded | date: 'MMM dd, y'}}</h3>
-        <h3>Meeting Date</h3>
-        <h3>Start : {{meeting.StartDate + ' ' + meeting.StartTime | date: 'MMM dd, y h:mm a'}}</h3>
-        <h3>End: {{meeting.EndDate + ' ' + meeting.EndTime | date: 'MMM dd, y h:mm a'}}</h3>
-
-      </ion-item>
-        
-      <ion-item-options>
-        <button ion-button color="danger" icon-left (click)="deleteMeeting(meeting)">
-          <ion-icon name="ios-trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
 </div>
 </ion-content>
