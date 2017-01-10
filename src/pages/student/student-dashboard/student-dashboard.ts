@@ -47,6 +47,7 @@ export class StudentDashboardPage {
     Type: ''
   };
   
+
   constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
   	this.Username =  this.navParams.data.Username;
@@ -88,39 +89,53 @@ export class StudentDashboardPage {
      var month = currentDate.getMonth();
      var year = currentDate.getFullYear();
      var hour = currentDate.getHours();
-     var minute = currentDate.getMinutes() + 1;
-
-     var currenttime = new Date(year,month,day);
+     var minute = currentDate.getMinutes();
+     var currenttime = new Date(year,month,day,hour,minute);
+     var counter = 0;
+     var ttext = '';
     this.classReminderList = this.af.database.list('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear  + '/class-reminder/' + this.studentClass.classId);
 
     this.classReminderList.subscribe(snapshots=>{
         snapshots.forEach(snapshot => {
 
           var duedate = new Date(snapshot.DueDate);
-          duedate.setHours(0);
-          duedate.setMinutes(0);
-          duedate.setSeconds(0);
+          var strTime = snapshot.DueTime;
+          var arr = strTime.split(":");
+
+          duedate.setHours(arr[0]);
+          duedate.setMinutes(arr[1]);
 
           var duetime = duedate.getTime();
           var curtime = currenttime.getTime();
           var difftime = duetime - curtime;
 
-          var sub = Math.round(difftime/1000*60*60*24); 
           console.log('due ' + duedate);
           console.log('ttime ' + currenttime);
-          console.log('ans ' + sub);
+          console.log('ans ' + difftime);
 
-          if(sub < 86400000)
-          {
+          if(difftime < 86400000 && difftime > 0)
+          {        
+             console.log('counter ' + counter);
+             if(ttext == '')
+             {
+                ttext = snapshot.Title;
+             }
+             else
+             {
+                ttext = ttext+ ", " + snapshot.Title;
+             }
+             counter= counter + 1;
 
-            LocalNotifications.schedule({
-                  title: snapshot.Type + ": " + snapshot.Title,
-                  text: "DueDate: " + snapshot.DueDate + " " + snapshot.DueTime ,
-                  at: new Date(new Date().getTime() + 2 * 1000),
-                  sound: 'file://assets/sounds/notif.mp3'
-              });
           }
+
         });
+
+         LocalNotifications.schedule({
+                title: "You have " + counter + " reminders that need to pass tomorrow",
+                text: "Reminders : " + ttext,
+                at: new Date(new Date().getTime() + 1000),
+                sound: 'file://assets/sounds/notif.mp3'
+            });
     })
 
     console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear  + '/class-reminder/' + this.studentClass.classId);
