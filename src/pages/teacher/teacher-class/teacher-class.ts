@@ -75,7 +75,8 @@ export class TeacherClassPage {
    this.navCtrl.push(TeacherClassStudentsPage, {
      ClassId:classId,
      Startyear:startYear,
-     Endyear:endYear
+     Endyear:endYear,
+     Username: this.Username
    });
   }
 

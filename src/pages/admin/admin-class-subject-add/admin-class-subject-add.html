@@ -23,7 +23,7 @@
   <ion-item>
     <ion-label stacked>Teacher</ion-label>
     <ion-select [(ngModel)]="classSubject.Teacher" multiple="false" cancelText="Nah" okText="Okay!">
-      <ion-option *ngFor="let teacher of teacherList | async" value="{{teacher.Firstname}} {{teacher.Lastname}}" checked="true">{{teacher.Firstname}} {{teacher.Lastname}}</ion-option>
+      <ion-option *ngFor="let teacher of teacherList | async" value="{{teacher.$key}}" checked="true">{{teacher.Firstname}} {{teacher.Lastname}}</ion-option>
     </ion-select>
   </ion-item>
 

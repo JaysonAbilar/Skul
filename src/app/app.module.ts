@@ -38,6 +38,7 @@ import { TeacherInboxPage } from '../pages/teacher/teacher-inbox/teacher-inbox';
 import { TeacherClassPage } from '../pages/teacher/teacher-class/teacher-class';
 import { TeacherClassStudentsPage } from '../pages/teacher/teacher-class-students/teacher-class-students';
 import { TeacherClassSubjectsPage } from '../pages/teacher/teacher-class-subjects/teacher-class-subjects';
+import { TeacherSendMessagePage } from '../pages/teacher/teacher-send-message/teacher-send-message';
 
 import { TeacherClassAssignmentListPage } from '../pages/teacher/teacher-class-assignment-list/teacher-class-assignment-list';
 import { TeacherClassAssignmentAddPage } from '../pages/teacher/teacher-class-assignment-add/teacher-class-assignment-add';
@@ -56,6 +57,7 @@ import { GuardianProfilePage } from '../pages/guardian/guardian-profile/guardian
 import { GuardianChildProfilePage } from '../pages/guardian/guardian-child-profile/guardian-child-profile';
 import { GuardianSubjectInfoPage } from '../pages/guardian/guardian-subject-info/guardian-subject-info';
 import { GuardianSendMessgePage } from '../pages/guardian/guardian-send-messge/guardian-send-messge';
+import { GuardianInboxPage } from '../pages/guardian/guardian-inbox/guardian-inbox';
 
 import { StudentHomePage } from '../pages/student/student-home/student-home';
 import { StudentDashboardPage } from '../pages/student/student-dashboard/student-dashboard';
@@ -111,12 +113,14 @@ import { StudentClassSubjectReminderPage } from '../pages/student/student-class-
     TeacherClassAttendanceAddPage,
     TeacherClassAttendanceUpdatePage,
     TeacherStudentProfilePage,
+    TeacherSendMessagePage,
     GuardianHomePage,
     GuardianDashboardPage,
     GuardianProfilePage,
     GuardianChildProfilePage,
     GuardianSubjectInfoPage,
     GuardianSendMessgePage,
+    GuardianInboxPage,
     StudentHomePage,
     StudentDashboardPage,
     StudentProfilePage,
@@ -175,12 +179,14 @@ import { StudentClassSubjectReminderPage } from '../pages/student/student-class-
     TeacherClassAttendanceAddPage,
     TeacherClassAttendanceUpdatePage,
     TeacherStudentProfilePage,
+    TeacherSendMessagePage,
     GuardianHomePage,
     GuardianDashboardPage,
     GuardianProfilePage,
     GuardianChildProfilePage,
     GuardianSubjectInfoPage,
     GuardianSendMessgePage,
+    GuardianInboxPage,
     StudentHomePage,
     StudentDashboardPage,
     StudentProfilePage,

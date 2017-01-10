@@ -4,28 +4,25 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { FIREBASE_PROVIDERS, defaultFirebase, AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 
 /*
-  Generated class for the TeacherInbox page.
+  Generated class for the GuardianInbox page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-teacher-inbox',
-  templateUrl: 'teacher-inbox.html'
+  selector: 'page-guardian-inbox',
+  templateUrl: 'guardian-inbox.html'
 })
-export class TeacherInboxPage {
+export class GuardianInboxPage {
 
-	public Username:'';
 	public messageList: FirebaseListObservable<any>;
-
-
-  	constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+	public Username:'';
+  	constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire)  {
   		this.Username =  this.navParams.data.Username;
-  		this.messageList = this.af.database.list('/teacher/' + this.Username + '/inbox');
+  		this.messageList = this.af.database.list('/guardian/' + this.Username + '/inbox');
   	}
 
   	ionViewDidLoad() {
-    	console.log('ionViewDidLoad TeacherInboxPage');
+    	console.log('ionViewDidLoad GuardianInboxPage');
   	}
-
 }

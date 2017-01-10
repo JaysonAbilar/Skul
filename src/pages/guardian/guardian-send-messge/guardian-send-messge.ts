@@ -29,15 +29,13 @@ export class GuardianSendMessgePage {
 	  	this.guardianUsername = this.navParams.get('GuardianUsername');
 	  	this.childFirstname = this.navParams.get('ChildFirstname');
 	  	this.childLastname = this.navParams.get('ChildLastname');
-
-	  	console.log(this.guardianUsername);
 	}
 
 	sendMessage(subject,body){
 		var dt = new Date();
 		var utcDate = dt.toUTCString();
 		console.log(utcDate);
-		firebase.database().ref('/teacher/' + this.teacherCode+ '/inbox/'+this.guardianUsername+'/'+utcDate).set({ 
+		firebase.database().ref('/teacher/' + this.teacherCode+ '/inbox/'+utcDate).set({ 
 	        sender: this.guardianUsername,
 	        subject : subject,
 	        body: body,
