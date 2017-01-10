@@ -32,10 +32,11 @@
   <ion-list>
     <ion-list-header>Class</ion-list-header>
     <div *ngFor="let teacherClass of teacherClassList | async">
-      <ion-item>
-        <h3>{{teacherClass.$key}}</h3>
-        <button ion-button item-right><ion-icon name="arrow-dropright-circle" (click)="goToSelectedClass(Username,teacherClass.$key)"></ion-icon></button>
-      </ion-item>
+      <ion-card (click)="goToSelectedClass(Username,teacherClass.$key)">
+        <ion-card-header>
+          {{teacherClass.$key}}
+        </ion-card-header>
+      </ion-card>
     </div>
   </ion-list>
 </ion-content>

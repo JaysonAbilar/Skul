@@ -32,9 +32,10 @@
   
   <ion-list>
     <ion-list-header>Class</ion-list-header>
-      <ion-item>
-        <h3>{{studentClass.classId}}</h3>
-        <button ng-show="studentClass.classId != null" ion-button item-right><ion-icon name="arrow-dropright-circle" (click)="goToSelectedClass(Username,studentClass.classId)"></ion-icon></button>
-      </ion-item>
+      <ion-card ng-show="studentClass.classId != null" (click)="goToSelectedClass(Username,studentClass.classId)">
+        <ion-card-header>
+          {{studentClass.classId}}
+        </ion-card-header>
+      </ion-card>
   </ion-list>
 </ion-content>
