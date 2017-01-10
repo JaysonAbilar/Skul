@@ -35,28 +35,36 @@ export class StudentDashboardPage {
 
   currentAcademicYearObject: FirebaseObjectObservable<any>;
 
+  public classReminderList: FirebaseListObservable<any>;
+
+  public classReminder = {
+    code: '',
+    DateAdded: '',
+    Description: '',
+    DueDate: '',
+    DueTime: '',
+    Title: '',
+    Type: ''
+  };
+  
   constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
 
   	this.Username =  this.navParams.data.Username;
     this.classs.StartYear = this.navParams.get('Startyear');
-    this.classs.EndYear = this.navParams.get('Endyear')
+    this.classs.EndYear = this.navParams.get('Endyear');
 
-    this.studentClassObject = this.af.database.object('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear  + '/student-class/' + this.Username);
-    this.studentClassObject.subscribe(snapshot => this.studentClass.classId = snapshot.ClassId); 
+    this.studentClass.classId = this.navParams.get('Classid');
+    console.log(this.studentClass.classId);
 
     console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear + '/teacher-class/' + this.Username)
 
   }
+
   
   initializeStudentClassObject(syr,eyr)
   {
      
-      LocalNotifications.schedule({
-            title: "Test Title",
-            text: "Delayed Notification",
-            at: new Date(new Date().getTime() + 5 * 1000),
-            sound: 'file://assets/sounds/notif.mp3'
-        });
+
   }
   
   goToSelectedClass(Username,ClassId)
@@ -75,7 +83,48 @@ export class StudentDashboardPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StudentDashboardPage');
+     var currentDate = new Date();
+     var day = currentDate.getDate();
+     var month = currentDate.getMonth();
+     var year = currentDate.getFullYear();
+     var hour = currentDate.getHours();
+     var minute = currentDate.getMinutes() + 1;
+
+     var currenttime = new Date(year,month,day);
+    this.classReminderList = this.af.database.list('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear  + '/class-reminder/' + this.studentClass.classId);
+
+    this.classReminderList.subscribe(snapshots=>{
+        snapshots.forEach(snapshot => {
+
+          var duedate = new Date(snapshot.DueDate);
+          duedate.setHours(0);
+          duedate.setMinutes(0);
+          duedate.setSeconds(0);
+
+          var duetime = duedate.getTime();
+          var curtime = currenttime.getTime();
+          var difftime = duetime - curtime;
+
+          var sub = Math.round(difftime/1000*60*60*24); 
+          console.log('due ' + duedate);
+          console.log('ttime ' + currenttime);
+          console.log('ans ' + sub);
+
+          if(sub < 86400000)
+          {
+
+            LocalNotifications.schedule({
+                  title: snapshot.Type + ": " + snapshot.Title,
+                  text: "DueDate: " + snapshot.DueDate + " " + snapshot.DueTime ,
+                  at: new Date(new Date().getTime() + 2 * 1000),
+                  sound: 'file://assets/sounds/notif.mp3'
+              });
+          }
+        });
+    })
+
+    console.log('/academic-year/'+ this.classs.StartYear  + '-' + this.classs.EndYear  + '/class-reminder/' + this.studentClass.classId);
+
   }
 
 }

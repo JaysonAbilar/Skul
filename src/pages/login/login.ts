@@ -31,6 +31,8 @@ export class LoginPage {
     Role: 'Guardian'
   };
 
+  public studentClassObject: FirebaseObjectObservable<any>;
+
   public Startyear: '';
   public Endyear:'';
 
@@ -51,15 +53,19 @@ export class LoginPage {
     var RolePassword;
     var navigation = this.navCtrl;
     var toaster = this.toastCtrl;
-
+    var classId ;
+     this.studentClassObject = this.af.database.object('/academic-year/'+ Startyear  + '-' + Endyear  + '/student-class/' + Username);
+     this.studentClassObject.subscribe(snapshot =>  classId = snapshot.ClassId); 
     root.on('value', function(snap){
       try{
+        
         RolePassword = snap.val().Password;  
         if(RolePassword == Password) {  
           navigation.push(LandingPage,{
             Username:Username,
             Startyear:Startyear,
-            Endyear:Endyear
+            Endyear:Endyear,
+            Classid:classId
           });
         } else {
           let toast = toaster.create({
