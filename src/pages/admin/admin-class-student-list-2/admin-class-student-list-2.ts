@@ -60,14 +60,7 @@ export class AdminClassStudentList2Page {
   }
 
 
-  deleteClassStudent(classStudent)
-  {
-    this.studentClassList = this.taf.database.list('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + classStudent.Student);
-    console.log('/academic-year/' + this.classs.StartYear + '-' + this.classs.EndYear + '/student-class/' + classStudent.Student);
-    console.log(this.classs.Id);
-    this.studentClassList.remove(this.classs.Id); 
-    this.classStudentList.remove(classStudent); 
-  }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminClassStudentList2Page');

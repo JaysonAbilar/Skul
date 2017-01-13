@@ -65,7 +65,7 @@ export class AdminClassStudentAddPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
-  	this.studentList = this.af.database.list('/student');
+  	this.studentList = this.af.database.list('/temp-student');
     this.classsList = this.af.database.list('/class');
 
     this.classs.Id = this.navParams.get('key');
@@ -124,6 +124,8 @@ export class AdminClassStudentAddPage {
         Email: this.guardian.Email,
         Contactnumber: this.guardian.Contactnumber
       });
+
+       this.studentList.remove(Student[i]);
 
     }
     this.navCtrl.pop();

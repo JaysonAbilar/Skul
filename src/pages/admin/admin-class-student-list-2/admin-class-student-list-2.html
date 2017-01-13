@@ -21,17 +21,11 @@
 <ion-content padding>
    <ion-list>
     <ion-list-header>Class Students</ion-list-header>
-    <ion-item-sliding *ngFor="let classStudent of classStudentList | async">
+    <div *ngFor="let classStudent of classStudentList | async">
       <ion-item>
         <ion-icon name="person" item-left></ion-icon>
         <h2>{{classStudent.Lastname}}, {{classStudent.Firstname}} {{classStudent.Middlename}}</h2>
       </ion-item>
-      <ion-item-options>
-        <button ion-button color="danger" icon-left (click)="deleteClassStudent(classStudent)">
-          <ion-icon name="ios-trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    </div>
   </ion-list>	
 </ion-content>

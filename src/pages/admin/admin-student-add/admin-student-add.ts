@@ -93,7 +93,7 @@ export class AdminStudentAddPage {
                 Email: this.guardian.Email,
                 Contactnumber: this.guardian.Contactnumber
                }).then( newStudent => {
-                  this.navCtrl.pop();
+                  
                 }, error => {
                   console.log(error);
               });
@@ -103,7 +103,31 @@ export class AdminStudentAddPage {
 	    }, error => {
 	      console.log(error);
 	    });
+
+     firebase.database().ref("/temp-student/" + Username).set({ 
+      Password: Password,
+      Firstname: Firstname,
+      Middlename: Middlename,
+      Lastname: Lastname,
+      Age: Age,
+      Gender: Gender,
+      Email: Email,
+      Contactnumber: Contactnumber,
+      Username: Username
+     });
+
+      firebase.database().ref("/temp-student/" + Username + "/Guardian/").set({ 
+      Username: Guardian,
+      Firstname : this.guardian.Firstname,
+      Middlename: this.guardian.Middlename,
+      Lastname: this.guardian.Lastname,
+      Age: this.guardian.Age,
+      Gender: this.guardian.Gender,
+      Email: this.guardian.Email,
+      Contactnumber: this.guardian.Contactnumber
+     });
 	  
+     this.navCtrl.pop();
    }
 
   ionViewDidLoad() {
