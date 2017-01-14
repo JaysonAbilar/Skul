@@ -43,7 +43,7 @@ export class GuardianSendMessgePage {
 	        childLastname: this.childLastname,
 	        timestamp: utcDate
       	}).then( popOut => {
-          this.navCtrl.pop();
+          alert("message sent");
         }, error => {
           console.log(error);
      	});

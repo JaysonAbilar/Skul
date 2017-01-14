@@ -43,7 +43,7 @@ export class TeacherSendMessagePage {
 	        StudentLastname: this.StudLastname,
 	        timestamp: utcDate
       	}).then( popOut => {
-          this.navCtrl.pop();
+         	alert("message sent");
         }, error => {
           console.log(error);
      	});
